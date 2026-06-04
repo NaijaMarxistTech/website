@@ -1,0 +1,16 @@
+---
+layout: default
+---
+<div class="statement-header" style="max-width:720px; margin-bottom:2rem;">
+  <div class="section-label" style="margin-bottom:0.25rem;">Official Statement</div>
+  <p class="byline" style="margin-bottom:0.5rem;">{{ page.date | date: "%B %d, %Y" }}</p>
+  <h1 style="font-family:var(--display); font-size:clamp(1.6rem, 5vw, 2.4rem); color:var(--navy); border-left:4px solid var(--red); padding-left:1rem;">{{ page.title }}</h1>
+</div>
+
+<div class="statement-content" style="font-size:1.05rem; line-height:1.7; max-width:720px;">
+  {{ content }}
+</div>
+
+<div style="margin-top:2.5rem; padding-top:1rem; border-top:1px solid var(--off);">
+  <a href="{{ site.baseurl }}/#statements" class="read-more">← Back to all statements</a>
+</div>

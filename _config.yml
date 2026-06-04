@@ -1,0 +1,21 @@
+title: The Naija Marxists
+description: Revolutionary socialist organisation rooted in the Nigerian working class
+url: "https://NaijaMarxistTech.github.io"
+baseurl: "/website"   # change to your repo name
+markdown: kramdown
+permalink: /:categories/:year/:month/:day/:title/
+collections:
+  statements:
+    output: true
+    permalink: /statements/:title/
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "statements"
+    values:
+      layout: "statement"

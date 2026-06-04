@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Naija Marxists</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="{{ site.baseurl }}/css/base.css" />
+  <link rel="stylesheet" href="{{ site.baseurl }}/css/layout.css" />
+  <link rel="stylesheet" href="{{ site.baseurl }}/css/sections.css" />
+</head>
+<body>
+
+  <!-- MASTHEAD + HEADER + NAV (same as your original) -->
+  <div class="masthead">
+    <p class="masthead-date" id="masthead-date">Workers of all countries, unite!</p>
+  </div>
+
+  <div style="background:var(--paper); border-bottom: 3px double var(--red);">
+    <header>
+      <div class="logo-wrap">
+        <img src="{{ site.baseurl }}/assets/logo.jpg" alt="The Naija Marxists logo" />
+      </div>
+      <div class="header-text">
+        <h1>The Naija Marxists</h1>
+        <p class="tagline">Scientific Socialism &bull; Class Struggle &bull; Nigerian Liberation</p>
+      </div>
+    </header>
+  </div>
+
+  <nav>
+    <ul>
+      <li><a href="{{ site.baseurl }}/#about">About</a></li>
+      <li><a href="{{ site.baseurl }}/#statements">Statements</a></li>
+      <li><a href="{{ site.baseurl }}/#analysis">Analysis</a></li>
+      <li><a href="{{ site.baseurl }}/#study-groups">Study Groups</a></li>
+      <li><a href="{{ site.baseurl }}/#events">Events</a></li>
+      <li><a href="{{ site.baseurl }}/#social">Follow Us</a></li>
+      <li><a href="{{ site.baseurl }}/#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- TICKER + HERO BAND (these appear on every page) -->
+  <div class="ticker-wrap">
+    <div class="ticker">
+      <span>Workers of all countries, unite</span>
+      <span>Down with imperialism and capitalist exploitation</span>
+      <span>For a socialist Nigeria and a socialist Africa</span>
+      <span>Marxism is not a dogma but a guide to action</span>
+      <span>Workers of all countries, unite</span>
+      <span>Down with imperialism and capitalist exploitation</span>
+      <span>For a socialist Nigeria and a socialist Africa</span>
+      <span>Marxism is not a dogma but a guide to action</span>
+    </div>
+  </div>
+
+  <div class="hero-band">
+    <h2>The working class has nothing<br>to lose but its chains</h2>
+    <p>The Naija Marxists is a revolutionary organisation committed to scientific socialism, workers' power, and the liberation of the Nigerian people from capitalism and imperialism.</p>
+    <div class="cta-row">
+      <a href="{{ site.baseurl }}/#statements" class="btn btn-gold">Read Our Statements</a>
+      <a href="{{ site.baseurl }}/#contact" class="btn btn-outline">Join the Struggle</a>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT – this is where page-specific content goes -->
+  <main class="page-wrap">
+    {{ content }}
+  </main>
+
+  <!-- FOOTER (same as original) -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="{{ site.baseurl }}/assets/logo.jpg" alt="Naija Marxists" />
+        <p>A revolutionary socialist organisation rooted in the Nigerian working class. Committed to historical materialism, internationalism, and the struggle for workers' power.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="{{ site.baseurl }}/#about">About Us</a></li>
+          <li><a href="{{ site.baseurl }}/#statements">Statements</a></li>
+          <li><a href="{{ site.baseurl }}/#analysis">Analysis</a></li>
+          <li><a href="{{ site.baseurl }}/#study-groups">Study Groups</a></li>
+          <li><a href="{{ site.baseurl }}/#events">Events</a></li>
+          <li><a href="{{ site.baseurl }}/#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="#">Marxist Reading List</a></li>
+          <li><a href="#">Nigerian Left History</a></li>
+          <li><a href="#">Study Group Materials</a></li>
+          <li><a href="#">Archive</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 The Naija Marxists. Workers of all countries, unite.</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="{{ site.baseurl }}/js/masthead.js"></script>
+  <script src="{{ site.baseurl }}/js/scroll.js"></script>
+  <!-- Add members.js later when you integrate Supabase -->
+</body>
+</html>
