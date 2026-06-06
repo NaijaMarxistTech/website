@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ site.title }} — {{ page.title }}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/layout.css">
+  <link rel="stylesheet" href="/css/sections.css">
+  <style>
+    /* Article page overrides – exactly your hack */
+    body {
+      background: var(--paper);
+    }
+    .article-container {
+      max-width: 800px;
+      margin: 4rem auto;
+      padding: 0 1.5rem;
+    }
+    .article-container h1 {
+      font-size: 2.8rem;
+      margin-bottom: 0.5rem;
+      font-family: var(--display);
+    }
+    .article-meta {
+      font-family: 'DM Mono', monospace;
+      color: var(--red);
+      border-bottom: 1px solid var(--gold);
+      padding-bottom: 1rem;
+      margin-bottom: 2rem;
+    }
+    .article-container h2 {
+      margin-top: 2rem;
+      color: var(--red);
+    }
+    .article-container p {
+      margin-bottom: 1.2rem;
+      line-height: 1.6;
+    }
+    .back-link {
+      display: inline-block;
+      margin-top: 3rem;
+      font-family: 'DM Mono', monospace;
+    }
+    .back-link a {
+      color: var(--red);
+      text-decoration: none;
+    }
+    .back-link a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="article-container">
+    <h1>{{ page.title }}</h1>
+    <div class="article-meta">
+      {{ page.categories | join: " &nbsp;|&nbsp; " }} &nbsp;|&nbsp; {{ page.date | date: "%-d %B %Y" }}
+    </div>
+    {{ content }}
+    <p class="back-link"><a href="/#analysis">← Back to analysis</a></p>
+  </div>
+  <script src="/js/masthead.js"></script>
+  <script src="/js/scroll.js"></script>
+</body>
+</html>

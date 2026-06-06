@@ -1,21 +1,21 @@
 title: The Naija Marxists
-description: Revolutionary socialist organisation rooted in the Nigerian working class
-url: "https://NaijaMarxistTech.github.io"
-baseurl: "/website"   # change to your repo name
+description: Scientific Socialism • Class Struggle • Nigerian Liberation
+url: "https://thenaijamarxists.org"   # your custom domain
+baseurl: ""                            # important: leave empty for custom domain
 markdown: kramdown
-permalink: /:categories/:year/:month/:day/:title/
+highlighter: rouge
+permalink: /analysis/:title/           # nice URLs like /analysis/oil-subsidy/
+
+# Collections (optional for statements later)
 collections:
   statements:
     output: true
     permalink: /statements/:title/
+
 defaults:
   - scope:
-      path: ""
       type: "posts"
     values:
-      layout: "post"
-  - scope:
-      path: ""
-      type: "statements"
-    values:
-      layout: "statement"
+      hide_header: true
+      hide_footer: true
+      layout: "article"

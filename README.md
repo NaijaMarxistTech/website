@@ -66,8 +66,48 @@ All colours are in `css/base.css` under `:root`. Change the hex values there.
 ### Changing the logo
 Replace `assets/logo.jpg` with the new image file. Keep the same filename.
 
-## Uploading to GitHub
 
+## Publishing articles – new dynamic workflow (Jekyll)
+
+> **You no longer need to edit `index.html` to add articles.**  
+> Just write Markdown, save it in `_posts/`, and commit.
+
+### 1. Write your article in Markdown
+
+Create a new file with a name like: `YYYY-MM-DD-title-with-dashes.md`  
+Example: `2025-06-06-why-marxism-matters.md`
+
+At the top of the file, add this front matter (between `---` lines):
+
+```yaml
+---
+title: "Your article title"
+date: 2025-06-06
+categories: Category Name
+excerpt: "Short summary shown on the homepage."
+---
+``` 
+
+Then write the article using Markdown:
+
+# Main heading
+## Subheading
+Paragraphs are separated by blank lines.
+[Link text](https://example.com)
+
+### 2. Save the file in the _posts/ folder
+If the folder doesn’t exist, create it in the root of the repository.
+
+### 3. Commit and push to GitHub
+- The live site will update automatically within 30 seconds.
+- The article will appear under Analysis on the homepage.
+- Clicking it opens a clean, styled page with only the article content.
+
+## Adding statements, events, social links
+For now, statements, events, and social links are still edited directly in index.html.
+Follow the original instructions for those sections.
+
+## Uploading to GitHub
 Only `index.html`, the `css/` folder, the `js/` folder, and `assets/` need to be
 on GitHub for the site to work. The `sections/` folder is for your own reference.
 
