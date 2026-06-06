@@ -1,8 +1,8 @@
 ---
 title: "Why Marxism still matters for Nigeria"
 date: 2025-06-06
-categories: Political Theory
-excerpt: "A short introduction to Marxist analysis of Nigerian capitalism."
+category: "Political Theory"
+excerpt: "A TEST. A short introduction to Marxist analysis of Nigerian capitalism."
 ---
 
 The Nigerian working class faces soaring inflation, mass unemployment, and a state that serves foreign capital. Marxism provides the tools to understand this not as a series of accidents but as the logic of capitalism itself.
