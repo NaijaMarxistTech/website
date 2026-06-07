@@ -26,3 +26,26 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
 });
+
+
+// ── HAMBURGER MENU ──
+const navToggle = document.querySelector('.nav-toggle');
+const navMenu   = document.querySelector('.nav-menu');
+
+navToggle.addEventListener('click', () => {
+  navToggle.classList.toggle('open');
+  navMenu.classList.toggle('open');
+  navToggle.setAttribute(
+    'aria-expanded',
+    navToggle.classList.contains('open')
+  );
+});
+
+// Close menu when a nav link is clicked
+document.querySelectorAll('.nav-menu a').forEach(link => {
+  link.addEventListener('click', () => {
+    navToggle.classList.remove('open');
+    navMenu.classList.remove('open');
+    navToggle.setAttribute('aria-expanded', false);
+  });
+});

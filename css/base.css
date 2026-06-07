@@ -21,6 +21,11 @@
   padding: 0;
 }
 
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
 html { scroll-behavior: smooth; }
 
 body {
@@ -29,7 +34,6 @@ body {
   font-family: var(--serif);
   font-size: 17px;
   line-height: 1.7;
-  overflow-x: hidden;
 }
 
 /* ── LAYOUT ── */
@@ -120,12 +124,90 @@ section.content-section h2 {
 
 /* ── RESPONSIVE ── */
 @media (max-width: 768px) {
-  header { flex-direction: column; text-align: center; gap: 1rem; }
-  #about .about-grid,
-  #contact .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
-  .footer-inner { grid-template-columns: 1fr; gap: 2rem; }
-  .analysis-item { grid-template-columns: 1fr; }
+
+  /* ── HEADER ── */
+  header {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+    padding: 1.2rem 1rem;
+    width: 100%;
+  }
+  .logo-wrap img { height: 70px; }
+
+  /* ── NAV ── */
+  nav ul {
+    padding: 0 0.5rem;
+    justify-content: center;
+  }
+  nav ul li a {
+    padding: 0.65rem 0.55rem;
+    font-size: 0.6rem;
+  }
+
+  /* ── TICKER ── */
+  .ticker-wrap {
+    width: 100%;
+    max-width: 100vw;
+  }
+
+  /* ── SECTIONS ── */
+  section.content-section { padding: 2rem 0; }
+  .page-wrap { padding: 0 1rem; }
+
+  /* ── ABOUT ── */
+  #about .about-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  /* ── STATEMENTS ── */
+  #statements .statements-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* ── ANALYSIS ── */
+  .analysis-item {
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
+  }
   .analysis-date-block { display: none; }
-  nav ul { padding: 0 1rem; }
-  nav ul li a { padding: 0.75rem 0.7rem; font-size: 0.65rem; }
+
+  /* ── STUDY GROUPS ── */
+  .sg-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* ── SOCIAL ── */
+  #social .social-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* ── CONTACT ── */
+  #contact .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .contact-form-wrap {
+    padding: 1.2rem;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .form-field input,
+  .form-field textarea,
+  .form-field select {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* ── FOOTER ── */
+  .footer-inner {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .footer-bottom {
+    flex-direction: column;
+    text-align: center;
+  }
+
 }
