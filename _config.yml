@@ -11,7 +11,7 @@ collections:
   statements:
     output: true
     permalink: /statements/:title/
-
+  
 defaults:
   - scope:
       type: "posts"

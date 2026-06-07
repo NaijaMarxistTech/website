@@ -1,16 +1,68 @@
----
-layout: default
----
-<div class="statement-header" style="max-width:720px; margin-bottom:2rem;">
-  <div class="section-label" style="margin-bottom:0.25rem;">Official Statement</div>
-  <p class="byline" style="margin-bottom:0.5rem;">{{ page.date | date: "%B %d, %Y" }}</p>
-  <h1 style="font-family:var(--display); font-size:clamp(1.6rem, 5vw, 2.4rem); color:var(--navy); border-left:4px solid var(--red); padding-left:1rem;">{{ page.title }}</h1>
-</div>
-
-<div class="statement-content" style="font-size:1.05rem; line-height:1.7; max-width:720px;">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ site.title }}: {{ page.title }}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/layout.css">
+  <link rel="stylesheet" href="/css/sections.css">
+  <style>
+    /* Same article page overrides */
+    body {
+      background: var(--paper);
+    }
+    .article-container {
+      max-width: 800px;
+      margin: 4rem auto;
+      padding: 0 1.5rem;
+    }
+    .article-container h1 {
+      font-size: 2.8rem;
+      margin-bottom: 0.5rem;
+      font-family: var(--display);
+    }
+    .article-meta {
+      font-family: 'DM Mono', monospace;
+      color: var(--red);
+      border-bottom: 1px solid var(--gold);
+      padding-bottom: 1rem;
+      margin-bottom: 2rem;
+    }
+    .article-container h2 {
+      margin-top: 2rem;
+      color: var(--red);
+    }
+    .article-container p {
+      margin-bottom: 1.2rem;
+      line-height: 1.6;
+    }
+    .back-link {
+      display: inline-block;
+      margin-top: 3rem;
+      font-family: 'DM Mono', monospace;
+    }
+    .back-link a {
+      color: var(--red);
+      text-decoration: none;
+    }
+    .back-link a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+<div class="article-container">
+  <h1>{{ page.title }}</h1>
+  <div class="article-meta">
+    {{ page.date | date: "%-d %B %Y" }} &nbsp;|&nbsp; {{ page.doc-type | default: "Official Statement" }}
+  </div>
   {{ content }}
+  <p class="back-link"><a href="/#statements">← Back to statements</a></p>
 </div>
-
-<div style="margin-top:2.5rem; padding-top:1rem; border-top:1px solid var(--off);">
-  <a href="{{ site.baseurl }}/#statements" class="read-more">← Back to all statements</a>
-</div>
+<script src="/js/masthead.js"></script>
+<script src="/js/scroll.js"></script>
+</body>
+</html>

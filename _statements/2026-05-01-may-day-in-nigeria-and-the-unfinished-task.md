@@ -1,8 +1,9 @@
 ---
 title: "May Day in Nigeria and the Unfinished Task: A Naija Marxist Statement"
 date: 2026-05-01
-category: Statements
+doc-type: "May Day"
 excerpt: "Nigerian workers are not now and have never been a passive class. The historical record shows a class that has repeatedly moved at revolutionary scale, only to be betrayed by its own leadership."
+layout: statement
 ---
 
 May Day belongs to the workers, but Nigerian workers do not own it. The president speaks at Eagle Square, the governors hand out promises in the state capitals, the unions march past, and the day ends. The first of May has sadly become a public holiday emptied of the politics that produced it.

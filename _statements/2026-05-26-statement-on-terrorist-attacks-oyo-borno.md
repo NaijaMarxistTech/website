@@ -1,8 +1,9 @@
 ---
 title: "Statement on the Terrorist Attacks and Abductions in Oyo and Borno States"
 date: 2026-05-26
-category: Statements
+doc-type: "Condemnation and Solidarity"
 excerpt: "May 2026 condemnation and solidarity. The Naija Marxists condemn the barbaric terrorist attacks of May 15, 2026, in which armed gunmen stormed schools in Oyo and Borno States, killing a teacher and a commuter, and abducting no fewer than 87 students and teachers."
+layout: statement
 ---
 
 <img src="/assets/images/NMM_abduction.png" alt="image" width="800" style="max-width:100%; height:auto;">

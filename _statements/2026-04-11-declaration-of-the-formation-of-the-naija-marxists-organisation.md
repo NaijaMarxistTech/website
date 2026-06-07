@@ -1,11 +1,12 @@
 ---
 title: "Declaration of the Formation of the Naija Marxists Organisation and the Necessity of a People's Vanguard Party"
 date: 2026-04-11
-category: "Analysis"
+doc-type: "Founding Statement"
 excerpt: "A concrete analysis of the Nigerian neocolonial situation and the call to build a revolutionary vanguard party of the working class."
+layout: statement
 ---
 
-<img src="/assets/images/NMO_img.png" alt="image" width="800" style="max-width:100%; height:auto;">
+<img src="/assets/images/NMM_img.png" alt="image" width="800" style="max-width:100%; height:auto;">
 
 ## A Concrete Analysis of the Situation
 
@@ -44,4 +45,4 @@ The liberation of Nigeria is a task we must accomplish ourselves.
 **Forward to the People's Democratic Revolution!**
 
 
-<img src="/assets/images/NMO_media.png" alt="image" width="400" style="max-width:100%; height:auto;">
+<img src="/assets/images/NMM_media.png" alt="image" width="400" style="max-width:100%; height:auto;">

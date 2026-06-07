@@ -24,26 +24,35 @@ layout: default
   </div>
 </section>
 
-<!-- STATEMENTS -->
+<!-- STATEMENTS (dynamic from _statements)-->
 <section id="statements" class="content-section fade-in">
   <div class="section-label">Political Statements</div>
   <h2>Official Statements</h2>
   <div class="statements-grid">
-    <div class="statement-card placeholder-card">
-      <p class="card-meta">Coming soon</p>
-      <h3 style="color:#aaa; font-style:italic;">Statement title will appear here</h3>
-      <p style="color:#bbb;">Official statements from the Naija Marxist Movement will be published here as they are released.</p>
-    </div>
-    <div class="statement-card placeholder-card">
-      <p class="card-meta">Coming soon</p>
-      <h3 style="color:#aaa; font-style:italic;">Statement title will appear here</h3>
-      <p style="color:#bbb;">Official statements from the Naija Marxist Movement will be published here as they are released.</p>
-    </div>
-    <div class="statement-card placeholder-card">
-      <p class="card-meta">Coming soon</p>
-      <h3 style="color:#aaa; font-style:italic;">Statement title will appear here</h3>
-      <p style="color:#bbb;">Official statements from the Naija Marxist Movement will be published here as they are released.</p>
-    </div>
+    {% assign statements = site.statements | sort: "date" | reverse %}
+    {% assign statement_count = statements | size %}
+    
+    <!-- Show real statements -->
+    {% for statement in statements limit:3 %}
+      <div class="statement-card">
+        <p class="card-meta">{{ statement.date | date: "%B %Y" }} &nbsp;|&nbsp; {{ statement.doc-type | default: "Statement" }}</p>
+        <h3>{{ statement.title }}</h3>
+        <p>{{ statement.excerpt | strip_html | truncatewords: 25 }}</p>
+        <a href="{{ statement.url | relative_url }}" class="read-more">Read statement →</a>
+      </div>
+    {% endfor %}
+    
+    <!-- Fill remaining slots with placeholders (if less than 3) -->
+    {% assign remaining = 3 | minus: statement_count %}
+    {% if remaining > 0 %}
+      {% for i in (1..remaining) %}
+        <div class="statement-card placeholder-card">
+          <p class="card-meta">Coming soon</p>
+          <h3 style="color:#aaa; font-style:italic;">Statement title will appear here</h3>
+          <p style="color:#bbb;">Official statements from the Naija Marxist Movement will be published here as they are released.</p>
+        </div>
+      {% endfor %}
+    {% endif %}
   </div>
 </section>
 

@@ -1,6 +1,6 @@
 # The Naija Marxists — Website
 
-## Directory Structure
+## Directory Structure (Previous)
 
 ```
 naija-marxists/
@@ -34,6 +34,8 @@ naija-marxists/
 
 > **You no longer need to edit `index.html` to add articles.**
 > Just write Markdown, save it in `_posts/`, and commit.
+> This same method applies to publishing Statements.
+> Instead of '_post', you use '_statements'
 
 ### 1. Write your article in Markdown
 
@@ -51,6 +53,18 @@ title: "Your article title"
 date: 2025-06-06
 categories: Category Name
 excerpt: "Short summary shown on the homepage."
+---
+```
+
+For statements, add this at the very top of the file:
+
+```yaml
+---
+title: "Your statement title"
+date: 2026-05-05
+doc-type: "Document Type"
+excerpt: "Short summary shown on the homepage"
+layout: statement
 ---
 ```
 
@@ -72,13 +86,15 @@ If the folder doesn't exist yet, create it at the root of the repository.
 
 The live site updates automatically within ~30 seconds. The article will appear under **Analysis** on the homepage, and clicking it opens a clean, styled article page.
 
+
+
 ---
 
 ## Updating Other Content
 
-Statements, events, and social links are still edited directly in `index.html`. Follow the steps below for each section.
+Events, and social links are still edited directly in `index.html`. Follow the steps below for each section.
 
-### Adding a Statement
+### Adding a Statement (manual fallback)
 
 1. Open `sections/statements.html`
 2. Copy the `STATEMENT CARD TEMPLATE` comment block
