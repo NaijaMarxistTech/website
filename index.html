@@ -1,341 +1,184 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>The Naija Marxists</title>
+---
+layout: default
+---
 
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
-
-  <!-- Stylesheets: edit these files to change appearance -->
-  <link rel="stylesheet" href="css/base.css" />
-  <link rel="stylesheet" href="css/layout.css" />
-  <link rel="stylesheet" href="css/sections.css" />
-</head>
-<body>
-
-  <!-- HEADER + NAV: edit sections/header.html -->
-  <div class="masthead">
-    <p class="masthead-date" id="masthead-date">Workers of all countries, unite!</p>
-  </div>
-  <div style="background:var(--paper); border-bottom: 3px double var(--red);">
-    <header>
-      <div class="logo-wrap">
-        <img src="assets/logo.jpg" alt="The Naija Marxists logo" />
-      </div>
-      <div class="header-text">
-        <h1>The Naija Marxists</h1>
-        <p class="tagline">Scientific Socialism &bull; Class Struggle &bull; Nigerian Liberation</p>
-      </div>
-    </header>
-  </div>
-  <nav>
-    <ul>
-      <li><a href="#about" class="active">About</a></li>
-      <li><a href="#statements">Statements</a></li>
-      <li><a href="#analysis">Analysis</a></li>
-      <li><a href="#study-groups">Study Groups</a></li>
-      <li><a href="#events">Events</a></li>
-      <li><a href="#social">Follow Us</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-  </nav>
-
-  <!-- TICKER + HERO: edit sections/hero.html -->
-  <div class="ticker-wrap">
-    <div class="ticker">
-      <span>Workers of all countries, unite</span>
-      <span>Down with imperialism and capitalist exploitation</span>
-      <span>For a socialist Nigeria and a socialist Africa</span>
-      <span>Marxism is not a dogma but a guide to action</span>
-      <span>Workers of all countries, unite</span>
-      <span>Down with imperialism and capitalist exploitation</span>
-      <span>For a socialist Nigeria and a socialist Africa</span>
-      <span>Marxism is not a dogma but a guide to action</span>
+<!-- ABOUT: static -->
+<section id="about" class="content-section fade-in">
+  <div class="section-label">About Us</div>
+  <h2>Who We Are</h2>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>The Naija Marxists is a political organisation of revolutionary socialists rooted in the Nigerian working class. We ground our analysis in historical materialism and Marxist-Leninist theory, applying it concretely to the conditions of Nigeria and the broader African continent.</p>
+      <p>We understand Nigerian capitalism not as an aberration but as the local expression of a global system of exploitation. Imperialism, in its contemporary financial and technological forms, continues to extract value from Nigerian workers and peasants. Our task is to build the political organisation capable of leading the struggle against it.</p>
+      <p>We are internationalists. We stand in solidarity with workers and oppressed peoples everywhere, and we recognise that the liberation of Nigeria is inseparable from the liberation of the African continent and the international working class.</p>
+    </div>
+    <div>
+      <ul class="principle-list">
+        <li><strong>Historical Materialism</strong> We analyse society through the lens of class struggle and the material conditions of production.</li>
+        <li><strong>Internationalism</strong> Nigerian liberation is bound up with the liberation of the African continent and the global working class.</li>
+        <li><strong>Workers' Power</strong> Political and economic power must pass to the organised working class -- not to a new elite.</li>
+        <li><strong>Revolutionary Organisation</strong> Change requires disciplined organisation, political education, and mass engagement.</li>
+        <li><strong>Anti-Imperialism</strong> We oppose all forms of imperialist domination -- economic, military, and technological.</li>
+      </ul>
     </div>
   </div>
-  <div class="hero-band">
-    <h2>The working class has nothing<br>to lose but its chains</h2>
-    <p>The Naija Marxists is a revolutionary organisation committed to scientific socialism, workers' power, and the liberation of the Nigerian people from capitalism and imperialism.</p>
-    <div class="cta-row">
-      <a href="#statements" class="btn btn-gold">Read Our Statements</a>
-      <a href="#contact" class="btn btn-outline">Join the Struggle</a>
-    </div>
-  </div>
+</section>
 
-  <!-- MAIN CONTENT -->
-  <main class="page-wrap">
-
-    <!-- ABOUT: static, edit directly here -->
-    <section id="about" class="content-section fade-in">
-      <div class="section-label">About Us</div>
-      <h2>Who We Are</h2>
-      <div class="about-grid">
-        <div class="about-text">
-          <p>The Naija Marxists is a political organisation of revolutionary socialists rooted in the Nigerian working class. We ground our analysis in historical materialism and Marxist-Leninist theory, applying it concretely to the conditions of Nigeria and the broader African continent.</p>
-          <p>We understand Nigerian capitalism not as an aberration but as the local expression of a global system of exploitation. Imperialism, in its contemporary financial and technological forms, continues to extract value from Nigerian workers and peasants. Our task is to build the political organisation capable of leading the struggle against it.</p>
-          <p>We are internationalists. We stand in solidarity with workers and oppressed peoples everywhere, and we recognise that the liberation of Nigeria is inseparable from the liberation of the African continent and the international working class.</p>
-        </div>
-        <div>
-          <ul class="principle-list">
-            <li>
-              <strong>Historical Materialism</strong>
-              We analyse society through the lens of class struggle and the material conditions of production.
-            </li>
-            <li>
-              <strong>Internationalism</strong>
-              Nigerian liberation is bound up with the liberation of the African continent and the global working class.
-            </li>
-            <li>
-              <strong>Workers' Power</strong>
-              Political and economic power must pass to the organised working class -- not to a new elite.
-            </li>
-            <li>
-              <strong>Revolutionary Organisation</strong>
-              Change requires disciplined organisation, political education, and mass engagement.
-            </li>
-            <li>
-              <strong>Anti-Imperialism</strong>
-              We oppose all forms of imperialist domination -- economic, military, and technological.
-            </li>
-          </ul>
-        </div>
+<!-- STATEMENTS (dynamic from _statements)-->
+<section id="statements" class="content-section fade-in">
+  <div class="section-label">Political Statements</div>
+  <h2>Official Statements</h2>
+  <div class="statements-grid">
+    {% assign statements = site.statements | sort: "date" | reverse %}
+    {% assign statement_count = statements | size %}
+    
+    <!-- Show real statements -->
+    {% for statement in statements limit:3 %}
+      <div class="statement-card">
+        <p class="card-meta">{{ statement.date | date: "%B %Y" }} &nbsp;|&nbsp; {{ statement.doc-type | default: "Statement" }}</p>
+        <h3>{{ statement.title }}</h3>
+        <p>{{ statement.excerpt | strip_html | truncatewords: 25 }}</p>
+        <a href="{{ statement.url | relative_url }}" class="read-more">Read statement →</a>
       </div>
-    </section>
-
-    <!-- STATEMENTS: edit sections/statements.html, then paste updated block here -->
-    <section id="statements" class="content-section fade-in">
-      <div class="section-label">Political Statements</div>
-      <h2>Official Statements</h2>
-      <div class="statements-grid">
+    {% endfor %}
+    
+    <!-- Fill remaining slots with placeholders (if less than 3) -->
+    {% assign remaining = 3 | minus: statement_count %}
+    {% if remaining > 0 %}
+      {% for i in (1..remaining) %}
         <div class="statement-card placeholder-card">
           <p class="card-meta">Coming soon</p>
           <h3 style="color:#aaa; font-style:italic;">Statement title will appear here</h3>
           <p style="color:#bbb;">Official statements from the Naija Marxist Movement will be published here as they are released.</p>
         </div>
-        <div class="statement-card placeholder-card">
-          <p class="card-meta">Coming soon</p>
-          <h3 style="color:#aaa; font-style:italic;">Statement title will appear here</h3>
-          <p style="color:#bbb;">Official statements from the Naija Marxist Movement will be published here as they are released.</p>
-        </div>
-        <div class="statement-card placeholder-card">
-          <p class="card-meta">Coming soon</p>
-          <h3 style="color:#aaa; font-style:italic;">Statement title will appear here</h3>
-          <p style="color:#bbb;">Official statements from the Naija Marxist Movement will be published here as they are released.</p>
-        </div>
-      </div>
-    </section>
+      {% endfor %}
+    {% endif %}
+  </div>
+</section>
 
-    <!-- ANALYSIS: edit sections/analysis.html, then paste updated block here -->
-    <section id="analysis" class="content-section fade-in">
-      <div class="section-label">Analysis &amp; Articles</div>
-      <h2>Political Analysis</h2>
-      <div class="analysis-list">
-        <div class="analysis-item">
-          <div class="analysis-date-block" style="background:#ccc;">
-            <div class="day" style="color:#999;">--</div>
-            <div class="month" style="color:#999;">--- ----</div>
-          </div>
-          <div class="analysis-body">
-            <p class="byline" style="color:#bbb;">Category</p>
-            <h3 style="color:#ccc; font-style:italic;">Article title will appear here</h3>
-            <p style="color:#bbb;">Analysis and articles from the Naija Marxist Movement will be listed here as they are published.</p>
-          </div>
+<!-- ANALYSIS (dynamic from _posts) -->
+<section id="analysis" class="content-section fade-in">
+  <div class="section-label">Analysis &amp; Articles</div>
+  <h2>Political Analysis</h2>
+  <div class="analysis-list">
+    {% for post in site.posts %}
+      <div class="analysis-item">
+        <div class="analysis-date-block">
+          <div class="day">{{ post.date | date: "%d" }}</div>
+          <div class="month">{{ post.date | date: "%b %Y" }}</div>
         </div>
-        <div class="analysis-item">
-          <div class="analysis-date-block" style="background:#ccc;">
-            <div class="day" style="color:#999;">--</div>
-            <div class="month" style="color:#999;">--- ----</div>
-          </div>
-          <div class="analysis-body">
-            <p class="byline" style="color:#bbb;">Category</p>
-            <h3 style="color:#ccc; font-style:italic;">Article title will appear here</h3>
-            <p style="color:#bbb;">Analysis and articles from the Naija Marxist Movement will be listed here as they are published.</p>
-          </div>
-        </div>
-        <div class="analysis-item">
-          <div class="analysis-date-block" style="background:#ccc;">
-            <div class="day" style="color:#999;">--</div>
-            <div class="month" style="color:#999;">--- ----</div>
-          </div>
-          <div class="analysis-body">
-            <p class="byline" style="color:#bbb;">Category</p>
-            <h3 style="color:#ccc; font-style:italic;">Article title will appear here</h3>
-            <p style="color:#bbb;">Analysis and articles from the Naija Marxist Movement will be listed here as they are published.</p>
-          </div>
+        <div class="analysis-body">
+          <p class="byline">{{ post.categories | join: " / " | default: "Analysis" }}</p>
+          <h3>{{ post.title }}</h3>
+          <p>{{ post.excerpt | strip_html | truncatewords: 30 }}</p>
+          <a href="{{ post.url | relative_url }}" class="read-more">Read article</a>
         </div>
       </div>
-    </section>
+    {% endfor %}
+  </div>
+</section>
 
-    <!-- STUDY GROUPS: edit directly here -->
-    <section id="study-groups" class="content-section fade-in">
-      <div class="section-label">Education</div>
-      <h2>Study Groups</h2>
-      <p class="sg-intro">Political education is the foundation of revolutionary practice. Our study groups meet regularly to work through Marxist theory and apply it to contemporary Nigerian and African conditions. All sessions are open to anyone committed to serious engagement.</p>
-      <div class="sg-grid">
-        <div class="sg-card" data-num="01">
-          <h3>Foundations of Marxism</h3>
-          <p>A structured reading group covering Marx, Engels, Lenin, and Trotsky -- from the Communist Manifesto through to the theory of permanent revolution.</p>
-          <p class="sg-schedule">Biweekly &mdash; Sundays &mdash; Online</p>
-        </div>
-        <div class="sg-card" data-num="02">
-          <h3>Nigerian Political Economy</h3>
-          <p>Applying materialist analysis to Nigerian capitalism: oil and resource extraction, the labour movement, the role of the state, and imperialism in its current forms.</p>
-          <p class="sg-schedule">Monthly &mdash; Saturdays &mdash; Abuja / Online</p>
-        </div>
-        <div class="sg-card" data-num="03">
-          <h3>Africa and Anti-Imperialism</h3>
-          <p>Examining African political economy through Marxist and Pan-Africanist traditions -- Nkrumah, Cabral, Fanon, Rodney -- and their relevance to current struggles.</p>
-          <p class="sg-schedule">Monthly &mdash; Saturdays &mdash; Lagos / Online</p>
-        </div>
-        <div class="sg-card" data-num="04">
-          <h3>Dialectical Materialism</h3>
-          <p>A philosophical reading group working through the methodology of Marxism: Engels' Dialectics of Nature, Lenin's Philosophical Notebooks, and applications to social analysis.</p>
-          <p class="sg-schedule">Monthly &mdash; Online</p>
-        </div>
-      </div>
-    </section>
+<!-- STUDY GROUPS -->
+<section id="study-groups" class="content-section fade-in">
+  <div class="section-label">Education</div>
+  <h2>Study Groups</h2>
+  <p class="sg-intro">Political education is the foundation of revolutionary practice. Our study groups meet regularly to work through Marxist theory and apply it to contemporary Nigerian and African conditions. All sessions are open to anyone committed to serious engagement.</p>
+  <div class="sg-grid">
+    <div class="sg-card" data-num="01">
+      <h3>Foundations of Marxism</h3>
+      <p>A structured reading group covering Marx, Engels, Lenin, and Trotsky -- from the Communist Manifesto through to the theory of permanent revolution.</p>
+      <p class="sg-schedule">Biweekly &mdash; Sundays &mdash; Online</p>
+    </div>
+    <div class="sg-card" data-num="02">
+      <h3>Nigerian Political Economy</h3>
+      <p>Applying materialist analysis to Nigerian capitalism: oil and resource extraction, the labour movement, the role of the state, and imperialism in its current forms.</p>
+      <p class="sg-schedule">Monthly &mdash; Saturdays &mdash; Abuja / Online</p>
+    </div>
+    <div class="sg-card" data-num="03">
+      <h3>Africa and Anti-Imperialism</h3>
+      <p>Examining African political economy through Marxist and Pan-Africanist traditions -- Nkrumah, Cabral, Fanon, Rodney -- and their relevance to current struggles.</p>
+      <p class="sg-schedule">Monthly &mdash; Saturdays &mdash; Lagos / Online</p>
+    </div>
+    <div class="sg-card" data-num="04">
+      <h3>Dialectical Materialism</h3>
+      <p>A philosophical reading group working through the methodology of Marxism: Engels' Dialectics of Nature, Lenin's Philosophical Notebooks, and applications to social analysis.</p>
+      <p class="sg-schedule">Monthly &mdash; Online</p>
+    </div>
+  </div>
+</section>
 
-    <!-- EVENTS: edit sections/events.html, then paste updated block here -->
-    <section id="events" class="content-section fade-in">
-      <div class="section-label">Upcoming</div>
-      <h2>Events</h2>
-      <div class="events-list">
-        <div class="event-row">
-          <div></div>
-          <div>
-            <h3 style="color:#ccc; font-style:italic;">Event title will appear here</h3>
-            <p class="event-meta"><span style="color:#ccc;">Date TBC</span> &mdash; Time TBC &mdash; Location TBC</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- SOCIAL: edit sections/social.html -- update handles and URLs -->
-    <section id="social" class="content-section fade-in">
-      <div class="section-label">Follow Us</div>
-      <h2>Find Us Online</h2>
-      <p style="font-weight:300; max-width:600px; margin-bottom:0;">Follow the Naija Marxist Movement on social media for statements, analysis, and updates on the struggle.</p>
-      <div class="social-grid">
-        <div class="social-card">
-          <span class="platform">Twitter / X</span>
-          <span class="handle">@NaijaMarxists</span>
-          <p>Statements, commentary, and political updates.</p>
-          <a href="https://twitter.com/NaijaMarxists" target="_blank" rel="noopener">Follow on X</a>
-        </div>
-        <div class="social-card">
-          <span class="platform">Facebook</span>
-          <span class="handle">The Naija Marxists</span>
-          <p>Longer posts, event announcements, and discussions.</p>
-          <a href="https://facebook.com/NaijaMarxists" target="_blank" rel="noopener">Follow on Facebook</a>
-        </div>
-        <div class="social-card">
-          <span class="platform">Instagram</span>
-          <span class="handle">@naijamarxists</span>
-          <p>Graphics, quotes, and visual political education.</p>
-          <a href="https://instagram.com/naijamarxists" target="_blank" rel="noopener">Follow on Instagram</a>
-        </div>
-        <div class="social-card">
-          <span class="platform">YouTube</span>
-          <span class="handle">Naija Marxists</span>
-          <p>Study group recordings, lead-offs, and public forums.</p>
-          <a href="https://youtube.com/@NaijaMarxists" target="_blank" rel="noopener">Subscribe on YouTube</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- CONTACT: edit directly here -->
-    <section id="contact" class="content-section fade-in">
-      <div class="section-label">Get Involved</div>
-      <h2>Contact &amp; Join</h2>
-      <div class="contact-grid">
-        <div class="contact-text">
-          <p>Whether you are a worker, student, or intellectual looking to engage with Marxist politics in Nigeria, we want to hear from you. The struggle requires organisation -- come and help build it.</p>
-          <p>We welcome enquiries about membership, study group participation, or collaboration on political work.</p>
-          <ul class="contact-channels">
-            <li>
-              <span class="ch-label">Email</span>
-              <span>contact@naijamarxists.org</span>
-            </li>
-            <li>
-              <span class="ch-label">Twitter/X</span>
-              <span>@NaijaMarxists</span>
-            </li>
-            <li>
-              <span class="ch-label">WhatsApp</span>
-              <span>Available on request</span>
-            </li>
-          </ul>
-        </div>
-        <div class="contact-form-wrap">
-          <h3>Send a Message</h3>
-          <div class="form-field">
-            <label>Your Name</label>
-            <input type="text" placeholder="Full name" />
-          </div>
-          <div class="form-field">
-            <label>Email Address</label>
-            <input type="email" placeholder="your@email.com" />
-          </div>
-          <div class="form-field">
-            <label>Subject</label>
-            <select>
-              <option>General enquiry</option>
-              <option>Membership</option>
-              <option>Study group</option>
-              <option>Events</option>
-              <option>Media / Press</option>
-            </select>
-          </div>
-          <div class="form-field">
-            <label>Message</label>
-            <textarea placeholder="Your message..."></textarea>
-          </div>
-          <button class="btn-red">Send Message</button>
-        </div>
-      </div>
-    </section>
-
-  </main>
-
-  <!-- FOOTER -->
-  <footer>
-    <div class="footer-inner">
-      <div class="footer-brand">
-        <img src="assets/logo.jpg" alt="Naija Marxists" />
-        <p>A revolutionary socialist organisation rooted in the Nigerian working class. Committed to historical materialism, internationalism, and the struggle for workers' power.</p>
-      </div>
-      <div class="footer-col">
-        <h4>Navigation</h4>
-        <ul>
-          <li><a href="#about">About Us</a></li>
-          <li><a href="#statements">Statements</a></li>
-          <li><a href="#analysis">Analysis</a></li>
-          <li><a href="#study-groups">Study Groups</a></li>
-          <li><a href="#events">Events</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Resources</h4>
-        <ul>
-          <li><a href="#">Marxist Reading List</a></li>
-          <li><a href="#">Nigerian Left History</a></li>
-          <li><a href="#">Study Group Materials</a></li>
-          <li><a href="#">Archive</a></li>
-        </ul>
+<!-- EVENTS -->
+<section id="events" class="content-section fade-in">
+  <div class="section-label">Upcoming</div>
+  <h2>Events</h2>
+  <div class="events-list">
+    <div class="event-row">
+      <div></div>
+      <div>
+        <h3 style="color:#ccc; font-style:italic;">Event title will appear here</h3>
+        <p class="event-meta"><span style="color:#ccc;">Date TBC</span> &mdash; Time TBC &mdash; Location TBC</p>
       </div>
     </div>
-    <div class="footer-bottom">
-      <p>&copy; 2025 The Naija Marxists. Workers of all countries, unite.</p>
+  </div>
+</section>
+
+<!-- SOCIAL -->
+<section id="social" class="content-section fade-in">
+  <div class="section-label">Follow Us</div>
+  <h2>Find Us Online</h2>
+  <p style="font-weight:300; max-width:600px; margin-bottom:0;">Follow the Naija Marxist Movement on social media for statements, analysis, and updates on the struggle.</p>
+  <div class="social-grid">
+    <div class="social-card">
+      <span class="platform">Twitter / X</span>
+      <span class="handle">@NGNMarxists</span>
+      <p>Statements, commentary, and political updates.</p>
+      <a href="https://x.com/NGNMarxists" target="_blank" rel="noopener">Follow on X</a>
     </div>
-  </footer>
+    <div class="social-card">
+      <span class="platform">Facebook</span>
+      <span class="handle">NGNMarxists</span>
+      <p>Longer posts, event announcements, and discussions.</p>
+      <a href="https://www.facebook.com/ngnmarxists" target="_blank" rel="noopener">Follow on Facebook</a>
+    </div>
+    <div class="social-card">
+      <span class="platform">Instagram</span>
+      <span class="handle">@NGNMarxists</span>
+      <p>Graphics, quotes, and visual political education.</p>
+      <a href="https://www.instagram.com/ngnmarxists" target="_blank" rel="noopener">Follow on Instagram</a>
+    </div>
+    <div class="social-card">
+      <span class="platform">Substack</span>
+      <span class="handle">NGNMarxists</span>
+      <p>Theoretical essays and movement updates delivered to your inbox.</p>
+      <a href="https://substack.com/@ngnmarxists" target="_blank" rel="noopener">Subscribe on Substack</a>
+    </div>
+  </div>
+</section>
 
-  <!-- Scripts: edit js/ files to change behaviour -->
-  <script src="js/masthead.js"></script>
-  <script src="js/scroll.js"></script>
-
-</body>
-</html>
+<!-- CONTACT -->
+<section id="contact" class="content-section fade-in">
+  <div class="section-label">Get Involved</div>
+  <h2>Contact &amp; Join</h2>
+  <div class="contact-grid">
+    <div class="contact-text">
+      <p>Whether you are a worker, student, or intellectual looking to engage with Marxist politics in Nigeria, we want to hear from you. The struggle requires organisation -- come and help build it.</p>
+      <p>We welcome enquiries about membership, study group participation, or collaboration on political work.</p>
+      <ul class="contact-channels">
+        <li><span class="ch-label">Email</span> <span>---</span></li>
+        <li><span class="ch-label">Twitter/X</span> <span>@NGNMarxists</span></li>
+        <li><span class="ch-label">WhatsApp</span> <span>Available on request</span></li>
+      </ul>
+    </div>
+    <div class="contact-form-wrap">
+      <h3>Send a Message</h3>
+      <div class="form-field"><label>Your Name</label><input type="text" placeholder="Full name" /></div>
+      <div class="form-field"><label>Email Address</label><input type="email" placeholder="your@email.com" /></div>
+      <div class="form-field">
+        <label>Subject</label>
+        <select><option>General enquiry</option><option>Membership</option><option>Study group</option><option>Events</option><option>Media / Press</option></select>
+      </div>
+      <div class="form-field"><label>Message</label><textarea placeholder="Your message..."></textarea></div>
+      <button class="btn-red">Send Message</button>
+    </div>
+  </div>
+</section>

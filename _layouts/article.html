@@ -12,15 +12,15 @@
   <link rel="stylesheet" href="/css/pages.css">
 </head>
 <body>
-<div class="article-container">
-  <h1>{{ page.title }}</h1>
-  <div class="article-meta">
-    {{ page.date | date: "%-d %B %Y" }} &nbsp;|&nbsp; {{ page.doc-type | default: "Official Statement" }}
+  <div class="article-container">
+    <h1>{{ page.title }}</h1>
+    <div class="article-meta">
+      {{ page.category }} &nbsp;|&nbsp; {{ page.date | date: "%-d %B %Y" }}
+    </div>
+    {{ content }}
+    <p class="back-link"><a href="/#analysis">← Back to analysis</a></p>
   </div>
-  {{ content }}
-  <p class="back-link"><a href="/#statements">← Back to statements</a></p>
-</div>
-<script src="/js/masthead.js"></script>
-<script src="/js/scroll.js"></script>
+  <script src="/js/masthead.js"></script>
+  <script src="/js/scroll.js"></script>
 </body>
 </html>
