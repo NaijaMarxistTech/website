@@ -30,9 +30,16 @@ body {
   color: var(--red);
 }
 
+.article-container h1, 
+.article-container h2, 
+.article-container h3 {
+  text-align: left;
+}
+
 .article-container p {
   margin-bottom: 1.2rem;
   line-height: 1.6;
+  text-align: justify;
 }
 
 .back-link {
