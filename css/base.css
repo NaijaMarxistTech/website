@@ -4,15 +4,18 @@
   --red:     #C62828;
   --red-dk:  #8B1A1A;
   --green:   #2E7D32;
-  --gold:    #C9A83C;
-  --navy:    #1C2B3A;
+  --gold:    #F5B041;
+  --navy:    #1E1E2A;
+  --navy-light: #2E3E52;
   --ink:     #1a1a1a;
-  --paper:   #F5F0E8;
-  --off:     #EDE8DC;
-  --rule:    #C62828;
-  --serif:   'Source Serif 4', Georgia, serif;
-  --display: 'Playfair Display', Georgia, serif;
+  --paper:   #F8F8FF;
+  --off:     #F4F4F4;
+  --rule:    #E53935;
+  --serif:   'Inter', sans-serif;
+  /* --display: 'Oswald', 'Inter', sans-serif; */
+  --display: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   --mono:    'DM Mono', monospace;
+  --body:    'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 }
 
 *, *::before, *::after {
@@ -31,9 +34,9 @@ html { scroll-behavior: smooth; }
 body {
   background: var(--paper);
   color: var(--ink);
-  font-family: var(--serif);
+  font-family: var(--body);;
   font-size: 17px;
-  line-height: 1.7;
+  line-height: 1.6;
   padding-top: 48px;
 }
 
@@ -56,6 +59,13 @@ body {
   gap: 0.6rem;
   margin-bottom: 0.6rem;
 }
+
+.section-label::before {
+  content: '★';
+  color: var(--red);
+  margin-right: 0.2rem;
+}
+
 .section-label::after {
   content: '';
   flex: 1;
