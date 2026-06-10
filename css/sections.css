@@ -343,6 +343,7 @@
 .form-field select:focus { border-color: var(--red); }
 .form-field textarea { height: 110px; resize: vertical; }
 
+
 /* Submit button – inverse of CTA (red background, white text) */
 .submit-btn {
   display: inline-block;
@@ -377,8 +378,75 @@
 /* Mobile: make it wider on small screens for easier tapping */
 @media (max-width: 768px) {
   .submit-btn {
-    width: 100%;
-    padding: 0.7rem 1.5rem;
-    font-size: 0.85rem;
+    width: 30%;
+    padding: 0.9rem 0.5rem;
+    font-size: 0.7rem;
+    font-weight: 600;
   }
+}
+
+
+
+/* For mobile devices */
+
+@media (max-width: 768px) {
+
+  /* ABOUT */
+  #about .about-grid {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+  }
+
+  /* ANALYSIS */
+  .analysis-item {
+    grid-template-columns: 1fr !important;
+    gap: 0.8rem !important;
+  }
+  .analysis-date-block { display: none !important; }
+  .analysis-body h3 { font-size: 1rem; }
+  .analysis-body p { font-size: 0.85rem; }
+
+  /* STATEMENTS */
+  #statements .statements-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* STUDY GROUPS */
+  .sg-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* SOCIAL */
+  #social .social-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* CONTACT */
+  #contact .contact-grid {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+  }
+  .contact-form-wrap {
+    padding: 1.2rem !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  .form-field input,
+  .form-field textarea,
+  .form-field select {
+    width: 100% !important;
+    box-sizing: border-box !important;
+    max-width: 100% !important;
+  }
+
+  /* FOOTER */
+  .footer-inner {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
+  }
+  .footer-bottom {
+    flex-direction: column !important;
+    text-align: center !important;
+  }
+
 }
