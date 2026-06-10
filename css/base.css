@@ -9,7 +9,7 @@
   --navy-light: #2E3E52;
   --ink:     #1a1a1a;
   --paper:   #F8F8FF;
-  --off:     #F4F4F4;
+  --off:     #F0EDE0;
   --rule:    #E53935;
   --serif:   'Inter', sans-serif;
   /* --display: 'Oswald', 'Inter', sans-serif; */
@@ -87,43 +87,88 @@ section.content-section h2 {
 }
 
 /* ── BUTTONS ── */
+/* Modern button base */
 .btn {
   display: inline-block;
-  padding: 0.7rem 1.8rem;
-  font-family: var(--mono);
-  font-size: 0.75rem;
-  letter-spacing: 0.12em;
+  padding: 0.85rem 2rem;
+  font-family: var(--display);
+  font-weight: 900;          /* boldest available */
+  font-size: 1.2rem;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   text-decoration: none;
-  border: 2px solid;
-  transition: background 0.2s, color 0.2s;
+  border: none;
+  border-radius: 12px;
   cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.2, 0.9, 0.4, 1.1); /* smoother */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.08);
 }
-.btn-gold {
-  background: var(--gold);
-  border-color: var(--gold);
-  color: var(--navy);
-}
-.btn-gold:hover { background: #b8952e; border-color: #b8952e; }
-.btn-outline {
-  background: transparent;
-  border-color: #fff;
-  color: #fff;
-}
-.btn-outline:hover { background: #fff; color: var(--red); }
+
+/* Red button – default state (solid, deep red) */
 .btn-red {
-  background: var(--red);
-  border: 2px solid var(--red);
-  color: #fff;
-  padding: 0.65rem 1.8rem;
-  font-family: var(--mono);
-  font-size: 0.72rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: background 0.2s;
+  background: #ffffff;
+  color: var(--red);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: all 0.12s cubic-bezier(0.2, 0.9, 0.4, 1.1);
 }
-.btn-red:hover { background: var(--red-dk); border-color: var(--red-dk); }
+
+/* Sharp pop on hover */
+.btn-red:hover {
+  background: #f8f8f8;           /* slightly brighter red */
+  color: var(--red-dk);
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25), 0 0 0 2px rgba(230, 57, 70, 0.8);
+}
+
+/* Gold button (primary CTA)
+.btn-gold {
+  background: linear-gradient(135deg, var(--gold) 0%, #b0871c 100%);
+  color: var(--navy);
+  box-shadow: 0 4px 10px rgba(201,168,60,0.3);
+}
+.btn-gold:hover {
+  transform: translateY(-1px);
+  background: linear-gradient(135deg, #dbbc3e 0%, #9e7618 100%);
+  box-shadow: 0 6px 14px rgba(201,168,60,0.35);
+}
+
+/* Outline button (hero secondary)
+.btn-outline {
+  background: var(--red);
+  border: 2px solid #fff;
+  color: #fff;
+  box-shadow: none;
+}
+.btn-outline:hover {
+  background: rgba(255,255,255,0.08);
+  transform: translateY(-1px);
+  border-color: var(--gold);
+  color: var(--gold);
+} */
+
+/* Active state */
+.btn:active {
+  transform: translateY(1px);
+}
+
+/* Focus for accessibility */
+.btn:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+
+/* Mobile touch targets */
+@media (max-width: 768px) {
+  .btn {
+    padding: 0.7rem 1.5rem;
+    font-size: 0.75rem;
+    border-radius: 10px;
+  }
+  .hero-band .btn {
+    display: block;
+    text-align: center;
+  }
+}
 
 /* ── FADE IN ── */
 .fade-in {
