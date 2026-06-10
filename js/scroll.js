@@ -49,3 +49,14 @@ document.querySelectorAll('.nav-menu a').forEach(link => {
     navToggle.setAttribute('aria-expanded', false);
   });
 });
+
+// ── NAV TRANSPARENCY ON SCROLL ──
+const nav = document.querySelector('nav');
+
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 50) {
+    nav.classList.add('scrolled');
+  } else {
+    nav.classList.remove('scrolled');
+  }
+});
