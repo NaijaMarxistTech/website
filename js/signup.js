@@ -1,4 +1,4 @@
-// js/signup.js - Complete rewrite
+// js/signup.js - Complete with checkbox skills, mobile-friendly
 
 console.log("=== signup.js loaded ===");
 
@@ -32,11 +32,21 @@ document.addEventListener('DOMContentLoaded', function() {
   ];
 
   // ============================================================
-  // 3. Get all DOM elements
+  // 3. Skills list
+  // ============================================================
+  const skillsList = [
+    "Web designing", "Graphic designing", "Writing/Content creation",
+    "Data analysis", "Video editing", "Social media management",
+    "Fundraising", "Event organizing", "Legal aid/Paralegal",
+    "Translation", "Research", "Community organizing", "Other"
+  ];
+
+  // ============================================================
+  // 4. Get all DOM elements
   // ============================================================
   const residentSelect = document.getElementById('residentNigeria');
   const locationField = document.getElementById('locationField');
-  const primarySkillSelect = document.getElementById('primarySkill');
+  const skillsCheckboxGrid = document.getElementById('skillsCheckboxGrid');
   const otherSkillField = document.getElementById('otherSkillField');
   const otherSkillText = document.getElementById('otherSkillText');
   const addSocialBtn = document.getElementById('addSocialBtn');
@@ -45,21 +55,72 @@ document.addEventListener('DOMContentLoaded', function() {
   const submitBtn = document.getElementById('submitBtn');
   const formStatus = document.getElementById('formStatus');
 
-  // Debug: log which elements we found
   console.log("Elements found:", {
     residentSelect: !!residentSelect,
-    locationField: !!locationField,
-    primarySkillSelect: !!primarySkillSelect,
+    skillsCheckboxGrid: !!skillsCheckboxGrid,
     otherSkillField: !!otherSkillField,
     addSocialBtn: !!addSocialBtn,
     membershipForm: !!membershipForm
   });
 
   // ============================================================
-  // 4. Handle "Resident in Nigeria" dropdown
+  // 5. Populate skills checkboxes
+  // ============================================================
+  function populateSkillsCheckboxes() {
+    if (!skillsCheckboxGrid) return;
+    
+    skillsCheckboxGrid.innerHTML = '';
+    skillsList.forEach(skill => {
+      // Create a valid ID for each checkbox
+      const skillId = `skill_${skill.replace(/\s/g, '_').replace(/\(/g, '').replace(/\)/g, '').replace(/\//g, '_')}`;
+      const div = document.createElement('div');
+      div.className = 'skill-checkbox-item';
+      div.innerHTML = `
+        <input type="checkbox" id="${skillId}" value="${skill}">
+        <label for="${skillId}">${skill}</label>
+      `;
+      skillsCheckboxGrid.appendChild(div);
+    });
+    console.log("Skills checkboxes populated");
+  }
+  populateSkillsCheckboxes();
+
+  // ============================================================
+  // 6. Handle "Other" skill checkbox
+  // ============================================================
+  function handleOtherSkillCheckbox() {
+    const otherCheckbox = document.querySelector('#skill_Other');
+    const isOtherSelected = otherCheckbox ? otherCheckbox.checked : false;
+    
+    if (isOtherSelected) {
+      if (otherSkillField) otherSkillField.style.display = 'block';
+      if (otherSkillText) otherSkillText.required = true;
+      console.log("Other field shown");
+    } else {
+      if (otherSkillField) otherSkillField.style.display = 'none';
+      if (otherSkillText) {
+        otherSkillText.required = false;
+        otherSkillText.value = '';
+      }
+      console.log("Other field hidden");
+    }
+  }
+
+  // Add event listener to the skills grid for checkbox changes
+  if (skillsCheckboxGrid) {
+    skillsCheckboxGrid.addEventListener('change', function(e) {
+      if (e.target && e.target.type === 'checkbox') {
+        handleOtherSkillCheckbox();
+      }
+    });
+    console.log("Added change listener to skillsCheckboxGrid");
+  }
+
+  // ============================================================
+  // 7. Handle "Resident in Nigeria" dropdown
   // ============================================================
   function updateLocationField() {
-    console.log("updateLocationField called, value:", residentSelect.value);
+    console.log("updateLocationField called, value:", residentSelect ? residentSelect.value : 'null');
     
     if (!locationField) return;
     
@@ -97,35 +158,7 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   // ============================================================
-  // 5. Handle "Other" skill dropdown
-  // ============================================================
-  function handleOtherSkillDropdown() {
-    console.log("handleOtherSkillDropdown called, value:", primarySkillSelect.value);
-    
-    if (!primarySkillSelect || !otherSkillField) return;
-    
-    if (primarySkillSelect.value === 'Other') {
-      otherSkillField.style.display = 'block';
-      if (otherSkillText) otherSkillText.required = true;
-      console.log("Other field shown");
-    } else {
-      otherSkillField.style.display = 'none';
-      if (otherSkillText) {
-        otherSkillText.required = false;
-        otherSkillText.value = '';
-      }
-      console.log("Other field hidden");
-    }
-  }
-
-  // Add event listener to skill dropdown
-  if (primarySkillSelect) {
-    primarySkillSelect.addEventListener('change', handleOtherSkillDropdown);
-    console.log("Added change listener to primarySkillSelect");
-  }
-
-  // ============================================================
-  // 6. Handle "Add another platform" button
+  // 8. Handle social media rows
   // ============================================================
   function addSocialRow() {
     console.log("addSocialRow called");
@@ -156,9 +189,7 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log("Added click listener to addSocialBtn");
   }
 
-  // ============================================================
-  // 7. Collect social handles
-  // ============================================================
+  // Collect social handles from all rows
   function collectSocialHandles() {
     const handles = {};
     document.querySelectorAll('.social-entry').forEach(entry => {
@@ -172,7 +203,7 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   // ============================================================
-  // 8. Form submission
+  // 9. Form submission handler
   // ============================================================
   async function handleFormSubmit(e) {
     e.preventDefault();
@@ -182,12 +213,17 @@ document.addEventListener('DOMContentLoaded', function() {
     const locationElement = document.getElementById('location');
     const locationValue = locationElement ? locationElement.value.trim() : '';
     
-    // Collect primary skill
-    let primarySkill = primarySkillSelect ? primarySkillSelect.value : '';
+    // Collect selected skills from checkboxes
+    const selectedCheckboxes = document.querySelectorAll('.skill-checkbox-item input[type="checkbox"]:checked');
+    let selectedSkills = Array.from(selectedCheckboxes).map(cb => cb.value);
+    
     const otherSkillTextValue = otherSkillText ? otherSkillText.value.trim() : '';
     
-    if (primarySkill === 'Other' && otherSkillTextValue) {
-      primarySkill = otherSkillTextValue;
+    // Check if "Other" is selected and has text
+    if (selectedSkills.includes('Other') && otherSkillTextValue) {
+      // Replace "Other" with the custom text
+      const otherIndex = selectedSkills.indexOf('Other');
+      selectedSkills[otherIndex] = otherSkillTextValue;
     }
     
     const formData = {
@@ -199,25 +235,45 @@ document.addEventListener('DOMContentLoaded', function() {
       resident_in_nigeria: residentSelect?.value === 'yes',
       location: locationValue,
       profession: document.getElementById('profession')?.value.trim() || '',
-      primary_skill: primarySkill,
+      primary_skill: selectedSkills,
       social_handles: collectSocialHandles(),
-      q1: document.getElementById('q1')?.value.trim() || '',
-      q2: document.getElementById('q2')?.value.trim() || '',
-      q3: document.getElementById('q3')?.value.trim() || '',
-      q4: document.getElementById('q4')?.value.trim() || '',
-      q5: document.getElementById('q5')?.value.trim() || '',
-      q6: document.getElementById('q6')?.value.trim() || '',
-      q7: document.getElementById('q7')?.value.trim() || '',
-      q8: document.getElementById('q8')?.value.trim() || '',
-      q9: document.getElementById('q9')?.value.trim() || '',
-      q10: document.getElementById('q10')?.value.trim() || ''
+      q1_marxist_familiarity: document.getElementById('q1')?.value.trim() || '',
+      q2_class_definition: document.getElementById('q2')?.value.trim() || '',
+      q3_class_conflict_revolution: document.getElementById('q3')?.value.trim() || '',
+      q4_primary_class_struggle: document.getElementById('q4')?.value.trim() || '',
+      q5_capitalism_vs_socialism: document.getElementById('q5')?.value.trim() || '',
+      q6_pan_africanism_vs_marxism: document.getElementById('q6')?.value.trim() || '',
+      q7_nigerian_democracy: document.getElementById('q7')?.value.trim() || '',
+      q8_revolution_definition: document.getElementById('q8')?.value.trim() || '',
+      q9_socialist_revolutions_today: document.getElementById('q9')?.value.trim() || '',
+      q10_why_join_contribution: document.getElementById('q10')?.value.trim() || ''
     };
 
-    // Basic validation
+    // Validation: Check if at least one skill is selected
+    if (selectedSkills.length === 0) {
+      if (formStatus) {
+        formStatus.innerHTML = '<span>Please select at least one skill.</span>';
+        formStatus.className = 'form-status error';
+      }
+      return;
+    }
+    
+    // Validation: Check if "Other" was selected but no text provided
+    const otherCheckbox = document.querySelector('#skill_Other');
+    if (otherCheckbox && otherCheckbox.checked && !otherSkillTextValue) {
+      if (formStatus) {
+        formStatus.innerHTML = '<span>Please specify your "Other" skill.</span>';
+        formStatus.className = 'form-status error';
+      }
+      return;
+    }
+
+    // Validation: Check all other required fields
     let isValid = true;
     for (let [key, value] of Object.entries(formData)) {
-      if (key !== 'telegram_username' && key !== 'social_handles' && !value) {
+      if (key !== 'telegram_username' && key !== 'social_handles' && key !== 'primary_skill' && !value) {
         isValid = false;
+        console.log(`Missing field: ${key}`);
         break;
       }
     }
@@ -230,12 +286,14 @@ document.addEventListener('DOMContentLoaded', function() {
       return;
     }
 
+    // Disable submit button and show loading state
     if (submitBtn) {
       submitBtn.disabled = true;
       submitBtn.textContent = 'Submitting...';
     }
     if (formStatus) formStatus.innerHTML = '';
 
+    // Submit to Supabase
     const { error } = await supabase
       .from('members')
       .insert([formData]);
@@ -251,12 +309,17 @@ document.addEventListener('DOMContentLoaded', function() {
         submitBtn.textContent = 'Submit Application';
       }
     } else {
+      // Success!
       if (formStatus) {
         formStatus.innerHTML = '<span>✓ Application submitted! A comrade will contact you within 48 hours.</span>';
         formStatus.className = 'form-status success';
       }
       if (membershipForm) membershipForm.reset();
       if (otherSkillField) otherSkillField.style.display = 'none';
+      
+      // Uncheck all checkboxes after reset
+      document.querySelectorAll('.skill-checkbox-item input[type="checkbox"]').forEach(cb => cb.checked = false);
+      
       if (submitBtn) {
         submitBtn.disabled = false;
         submitBtn.textContent = 'Submit Application';
@@ -265,6 +328,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 
+  // Add submit event listener to form
   if (membershipForm) {
     membershipForm.addEventListener('submit', handleFormSubmit);
     console.log("Added submit listener to membershipForm");

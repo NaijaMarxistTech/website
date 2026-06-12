@@ -68,38 +68,24 @@
       <div class="form-field" id="locationField"></div>
     </div>
 
-    <!-- SECTION 2: Skills -->
-    <div class="form-section">
-      <h3>Section 2: Skills & Contributions</h3>
-      <div class="section-desc">Select your primary skill. If "Other", please specify.</div>
-      
+<!-- SECTION 2: Skills -->
+<div class="form-section">
+  <h3>Section 2: Skills & Contributions</h3>
+  <div class="section-desc">Select all skills you have or are willing to develop.</div>
+  
+  <div class="form-field">
+    <label>Skills <span class="required">*</span></label>
+    <div class="skills-checkbox-grid" id="skillsCheckboxGrid">
+      <!-- Skills will be populated by JavaScript -->
+    </div>
+    <div id="otherSkillField" style="display:none; margin-top:0.8rem;">
       <div class="form-field">
-        <label>Primary Skill <span class="required">*</span></label>
-        <select id="primarySkill" required onchange="handleOtherSkillDropdown()">
-          <option value="">Select a skill...</option>
-          <option value="Web designing">Web designing</option>
-          <option value="Graphic designing">Graphic designing</option>
-          <option value="Writing/Content creation">Writing/Content creation</option>
-          <option value="Data analysis">Data analysis</option>
-          <option value="Video editing">Video editing</option>
-          <option value="Social media management">Social media management</option>
-          <option value="Fundraising">Fundraising</option>
-          <option value="Event organizing">Event organizing</option>
-          <option value="Legal aid/Paralegal">Legal aid/Paralegal</option>
-          <option value="Translation">Translation</option>
-          <option value="Research">Research</option>
-          <option value="Community organizing">Community organizing</option>
-          <option value="Other">Other (please specify)</option>
-        </select>
-      </div>
-      
-      <div id="otherSkillField" style="display:none; margin-top:0.8rem;">
-        <div class="form-field">
-          <label>Please specify your skill <span class="required">*</span></label>
-          <input type="text" id="otherSkillText" placeholder="e.g., Podcast editing, Grant writing, etc.">
-        </div>
+        <label>Please specify your "Other" skill <span class="required">*</span></label>
+        <input type="text" id="otherSkillText" placeholder="e.g., Podcast editing, Grant writing, etc.">
       </div>
     </div>
+  </div>
+</div>
 
     <!-- SECTION 3: Social Media Handles -->
     <div class="form-section">
