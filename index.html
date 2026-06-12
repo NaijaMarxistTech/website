@@ -40,6 +40,7 @@ layout: default
 </section>
 
 <!-- STATEMENTS (dynamic from _statements) -->
+ <!-- Increase the number(3) based on how many statements you need to show on the website -->
 <section id="statements" class="content-section fade-in">
   <div class="section-label">Political Statements</div>
   <h2>Official Statements</h2>
@@ -47,7 +48,7 @@ layout: default
     {% assign statements = site.statements | sort: "date" | reverse %}
     {% assign statement_count = statements | size %}
 
-    {% for statement in statements limit:5 %}
+    {% for statement in statements limit:3 %}
       <div class="statement-card">
         <p class="card-meta">{{ statement.date | date: "%B %Y" }} &nbsp;|&nbsp; {{ statement.doc-type | default: "Statement" }}</p>
         <h3>{{ statement.title }}</h3>
@@ -56,7 +57,7 @@ layout: default
       </div>
     {% endfor %}
 
-    {% assign remaining = 5 | minus: statement_count %}
+    {% assign remaining = 3 | minus: statement_count %}
     {% if remaining > 0 %}
       {% for i in (1..remaining) %}
         <div class="statement-card placeholder-card">
