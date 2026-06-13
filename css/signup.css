@@ -1,4 +1,15 @@
-/* css/signup.css - Membership form styles */
+/* css/signup.css - Membership form styles (fully mobile-optimized) */
+
+/* Add space between hero and form */
+.signup-form-container {
+  margin-top: 2rem;
+}
+
+@media (max-width: 768px) {
+  .signup-form-container {
+    margin-top: 1rem;
+  }
+}
 
 .form-section {
   background: var(--off);
@@ -60,6 +71,7 @@
   color: var(--ink);
   outline: none;
   transition: border-color 0.2s;
+  min-height: 44px; /* ensures good tap target */
 }
 
 .form-field input:focus,
@@ -126,6 +138,31 @@
   flex: 1;
 }
 
+/* Remove button styling (if used) */
+.btn-remove-social {
+  background: var(--red);
+  color: white;
+  border: none;
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1.2rem;
+  font-weight: bold;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, transform 0.1s;
+  flex-shrink: 0;
+}
+.btn-remove-social:hover {
+  background: var(--red-dk);
+  transform: scale(1.02);
+}
+.btn-remove-social:active {
+  transform: scale(0.98);
+}
+
 .btn-add {
   background: var(--navy);
   color: #fff;
@@ -158,34 +195,6 @@
 .form-status.error {
   background: var(--red);
   color: #fff;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .form-row {
-    grid-template-columns: 1fr;
-  }
-  .form-section {
-    padding: 1.2rem;
-  }
-  .skills-checkbox-grid {
-    grid-template-columns: 1fr;
-    gap: 0.5rem;
-    padding: 0.8rem;
-  }
-  .skill-checkbox-item {
-    padding: 0.5rem 0;
-  }
-  .skill-checkbox-item input[type="checkbox"] {
-    width: 20px;
-    height: 20px;
-  }
-  .social-entry {
-    flex-wrap: wrap;
-  }
-  .social-entry select {
-    width: 100%;
-  }
 }
 
 /* Success message styling */
@@ -223,7 +232,9 @@
   background: var(--red);
   color: white;
   text-decoration: none;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   padding: 0.7rem 1.8rem;
   font-family: var(--mono);
   font-size: 0.75rem;
@@ -232,6 +243,7 @@
   border: 2px solid var(--red);
   transition: background 0.2s;
   margin-top: 0.5rem;
+  min-height: 44px;
 }
 
 #successMessage .btn-home:hover {
@@ -246,4 +258,88 @@
 
 #formStatus.success {
   background: transparent !important;
+}
+
+/* ==================================================
+   MOBILE OPTIMIZATIONS (max-width: 768px)
+   ================================================== */
+@media (max-width: 768px) {
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+  .form-section {
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  .skills-checkbox-grid {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+    padding: 0.8rem;
+  }
+  .skill-checkbox-item {
+    padding: 0.6rem 0;
+  }
+  .skill-checkbox-item input[type="checkbox"] {
+    width: 22px;
+    height: 22px;
+    margin-right: 0.5rem;
+  }
+  .social-entry {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+    margin-bottom: 0.8rem;
+  }
+  .social-entry select,
+  .social-entry input {
+    width: 100%;
+  }
+  /* Improve tap targets for add button */
+  .btn-add {
+    padding: 0.7rem 1rem;
+    min-height: 44px;
+    font-size: 0.75rem;
+  }
+  /* Larger labels for readability */
+  .form-field label {
+    font-size: 0.75rem;
+  }
+  .form-section .section-desc {
+    font-size: 0.9rem;
+  }
+  /* Ensure inputs have minimum tap height */
+  .form-field input,
+  .form-field select,
+  .form-field textarea {
+    min-height: 44px;
+    font-size: 16px; /* prevents zoom on iOS */
+  }
+  /* Adjust heading sizes */
+  .form-section h3 {
+    font-size: 1.2rem;
+  }
+  /* Success message adjustments */
+  #successMessage {
+    margin: 1rem;
+    padding: 2rem 1rem;
+  }
+  #successMessage h2 {
+    font-size: 1.4rem;
+  }
+  #successMessage p {
+    font-size: 1rem;
+  }
+  #successMessage .btn-home {
+    min-height: 44px;
+    padding: 0.7rem 1.5rem;
+  }
+}
+
+/* Touch feedback for interactive elements */
+button,
+a,
+.btn-add,
+.btn-remove-social,
+.skill-checkbox-item {
+  -webkit-tap-highlight-color: rgba(198, 40, 40, 0.3);
 }
