@@ -6,7 +6,6 @@ _site/
 # Bundler / Ruby
 vendor/
 Gemfile.lock   # Could be optional
-Gemfile
 
 # OS junk
 .DS_Store
