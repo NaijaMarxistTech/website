@@ -1,11 +1,11 @@
 <!-- _includes/signup-form.html -->
-<div style="max-width: 900px; margin: 0 auto;">
+<div class="signup-form-container" style="max-width: 900px; margin: 0 auto;">
   <div class="section-label">Join the Movement</div>
   <h1 style="font-family: var(--display); font-size: clamp(1.8rem, 4vw, 2.8rem); color: var(--navy); margin-bottom: 0.5rem;">
     Membership Application
   </h1>
   <p style="margin-bottom: 2rem; font-weight: 300;">
-    Complete this application honestly. Your responses will be reviewed by our recruitment committee.
+    Complete this application honestly. Your responses will be reviewed by our membership committee.
   </p>
 
   <form id="membershipForm">
@@ -68,24 +68,24 @@
       <div class="form-field" id="locationField"></div>
     </div>
 
-<!-- SECTION 2: Skills -->
-<div class="form-section">
-  <h3>Section 2: Skills & Contributions</h3>
-  <div class="section-desc">Select all skills you have or are willing to develop.</div>
-  
-  <div class="form-field">
-    <label>Skills <span class="required">*</span></label>
-    <div class="skills-checkbox-grid" id="skillsCheckboxGrid">
-      <!-- Skills will be populated by JavaScript -->
-    </div>
-    <div id="otherSkillField" style="display:none; margin-top:0.8rem;">
+    <!-- SECTION 2: Skills -->
+    <div class="form-section">
+      <h3>Section 2: Skills & Contributions</h3>
+      <div class="section-desc">Select all skills you have or are willing to develop.</div>
+      
       <div class="form-field">
-        <label>Please specify your "Other" skill <span class="required">*</span></label>
-        <input type="text" id="otherSkillText" placeholder="e.g., Podcast editing, Grant writing, etc.">
+        <label>Skills <span class="required">*</span></label>
+        <div class="skills-checkbox-grid" id="skillsCheckboxGrid">
+          <!-- Skills will be populated by JavaScript -->
+        </div>
+        <div id="otherSkillField" style="display:none; margin-top:0.8rem;">
+          <div class="form-field">
+            <label>Please specify your "Other" skill <span class="required">*</span></label>
+            <input type="text" id="otherSkillText" placeholder="e.g., Podcast editing, Grant writing, etc.">
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
 
     <!-- SECTION 3: Social Media Handles -->
     <div class="form-section">
@@ -167,6 +167,15 @@
     </div>
 
     <button type="submit" class="btn-red" id="submitBtn" style="width:100%; padding:1rem;">Submit Application</button>
-    <div id="formStatus" class="form-status"></div>
   </form>
 </div>
+
+<div id="successMessage" style="display: none; text-align: center; padding: 3rem 2rem; background: #ffffff; border-radius: 4px; max-width: 900px; margin: 2rem auto; box-shadow: 0 4px 20px rgba(0,0,0,0.1); border-top: 4px solid #2E7D32;">
+  <div style="font-size: 4rem; margin-bottom: 1rem; color: #2E7D32;">✓</div>
+  <h2 style="font-family: 'Playfair Display', Georgia, serif; color: #1C2B3A; margin-bottom: 1rem; font-size: 1.8rem;">Application Submitted!</h2>
+  <p style="font-size: 1.1rem; margin-bottom: 1rem; color: #1a1a1a;">Thank you for applying to join The Naija Marxists.</p>
+  <p style="margin-bottom: 2rem; color: #1a1a1a;">A comrade will contact you within 48 hours to discuss next steps.</p>
+  <a href="/" class="btn btn-red" style="background: #C62828; color: white; text-decoration: none; display: inline-block; padding: 0.7rem 1.8rem; font-family: 'DM Mono', monospace; font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; border: 2px solid #C62828; transition: background 0.2s;">Return to Homepage</a>
+</div>
+
+<div id="formStatus" class="form-status"></div>
