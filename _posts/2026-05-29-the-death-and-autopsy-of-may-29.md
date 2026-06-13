@@ -76,3 +76,5 @@ Yet beneath that betrayal a new generation of Nigerian youth is rising that the 
 Let them hold their parade. Let Tinubu read his paper victories to a country he has helped to starve, from a table that has never wanted for anything. The autopsy of this Democracy Day returns one verdict: the promise of 1999 is dead, and the class that has held the body since 1960 cannot revive it. The day is coming when those who alone have made this country work take it into their own hands. That day will not arrive on its own.
 
 **We are building it. Let us begin.**
+
+*@TheNaijaMarxists*
