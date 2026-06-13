@@ -8,8 +8,8 @@ document.addEventListener('DOMContentLoaded', function() {
   // ============================================================
   // 1. Supabase configuration
   // ============================================================
-  const SUPABASE_URL = 'https://pcpntpuujhrvbffgpixs.supabase.co';
-  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBjcG50cHV1amhydmJmZmdwaXhzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA4NjMwNDgsImV4cCI6MjA5NjQzOTA0OH0.gsMFI_dmN44NA5iHyyg1QgMXxJjBi1Ho8Inv3Tuqmsw';
+  const SUPABASE_URL = 'YOUR_SUPABASE_URL';
+  const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
   
   if (typeof window.supabase === 'undefined') {
     console.error("Supabase library not loaded!");
