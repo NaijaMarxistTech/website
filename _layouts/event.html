@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ site.title }} — {{ page.title }}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/layout.css">
+  <link rel="stylesheet" href="/css/sections.css">
+  <link rel="stylesheet" href="/css/pages.css">
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/assets/favicons/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
+  <link rel="apple-touch-icon" sizes="512x512" href="/assets/favicons/favicon-512x512.png">
+  <link rel="manifest" href="/assets/favicons/site.webmanifest">
+</head>
+<body>
+  <div class="event-container">
+    <h1>{{ page.title }}</h1>
+    <div class="event-meta">
+      {{ page.date | date: "%-d %B %Y" }} &nbsp;|&nbsp; {{ page.time }} &nbsp;|&nbsp; {{ page.location }}
+    </div>
+    {{ content }}
+    <p class="back-link"><a href="/#events">← Back to events</a></p>
+  </div>
+  <script src="/js/masthead.js"></script>
+  <script src="/js/scroll.js"></script>
+</body>
+</html>

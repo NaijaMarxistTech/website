@@ -207,27 +207,61 @@
 
 
 /* ── EVENTS ── */
-#events .events-list { display: flex; flex-direction: column; gap: 1rem; }
+#events .events-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
 .event-row {
   display: grid;
-  grid-template-columns: 4px 1fr;
-  gap: 1.2rem;
+  grid-template-columns: 80px 1fr;
+  gap: 1.5rem;
+  align-items: start;
   background: #fff;
-  padding: 1.2rem;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
-  position: relative;
+  padding: 1.2rem 1.5rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  border-left: 4px solid var(--green);
+  transition: transform 0.2s, box-shadow 0.2s;
 }
-.event-row::before {
-  content: '';
-  width: 4px;
-  background: var(--green);
-  border-radius: 2px;
+.event-row:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
 }
+
+.event-date-block {
+  text-align: center;
+  background: var(--red);
+  color: #fff;
+  padding: 0.6rem 0.4rem;
+  min-width: 65px;
+}
+.event-date-block .day {
+  font-family: var(--display);
+  font-size: 1.6rem;
+  font-weight: 900;
+  line-height: 1.2;
+}
+.event-date-block .month {
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  opacity: 0.85;
+}
+
 .event-row h3 {
   font-family: var(--display);
-  font-size: 1rem;
+  font-size: 1.05rem;
   color: var(--navy);
   margin-bottom: 0.3rem;
+}
+.event-row h3 a {
+  color: var(--navy);
+  text-decoration: none;
+}
+.event-row h3 a:hover {
+  color: var(--red);
 }
 .event-row .event-meta {
   font-family: var(--mono);
@@ -236,7 +270,16 @@
   text-transform: uppercase;
   color: #777;
 }
-.event-row .event-meta span { color: var(--green); margin-right: 0.6rem; }
+.event-row .event-meta span {
+  color: var(--green);
+  margin-right: 0.4rem;
+}
+.event-row .event-excerpt {
+  font-size: 0.9rem;
+  font-weight: 300;
+  color: #444;
+  margin-top: 0.4rem;
+}
 
 /* ── SOCIAL MEDIA ── */
 #social .social-grid {
@@ -375,16 +418,6 @@
   transform: translateY(1px);
 }
 
-/* Mobile: make it wider on small screens for easier tapping */
-@media (max-width: 768px) {
-  .submit-btn {
-    width: 30%;
-    padding: 0.9rem 0.5rem;
-    font-size: 0.7rem;
-    font-weight: 600;
-  }
-}
-
 
 
 /* For mobile devices */
@@ -414,6 +447,29 @@
   /* STUDY GROUPS */
   .sg-grid {
     grid-template-columns: 1fr !important;
+  }
+
+  /* ── EVENTS MOBILE ── */
+  .event-row {
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
+    padding: 1rem;
+  }
+  .event-date-block {
+    display: none;
+  }
+  .event-row h3 {
+    font-size: 1rem;
+  }
+
+  /* To prevent overflow when writing lists */
+  .article-container ul,
+  .event-container ul,
+  .article-container ol,
+  .event-container ol {
+    padding-left: 1.8rem;
+    margin-left: 0;
+    overflow: visible;
   }
 
   /* SOCIAL */
@@ -447,6 +503,14 @@
   .footer-bottom {
     flex-direction: column !important;
     text-align: center !important;
+  }
+
+  /* Mobile: make it wider on small screens for easier tapping */
+  .submit-btn {
+    width: 30%;
+    padding: 0.9rem 0.5rem;
+    font-size: 0.7rem;
+    font-weight: 600;
   }
 
 }

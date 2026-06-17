@@ -117,18 +117,38 @@ layout: default
   </div>
 </section>
 
-<!-- EVENTS -->
+<!-- EVENTS (dynamic from _events) -->
 <section id="events" class="content-section fade-in">
   <div class="section-label">Upcoming</div>
   <h2>Events</h2>
   <div class="events-list">
-    <div class="event-row">
-      <!-- <div></div> -->
-      <div>
-        <h3 style="color:#ccc; font-style:italic;">Event title will appear here</h3>
-        <p class="event-meta"><span style="color:#ccc;">Date TBC</span> &mdash; Time TBC &mdash; Location TBC</p>
+    {% if site.events %}
+      {% assign events = site.events | sort: "date" | reverse %}
+      {% for event in events limit:5 %}
+        <div class="event-row">
+          <div class="event-date-block">
+            <div class="day">{{ event.date | date: "%d" }}</div>
+            <div class="month">{{ event.date | date: "%b %Y" }}</div>
+          </div>
+          <div>
+            <h3><a href="{{ event.url | relative_url }}">{{ event.title }}</a></h3>
+            <p class="event-meta">
+              <span>{{ event.time }}</span> &mdash; <span>{{ event.location }}</span>
+            </p>
+            <p class="event-excerpt">{{ event.excerpt | strip_html | truncatewords: 20 }}</p>
+            <a href="{{ event.url | relative_url }}" class="read-more">View event →</a>
+          </div>
+        </div>
+      {% endfor %}
+    {% else %}
+      <div class="event-row">
+        <div></div>
+        <div>
+          <h3 style="color:#ccc; font-style:italic;">No events scheduled yet</h3>
+          <p class="event-meta"><span style="color:#ccc;">Check back soon for upcoming events.</span></p>
+        </div>
       </div>
-    </div>
+    {% endif %}
   </div>
 </section>
 

@@ -11,6 +11,9 @@ collections:
   statements:
     output: true
     permalink: /statements/:title/
+  events:
+    output: true
+    permalink: /events/:title/
   
 defaults:
   - scope:
