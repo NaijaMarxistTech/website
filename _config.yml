@@ -19,3 +19,6 @@ defaults:
       hide_header: true
       hide_footer: true
       layout: "article"
+
+plugins:
+  - jekyll-environment-variables
