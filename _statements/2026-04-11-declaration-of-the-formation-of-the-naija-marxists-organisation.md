@@ -6,7 +6,7 @@ excerpt: "A concrete analysis of the Nigerian neocolonial situation and the call
 layout: statement
 ---
 
-<img src="/assets/images/NMM_img.png" alt="image" width="800" style="max-width:100%; height:auto;">
+<img src="/assets/images/statements/NMM_img.png" alt="image" width="800" style="max-width:100%; height:auto;">
 
 ## A Concrete Analysis of the Situation
 
@@ -45,4 +45,4 @@ The liberation of Nigeria is a task we must accomplish ourselves.
 **Forward to the People's Democratic Revolution!**
 
 
-<img src="/assets/images/NMM_media.png" alt="image" width="400" style="max-width:100%; height:auto;">
+<img src="/assets/images/statements/NMM_media.png" alt="image" width="400" style="max-width:100%; height:auto;">

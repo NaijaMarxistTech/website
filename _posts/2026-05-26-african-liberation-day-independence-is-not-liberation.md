@@ -5,7 +5,7 @@ category: Analysis
 excerpt: "African Liberation Day marks a transfer of political administration. The economic structures built during the colonial period remained in place after the flags changed."
 ---
 
-<img src="/assets/images/NMM_Liberation_day.png" alt="image" width="800" style="max-width:100%; height:auto;">
+<img src="/assets/images/posts/NMM_Liberation_day.png" alt="image" width="800" style="max-width:100%; height:auto;">
 
 African Liberation Day marks a transfer of political administration. In some countries that transfer required armed struggle, and the movements that fought for it, in Algeria, Kenya, Angola, Mozambique, Guinea-Bissau, were met with extraordinary violence before the departing powers relented. In most cases independence was negotiated, because the colonial powers calculated that a managed handover of formal governance was less costly than continued occupation and would preserve what actually mattered: the economic relationship. The constitutional arrangements that governed independence were frequently drafted or shaped by the departing powers. The French CFA franc kept francophone Africa bound to Paris. British commercial interests were protected by treaty. The colonial state did not withdraw. It restructured.
 

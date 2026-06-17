@@ -5,7 +5,7 @@ category: Analysis
 excerpt: "Every Democracy Day, the ruling class invokes June 12 while gutting the living standards of Nigerian workers. What does the history of 1993 teach us about seizing power, not just voting?"
 ---
 
-<img src="/assets/images/NMM_june12_2026.jpg" alt="image" width="800" style="max-width:100%; height:auto;">
+<img src="/assets/images/posts/NMM_june12_2026.jpg" alt="image" width="800" style="max-width:100%; height:auto;">
 
 Every June 12, the parasites who loot this country's treasury gather from Aso Rock to the local government secretariats to perform a ritual called Democracy Day. Men who fought the dictatorship share the podium with men who served it, and all of them invoke MKO Abiola's name like a charm while the common man and worker who marks the holiday stands in a fuel queue. There is a deliberate burial of the real history of 1993 in this ceremony, because that history carries lessons the ruling class needs us Nigerians to never learn, i.e the workers of Nigeria have the power to stop begging for "good governance" and start seizing power. The events of 1993 to 1999 contain, in concentrated form, the central questions of Nigerian politics: the class character of the state, the limits of bourgeois democracy, the role of the labour bureaucracy, and the consequences of mass struggle without a revolutionary party.
 

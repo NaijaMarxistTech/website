@@ -6,7 +6,7 @@ excerpt: "May 2026 condemnation and solidarity. The Naija Marxists condemn the b
 layout: statement
 ---
 
-<img src="/assets/images/NMM_abduction.png" alt="image" width="800" style="max-width:100%; height:auto;">
+<img src="/assets/images/statements/NMM_abduction.png" alt="image" width="800" style="max-width:100%; height:auto;">
 
 The Naija Marxists condemn the barbaric terrorist attacks of 15 May 2026, in which armed gunmen stormed schools in Oriire Local Government Area of Oyo State and Askira-Uba LGA of Borno State, killing a teacher and a commuter, and abducting no fewer than 87 students and teachers. We extend our deepest solidarity to the families of the murdered, to the communities living in terror, and to every child whose right to education has been violently stolen. These are sons and daughters of the Nigerian working class and peasantry, and they have been failed by every institution that was supposed to protect them. We are disgusted and angry, and we refuse to move on.
 
