@@ -8,8 +8,8 @@ document.addEventListener('DOMContentLoaded', function() {
   // ============================================================
   // 1. Supabase configuration
   // ============================================================
-  const SUPABASE_URL = 'YOUR_SUPABASE_URL';
-  const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
+  const SUPABASE_URL = window.SUPABASE_URL || 'YOUR_SUPABASE_URL';
+  const SUPABASE_ANON_KEY = window.SUPABASE_ANON_KEY || 'YOUR_SUPABASE_ANON_KEY';
   
   if (typeof window.supabase === 'undefined') {
     console.error("Supabase library not loaded!");
