@@ -5,6 +5,7 @@ baseurl: ""                            # important: leave empty for custom domai
 markdown: kramdown
 highlighter: rouge
 permalink: /analysis/:title/           # nice URLs like /analysis/oil-subsidy/
+future: true
 
 # Collections (optional for statements later)
 collections:

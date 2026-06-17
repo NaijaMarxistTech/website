@@ -5,7 +5,7 @@ category: Analysis
 excerpt: "On 29 May the Nigerian state mounts its annual parade. Three years of 'Renewed Hope' have produced the opposite of every promise this government made."
 ---
 
-<img src="/assets/images/NMM_failed_presidency.png" alt="image" width="800" style="max-width:100%; height:auto;">
+<img src="/assets/images/posts/NMM_failed_presidency.png" alt="image" width="800" style="max-width:100%; height:auto;">
 
 On 29 May the Nigerian state will mount its annual parade. The President will read a speech about reforms beginning to bite, brighter days ahead, and ask the country to endure a little more, from inside a convoy that has never queued for fuel and a class that flies abroad for its medicine and schools its children there. On paper, 1999 lifted Nigeria from the barracks to the ballot; in the streets, twenty-six years on, more than 140 million Nigerians, around 63% of the country, queue for a meal that does not come and send children home for fees they cannot pay.
 
