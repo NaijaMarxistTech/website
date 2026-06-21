@@ -117,7 +117,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Submit to Supabase
     const { error } = await supabase
-      .from('test_contact_messages')
+      .from('contact_messages')
       .insert([formData]);
     
     if (error) {
