@@ -286,7 +286,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Submit to Supabase
     const { error } = await supabase
-      .from('members')
+      .from('test_members')
       .insert([formData]);
 
     if (error) {
