@@ -195,50 +195,74 @@ layout: default
 <section id="contact" class="content-section fade-in">
   <div class="section-label">Get Involved</div>
   <h2>Contact &amp; Join</h2>
-  <div class="contact-grid">
-    <div class="contact-text">
-      <p>Whether you are a worker, student, or intellectual looking to engage with Marxist politics in Nigeria, we want to hear from you. The struggle requires organisation -- come and help build it.</p>
-      <p>We welcome enquiries about membership, study group participation, or collaboration on political work.</p>
-      <ul class="contact-channels">
-        <li>
-          <span class="ch-label">Email</span>
-          <span>contact@naijamarxists.org</span>
-        </li>
-        <li>
-          <span class="ch-label">Twitter/X</span>
-          <span>@NGNMarxists</span>
-        </li>
-        <li>
-          <span class="ch-label">WhatsApp</span>
-          <span>Available on request</span>
-        </li>
-      </ul>
+  
+  <!-- Contact form container -->
+  <div id="contactFormContainer" class="contact-form-container" style="max-width: 900px; margin: 0 auto;">
+    <div class="contact-grid">
+      <div class="contact-text">
+        <p>Whether you are a worker, student, or intellectual looking to engage with Marxist politics in Nigeria, we want to hear from you. The struggle requires organisation -- come and help build it.</p>
+        <p>We welcome enquiries about membership, study group participation, or collaboration on political work.</p>
+        <ul class="contact-channels">
+          <li>
+            <span class="ch-label">Email</span>
+            <span>contact@thenaijamarxists.org</span>
+          </li>
+          <li>
+            <span class="ch-label">Twitter/X</span>
+            <span>@NGNMarxists</span>
+          </li>
+          <li>
+            <span class="ch-label">WhatsApp</span>
+            <span>Available on request</span>
+          </li>
+        </ul>
+      </div>
+      <div class="contact-form-wrap">
+        <h3>Send a Message</h3>
+        <form id="contactForm">
+          <div class="form-field">
+            <label>Your Name <span class="required">*</span></label>
+            <input type="text" id="contactName" placeholder="Full name" required>
+          </div>
+          <div class="form-field">
+            <label>Email Address <span class="required">*</span></label>
+            <input type="email" id="contactEmail" placeholder="your@email.com" required>
+          </div>
+          <div class="form-field">
+            <label>Subject <span class="required">*</span></label>
+            <select id="contactSubject" required>
+              <option value="">Select a subject...</option>
+              <option value="General enquiry">General enquiry</option>
+              <option value="Membership">Membership</option>
+              <option value="Study group">Study group</option>
+              <option value="Events">Events</option>
+              <option value="Media / Press">Media / Press</option>
+              <option value="Collaboration">Collaboration</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label>Message <span class="required">*</span></label>
+            <textarea id="contactMessage" placeholder="Your message..." rows="5" required></textarea>
+          </div>
+          <button type="submit" class="submit-btn" id="contactSubmitBtn" style="width:100%;">Send Message</button>
+        </form>
+        <div id="contactFormStatus" class="form-status"></div>
+      </div>
     </div>
-    <div class="contact-form-wrap">
-      <h3>Send a Message</h3>
-      <div class="form-field">
-        <label>Your Name</label>
-        <input type="text" placeholder="Full name" />
-      </div>
-      <div class="form-field">
-        <label>Email Address</label>
-        <input type="email" placeholder="your@email.com" />
-      </div>
-      <div class="form-field">
-        <label>Subject</label>
-        <select>
-          <option>General enquiry</option>
-          <option>Membership</option>
-          <option>Study group</option>
-          <option>Events</option>
-          <option>Media / Press</option>
-        </select>
-      </div>
-      <div class="form-field">
-        <label>Message</label>
-        <textarea placeholder="Your message..."></textarea>
-      </div>
-      <button class="submit-btn">Send Message</button>
-    </div>
+  </div>
+
+  <!-- Using the reusable success message component -->
+  <div id="contactSuccessMessage" style="display: none;">
+    {% include success-message.html 
+      type="contact"
+      heading="Message Sent!"
+      message="Thank you for reaching out to The Naija Marxists."
+      button_text="OK"
+      button_action="dismiss"
+      form_id="contactForm"
+      container_id="contactFormContainer"
+      submit_button_text="Send Message"
+    %}
   </div>
 </section>

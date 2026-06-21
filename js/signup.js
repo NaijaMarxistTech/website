@@ -8,16 +8,14 @@ document.addEventListener('DOMContentLoaded', function() {
   // ============================================================
   // 1. Supabase configuration
   // ============================================================
-  const SUPABASE_URL = window.SUPABASE_URL || 'YOUR_SUPABASE_URL';
-  const SUPABASE_ANON_KEY = window.SUPABASE_ANON_KEY || 'YOUR_SUPABASE_ANON_KEY';
+  const supabase = window.supabaseClient;
   
-  if (typeof window.supabase === 'undefined') {
-    console.error("Supabase library not loaded!");
+  if (!supabase) {
+    console.error("Supabase client not initialized!");
     return;
   }
   
-  const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-  console.log("Supabase client created");
+  console.log("Supabase client ready for signup form");
 
   // ============================================================
   // 2. Data

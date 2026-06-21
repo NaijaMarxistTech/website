@@ -1,0 +1,58 @@
+<!-- _includes/success-message.html -->
+<!-- Reusable success message component -->
+<!-- 
+  Parameters:
+  - type: 'signup' or 'contact'
+  - heading: Custom heading (optional)
+  - message: Custom message (optional)
+  - button_text: Custom button text (optional)
+  - button_action: 'dismiss' or 'homepage' (optional)
+  - form_id: ID of the form to show when dismissed (optional)
+  - container_id: ID of the form container to show when dismissed (optional)
+-->
+
+{% assign heading = include.heading | default: "Success!" %}
+{% assign message = include.message | default: "Your submission was successful." %}
+{% assign button_text = include.button_text | default: "Return to Homepage" %}
+{% assign button_action = include.button_action | default: "homepage" %}
+{% assign type = include.type | default: "default" %}
+{% assign form_id = include.form_id | default: "" %}
+{% assign container_id = include.container_id | default: "" %}
+{% assign submit_button_text = include.submit_button_text | default: "Send Message" %}
+
+<div class="success-message" style="text-align: center; padding: 3rem 2rem; background: #ffffff; border-radius: 4px; max-width: 900px; margin: 2rem auto; box-shadow: 0 4px 20px rgba(0,0,0,0.1); border-top: 4px solid #2E7D32;">
+  <div style="font-size: 4rem; margin-bottom: 1rem; color: #2E7D32;">✓</div>
+  <h2 style="font-family: 'Playfair Display', Georgia, serif; color: #1C2B3A; margin-bottom: 1rem; font-size: 1.8rem;">{{ heading }}</h2>
+  <p style="font-size: 1.1rem; margin-bottom: 1rem; color: #1a1a1a;">{{ message }}</p>
+  <p style="margin-bottom: 2rem; color: #1a1a1a; font-size: 0.9rem;">A comrade will contact you within 48 hours.</p>
+  
+  {% if button_action == 'dismiss' %}
+    <button onclick="
+      const successWrapper = this.closest('.success-message')?.parentElement;
+      if (successWrapper) {
+        successWrapper.style.display = 'none';
+      }
+      if ('{{ container_id }}') {
+        const formContainer = document.getElementById('{{ container_id }}');
+        if (formContainer) {
+          formContainer.style.display = 'block';
+        }
+      }
+      if ('{{ form_id }}') {
+        const form = document.getElementById('{{ form_id }}');
+        if (form) {
+          form.reset();
+        }
+        const submitBtn = form ? form.querySelector('button[type=submit]') : null;
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = '{{ submit_button_text }}';
+        }
+      }
+    " class="btn btn-red" style="background: #C62828; color: white; text-decoration: none; display: inline-block; padding: 0.7rem 1.8rem; font-family: 'DM Mono', monospace; font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; border: 2px solid #C62828; transition: background 0.2s; cursor: pointer;">
+      {{ button_text }}
+    </button>
+  {% else %}
+    <a href="{{ site.baseurl }}/" class="btn btn-red" style="background: #C62828; color: white; text-decoration: none; display: inline-block; padding: 0.7rem 1.8rem; font-family: 'DM Mono', monospace; font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; border: 2px solid #C62828; transition: background 0.2s;">{{ button_text }}</a>
+  {% endif %}
+</div>

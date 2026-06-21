@@ -20,3 +20,6 @@ desktop.ini
 
 # Local config (if you have any)
 *.local.yml
+
+# env files
+.env

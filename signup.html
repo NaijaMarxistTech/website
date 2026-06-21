@@ -7,12 +7,3 @@ permalink: /signup/
 <link rel="stylesheet" href="{{ site.baseurl }}/css/signup.css">
 
 {% include signup-form.html %}
-
-<!-- Load scripts -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="{{ site.baseurl }}/js/signup.js"></script>
-
-<script>
-  window.SUPABASE_URL = '{{ site.env.SUPABASE_URL }}';
-  window.SUPABASE_ANON_KEY = '{{ site.env.SUPABASE_ANON_KEY }}';
-</script>

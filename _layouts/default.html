@@ -39,9 +39,29 @@
     {% include footer.html %}
   {% endunless %}
 
+  <!-- Load Supabase library once globally -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <!-- Expose Supabase keys globally -->
+  <script>
+    // Initialize Supabase once globally
+    window.SUPABASE_URL = '{{ site.env.SUPABASE_URL }}';
+    window.SUPABASE_ANON_KEY = '{{ site.env.SUPABASE_ANON_KEY }}';
+    
+    if (typeof window.supabase !== 'undefined') {
+      window.supabaseClient = window.supabase.createClient(
+        window.SUPABASE_URL,
+        window.SUPABASE_ANON_KEY
+      );
+      console.log("Supabase client initialized globally");
+    } else {
+      console.error("Supabase library not loaded!");
+    }
+  </script>
+
   <script src="/js/masthead.js"></script>
   <script src="/js/scroll.js"></script>
-
-  {{ page.scripts }}
+  <script src="{{ site.baseurl }}/js/contact.js"></script>
+  <script src="{{ site.baseurl }}/js/signup.js"></script>
 </body>
 </html>
