@@ -170,12 +170,14 @@
   </form>
 </div>
 
-<div id="successMessage" style="display: none; text-align: center; padding: 3rem 2rem; background: #ffffff; border-radius: 4px; max-width: 900px; margin: 2rem auto; box-shadow: 0 4px 20px rgba(0,0,0,0.1); border-top: 4px solid #2E7D32;">
-  <div style="font-size: 4rem; margin-bottom: 1rem; color: #2E7D32;">✓</div>
-  <h2 style="font-family: 'Playfair Display', Georgia, serif; color: #1C2B3A; margin-bottom: 1rem; font-size: 1.8rem;">Application Submitted!</h2>
-  <p style="font-size: 1.1rem; margin-bottom: 1rem; color: #1a1a1a;">Thank you for applying to join The Naija Marxists.</p>
-  <p style="margin-bottom: 2rem; color: #1a1a1a;">A comrade will contact you within 48 hours to discuss next steps.</p>
-  <a href="/" class="btn btn-red" style="background: #C62828; color: white; text-decoration: none; display: inline-block; padding: 0.7rem 1.8rem; font-family: 'DM Mono', monospace; font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; border: 2px solid #C62828; transition: background 0.2s;">Return to Homepage</a>
+<!-- Using the reusable success message component -->
+<div id="successMessage" style="display: none;">
+  {% include success-message.html 
+    type="signup"
+    heading="Application Submitted!"
+    message="Thank you for applying to join The Naija Marxists."
+    button_text="Return to Homepage"
+  %}
 </div>
 
 <div id="formStatus" class="form-status"></div>
