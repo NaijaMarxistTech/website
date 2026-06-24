@@ -8,14 +8,13 @@ document.addEventListener('DOMContentLoaded', function() {
   // ============================================================
   // 1. Supabase configuration
   // ============================================================
-  const supabase = window.supabaseClient;
-  
+  const supabase = window.supabaseClient || null;
+
   if (!supabase) {
-    console.error("Supabase client not initialized!");
-    return;
+    console.warn("Supabase client not initialized — UI will still work, but submissions will fail until Supabase is configured.");
+  } else {
+    console.log("Supabase client ready for signup form");
   }
-  
-  console.log("Supabase client ready for signup form");
 
   // ============================================================
   // 2. Data
@@ -284,10 +283,20 @@ document.addEventListener('DOMContentLoaded', function() {
     
     showLoading('Submitting your application to the central committee...');
 
-    // Submit to Supabase
-    const { error } = await supabase
-      .from('members')
-      .insert([formData]);
+      // Submit to Supabase
+      if (!supabase) {
+        console.error("Supabase client not initialized — cannot submit application.");
+        showError('Submission failed: backend unavailable. Please try again later or contact us directly.');
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Submit Application';
+        }
+        return;
+      }
+
+      const { error } = await supabase
+        .from('members')
+        .insert([formData]);
 
     if (error) {
       console.error("Supabase error:", error);
