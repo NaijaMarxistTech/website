@@ -38,6 +38,17 @@
   box-shadow: 0 2px 8px rgba(0,0,0,0.06);
   transition: transform 0.2s, box-shadow 0.2s;
 }
+/* ── STATEMENT TITLE LINK ── */
+.statement-title-link {
+  color: var(--navy);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.statement-title-link:hover {
+  color: var(--red);
+  text-decoration: underline;
+}
 .statement-card:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(0,0,0,0.1);
@@ -563,6 +574,9 @@
   /* STATEMENTS */
   #statements .statements-grid {
     grid-template-columns: 1fr !important;
+  }
+  .statement-title-link {
+    font-size: 1rem;
   }
 
   /* STUDY GROUPS */

@@ -51,7 +51,7 @@ layout: default
     {% for statement in statements limit:3 %}
       <div class="statement-card">
         <p class="card-meta">{{ statement.date | date: "%B %Y" }} &nbsp;|&nbsp; {{ statement.doc-type | default: "Statement" }}</p>
-        <h3>{{ statement.title }}</h3>
+        <h3><a href="{{ statement.url | relative_url }}" class="statement-title-link">{{ statement.title }}</a></h3>
         <p>{{ statement.excerpt | strip_html }}</p>
         <a href="{{ statement.url | relative_url }}" class="read-more">Read statement →</a>
       </div>
