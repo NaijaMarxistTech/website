@@ -52,7 +52,7 @@ layout: default
       <div class="statement-card">
         <p class="card-meta">{{ statement.date | date: "%B %Y" }} &nbsp;|&nbsp; {{ statement.doc-type | default: "Statement" }}</p>
         <h3>{{ statement.title }}</h3>
-        <p>{{ statement.excerpt | strip_html | truncatewords: 25 }}</p>
+        <p>{{ statement.excerpt | strip_html }}</p>
         <a href="{{ statement.url | relative_url }}" class="read-more">Read statement →</a>
       </div>
     {% endfor %}
@@ -86,7 +86,7 @@ layout: default
         <div class="analysis-body">
           <p class="byline">{{ post.category | default: "Analysis" }}</p>
           <h3><a href="{{ post.url | relative_url }}" class="article-link">{{ post.title }}</a></h3>
-          <p>{{ post.excerpt | strip_html | truncatewords: 30 }}</p>
+          <p>{{ post.excerpt | strip_html }}</p>
           <a href="{{ post.url | relative_url }}" class="read-more">Read article →</a>
         </div>
       </div>

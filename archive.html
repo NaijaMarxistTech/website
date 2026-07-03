@@ -19,7 +19,7 @@ hide_hero: true
           <span class="archive-category">{{ post.category | default: "Analysis" }}</span>
         </div>
         <h3><a href="{{ post.url | relative_url }}" class="article-link">{{ post.title }}</a></h3>
-        <p class="archive-excerpt">{{ post.excerpt | strip_html | truncatewords: 30 }}</p>
+        <p class="archive-excerpt">{{ post.excerpt | strip_html }}</p>
       </div>
     {% endfor %}
   </div>
