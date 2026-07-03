@@ -71,24 +71,31 @@ layout: default
 </section>
 
 <!-- ANALYSIS (dynamic from _posts) -->
+<!-- ANALYSIS (dynamic from _posts) -->
 <section id="analysis" class="content-section fade-in">
   <div class="section-label">Analysis &amp; Articles</div>
   <h2>Political Analysis</h2>
   <div class="analysis-list">
-    {% for post in site.posts %}
+    {% assign posts = site.posts | sort: "date" | reverse %}
+    {% for post in posts limit:5 %}
       <div class="analysis-item">
         <div class="analysis-date-block">
           <div class="day">{{ post.date | date: "%d" }}</div>
           <div class="month">{{ post.date | date: "%b %Y" }}</div>
         </div>
         <div class="analysis-body">
-          <p class="byline">{{ post.categories | join: " / " | default: "Analysis" }}</p>
-          <h3>{{ post.title }}</h3>
+          <p class="byline">{{ post.category | default: "Analysis" }}</p>
+          <h3><a href="{{ post.url | relative_url }}" class="article-link">{{ post.title }}</a></h3>
           <p>{{ post.excerpt | strip_html | truncatewords: 30 }}</p>
-          <a href="{{ post.url | relative_url }}" class="read-more">Read article</a>
+          <a href="{{ post.url | relative_url }}" class="read-more">Read article →</a>
         </div>
       </div>
     {% endfor %}
+  </div>
+
+  <!-- View all articles link -->
+  <div class="view-all-container">
+    <a href="/archive/" class="view-all-link">View all articles →</a>
   </div>
 </section>
 

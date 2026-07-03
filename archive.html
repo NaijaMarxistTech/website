@@ -1,0 +1,30 @@
+---
+layout: default
+title: All Articles
+permalink: /archive/
+hide_hero: true
+---
+
+<section class="content-section fade-in">
+  <div class="section-label">Analysis &amp; Articles</div>
+  <h2>All Political Analysis</h2>
+  <p class="archive-intro">All articles published by The Naija Marxists, in reverse chronological order.</p>
+
+  <div class="archive-list">
+    {% assign posts = site.posts | sort: "date" | reverse %}
+    {% for post in posts %}
+      <div class="archive-item">
+        <div class="archive-meta">
+          <span class="archive-date">{{ post.date | date: "%b %d, %Y" }}</span>
+          <span class="archive-category">{{ post.category | default: "Analysis" }}</span>
+        </div>
+        <h3><a href="{{ post.url | relative_url }}" class="article-link">{{ post.title }}</a></h3>
+        <p class="archive-excerpt">{{ post.excerpt | strip_html | truncatewords: 30 }}</p>
+      </div>
+    {% endfor %}
+  </div>
+
+  <div class="back-to-home">
+    <a href="/#analysis" class="read-more">← Back to homepage</a>
+  </div>
+</section>

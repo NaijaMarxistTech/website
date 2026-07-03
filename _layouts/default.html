@@ -39,7 +39,9 @@
 
   {% unless page.hide_header %}
     {% include header.html %}
-    {% include hero.html %}
+    {% unless page.hide_hero %}
+      {% include hero.html %}
+    {% endunless %}
   {% endunless %}
 
   <main class="page-wrap">
