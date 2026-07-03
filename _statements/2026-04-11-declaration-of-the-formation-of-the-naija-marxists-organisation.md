@@ -18,8 +18,6 @@ Enough.
 
 From Lagos danfo stops to Kano markets, from Port Harcourt oil rigs to Enugu coal pits, united as a people, united as one class, organised in unions, streets, and neighbourhoods, we can shut down their profit machine with strikes and mass action, and seize back our wealth and our future.
 
----
-
 ## Who We Are
 
 We are the inevitable offspring, FORGED IN THE FIRES OF NIGERIA'S STRUGGLES, BORN from the blood, sweat, and tears of the NIGERIAN PROLETARIAT AND PEASANT CLASS. We are THE LIVING CONTRADICTIONS tearing at this fractured neocolonial state, the unbroken chain in a proud lineage of Nigerian Marxism, from early agitators to today's street fighters.
@@ -27,8 +25,6 @@ We are the inevitable offspring, FORGED IN THE FIRES OF NIGERIA'S STRUGGLES, BOR
 We are not a charity or NGO body. We are not a pressure group within bourgeois democracy. We are the most conscious and committed sons and daughters of the Nigerian working class, the rural peasantry, and the alienated intelligentsia, organised to bring the truth to Nigerians and show them a path to their emancipation because we understand that the enemy, the Nigerian state and its imperialist backers, is ruthless, sophisticated, and will not relinquish power without a struggle.
 
 We study the science of revolution as laid down by Marx, Engels, Lenin, the century-long line of Socialist leaders, and the lessons of anti-colonial struggle both in Nigeria and beyond. We apply this science to the specific conditions of the Nigerian semi-feudal and neocolonial formation. Our task is to fuse Scientific Socialism with the spontaneous resistance of the Nigerian masses.
-
----
 
 ## The Road Ahead
 
