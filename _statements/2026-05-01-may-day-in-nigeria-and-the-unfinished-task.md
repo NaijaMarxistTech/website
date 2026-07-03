@@ -18,8 +18,6 @@ The post-colonial governments of the first republic and the military regimes ref
 
 The first state recognition came in 1980 from the People's Redemption Party government in Kano, under Mallam Aminu Kano's political leadership, which was the only mass left government Nigerian electoral politics had produced. The Shagari administration, following from that, declared May Day a national holiday in 1981. Three years earlier, in 1978, the military government had dissolved the four existing trade union federations by decree and merged the country's roughly fifteen hundred unions into a single body, the Nigeria Labour Congress (NLC). Union dues were now collected directly through the government payroll system, which meant the workers were paying their unions through the very government those unions were supposed to confront. The government granted the calendar entry while trying to take the autonomy. The recognition was a real victory for the workers, won through decades of agitation, and the workers knew the difference between the form and the content of what they had won. They went on to use the day, and the years that followed, to organise against the same government that had recognised it.
 
----
-
 ## What the Nigerian Working Class Has Done
 
 Nigerian workers are not now and have never been a passive class. The historical record shows a class that has repeatedly moved at revolutionary scale, only to be betrayed by its own leadership at the moment of decision. We need to walk through that record, because it tells us where we are, what we are capable of, and what is still missing.
@@ -42,8 +40,6 @@ In June 2024, a general strike shut down the national grid in protest against th
 
 The Nigerian working class can fight, has fought, and will fight again. What it has lacked is leadership willing to press the fight to its conclusion, and an organisation independent of any leadership that could carry the fight forward when those leaders chose to step back. That is the gap between every revolutionary moment Nigeria has had and the revolutionary outcome that should have followed. Closing it is the task in front of us.
 
----
-
 ## The System the Workers Confront
 
 To understand why every one of those moments stopped short, we have to look honestly at the system Nigerian workers actually confront, because the system itself is what shapes the limits of what wage struggle alone can win.
@@ -58,8 +54,6 @@ The Structural Adjustment Programme of 1986, imposed on Nigeria by the IMF and t
 
 The value of the naira itself depends on the price of crude oil in markets that no Nigerian worker has any control over. That means every wage victory the workers win is at risk of being eaten up by a devaluation tomorrow. Look at the numbers honestly. The N70,000 minimum wage that the workers settled for in July 2024 was worth about $40 a month at the exchange rate of the time. The N30,000 minimum wage it replaced had been worth about $75 a month before the Tinubu government devalued the naira in 2023. The workers won 133% more naira on paper, while losing 47% of what those naira could actually buy. This is what wage struggle ends up yielding inside a dependent commodity economy. The unions can fight for naira figures all day, and the dollar exchange rate decides the outcome behind their backs.
 
----
-
 ## What the Unions Cannot Deliver
 
 We have already informed that the NLC came into being by military decree. When the federal government withheld check-off dues through the IPPIS payroll system in early 2024, it confirmed what every honest organiser already knew, that the government can starve the unions whenever the unions take it on seriously.
@@ -72,8 +66,6 @@ The Labour Party in its current form does not threaten any of this arrangement. 
 
 The Labour Party as we have it today offers no real challenge to the things that matter most: the petro-rentier state in which a small ruling group lives off oil rents while everyone else carries the consequences, the private ownership of the commanding heights of the Nigerian economy, and the way the value of the naira itself is set abroad by the dollar oil price. It is a Trojan horse for the political class, painted in the colours of the workers.
 
----
-
 ## What the Situation Requires
 
 The question we are facing as Nigerian workers and Nigerian Marxists today was answered in outline more than 120 years ago. In 1902, in the Russian Empire, Vladimir Lenin wrote a short pamphlet called What Is To Be Done?.
@@ -84,15 +76,11 @@ The lesson here applies broadly. A working class that goes into the fight withou
 
 The Nigerian working class fought in 1945, in 1949, in 1964, in 1994, in 2003, in 2012, and in 2024. Every single time, the ground taken was given back. The party that could have held it was never built.
 
----
-
 ## What Naija Marxists Is Doing
 
 The Naija Marxists exists to build the workers' party under Nigerian conditions. The work goes into formal sector workplaces and into the informal economy, into the universities, and onto the digital platforms where young Nigerians are being squeezed by algorithmic bosses. The cadres we are training study Marxist theory seriously, because the Nigerian working class needs a scientific understanding of the system that exploits it. The propaganda we produce treats Nigerian workers as a politically adult class, capable of running the country itself, and links every fight over wages, fuel, and the cost of living to the deeper question of who actually owns Nigeria and who actually runs the Nigerian state.
 
 We accept no money from the Nigerian ruling class, from foreign NGOs, or from any government agency. Our funds come from our members, in their dues, their contributions, and their labour. Internally we operate by democratic decision followed by united action. The political independence of this organisation — from every other power in the country — is the condition of our existence as Marxists.
-
----
 
 ## A Call to Organise
 
