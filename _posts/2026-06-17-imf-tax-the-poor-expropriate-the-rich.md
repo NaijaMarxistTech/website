@@ -17,8 +17,6 @@ The IMF is the financial policeman of global capitalism, created under American 
 
 Tinubu's government has already been implementing this austerity programme before this consultation! It removed the petrol subsidy on inauguration day without warning and without replacement. It devalued the naira by over 70%, repricing everything imported upward while Nigerian wages stand still. Electricity tariffs jumped over 200%. Inflation has crossed 34%, and the ordinary Nigerian feels every point of it in the market, at the bus stop, at the pharmacy. When Nigerians took to the streets in August 2024 to say they could not eat, security forces killed at least 22 of them and arrested over a thousand more. The IMF applauded these "structural reforms," but the ordinary Nigerian buried their dead.
 
----
-
 ## WHO WILL FIGHT THIS?
 
 Look the NLC, as it is currently constituted, objectively cannot lead this fight. In 2024, Nigerian workers came out on an indefinite general strike and the rank and file were ready to fight, yet within two days the NLC and TUC suspended it for "renewed negotiations," even though the government had not moved an inch and none of the structural demands had been won. The bureaucracy sent the workers back. What followed was a N70,000 minimum wage jointly presented as a victory, which was worth less in real terms than the N30,000 it replaced! The ruling class got exactly what it needed, and the labour leadership delivered it. A leadership that suspends the workers' weapon before the enemy has conceded anything is managing the class on behalf of those who exploit it.
@@ -26,8 +24,6 @@ Look the NLC, as it is currently constituted, objectively cannot lead this fight
 The opposition political parties are a terminal dead end, and are merely rival gangs competing for the privilege of running the same system. They represent the same land-owning, contract-chasing, capital-hoarding class. Their manifestos are simply costuming. They will never legislate away the poverty that maintains their power! An election that leaves property relations intact is merely a change of guards for the prison.
 
 So if organised labour cannot, and the political parties cannot fight the IMF, who will? The Nigerian workers and youth are the answer! The class-conscious, disciplined workers and youth, armed with a programme that identifies the class enemy clearly, are the only force that can change the direction of this country!
-
----
 
 ## THE PROGRAMME AND THE POWER TO IMPOSE IT
 

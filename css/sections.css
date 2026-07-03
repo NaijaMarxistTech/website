@@ -126,6 +126,109 @@
 }
 .analysis-body p { font-size: 0.9rem; font-weight: 300; color: #444; }
 
+/* ── ARTICLE LINKS ── */
+.article-link {
+  color: var(--navy);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.article-link:hover {
+  color: var(--red);
+  text-decoration: underline;
+}
+
+/* ── VIEW ALL ARTICLES ── */
+.view-all-container {
+  text-align: center;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--off);
+}
+
+.view-all-link {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--red);
+  text-decoration: none;
+  border-bottom: 2px solid var(--red);
+  padding-bottom: 0.3rem;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.view-all-link:hover {
+  color: var(--red-dk);
+  border-color: var(--red-dk);
+}
+
+/* ── ARCHIVE PAGE ── */
+.archive-intro {
+  max-width: 600px;
+  margin-bottom: 2rem;
+  font-weight: 300;
+  color: #555;
+}
+
+.archive-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.8rem;
+}
+
+.archive-item {
+  border-bottom: 1px solid var(--off);
+  padding-bottom: 1.5rem;
+}
+
+.archive-item:last-child {
+  border-bottom: none;
+}
+
+.archive-meta {
+  display: flex;
+  gap: 1rem;
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #777;
+  margin-bottom: 0.3rem;
+}
+
+.archive-category {
+  color: var(--red);
+}
+
+.archive-item h3 {
+  font-family: var(--display);
+  font-size: 1.2rem;
+  color: var(--navy);
+  margin-bottom: 0.3rem;
+}
+
+.archive-item h3 .article-link {
+  color: var(--navy);
+}
+
+.archive-item h3 .article-link:hover {
+  color: var(--red);
+}
+
+.archive-excerpt {
+  font-size: 0.9rem;
+  font-weight: 300;
+  color: #444;
+  line-height: 1.6;
+}
+
+.back-to-home {
+  margin-top: 2.5rem;
+}
+
+
 /* ── STUDY GROUPS ── */
 #study-groups .sg-intro {
   max-width: 640px;
@@ -438,6 +541,24 @@
   .analysis-date-block { display: none !important; }
   .analysis-body h3 { font-size: 1rem; }
   .analysis-body p { font-size: 0.85rem; }
+
+  /* Archive page */
+  .archive-item h3 {
+    font-size: 1rem;
+  }
+  .archive-meta {
+    font-size: 0.55rem;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+  }
+  .archive-intro {
+    font-size: 0.9rem;
+  }
+
+  /* View all link */
+  .view-all-link {
+    font-size: 0.7rem;
+  }
 
   /* STATEMENTS */
   #statements .statements-grid {

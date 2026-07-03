@@ -11,8 +11,6 @@ African Liberation Day marks a transfer of political administration. In some cou
 
 Sixty-three years later, the results of that restructuring are visible in every direction. Wars consuming the Sahel and eastern Congo. Austerity programmes administered by institutions whose largest shareholders sit in Washington and Paris. Public hospitals without basic supplies in countries that sit on enormous mineral wealth. A handful of billionaires accumulating at rates that would have been recognisable to any colonial administrator, while the people who produce the wealth that makes this accumulation possible remain dispossessed. To understand why, it is necessary to understand what capitalism is and how it operates, not as a general description of greed or inequality, but as a specific system with specific internal laws that produce these outcomes as a matter of course.
 
----
-
 ## The Logic of Capital
 
 Capitalism is a mode of production organised around a specific class relation. Those who own the means of production, the land, the factories, the mines, the infrastructure, constitute one class. Those who own nothing but their capacity to work and must sell that labour to survive constitute another. When the worker labours, the value produced exceeds the value of the wage paid. That difference, what Marx called surplus value, is appropriated by the owning class. It is the source of profit, of interest, of rent, of all the forms in which the owning class accumulates. This is not capitalism distorted or corrupted. It is capitalism functioning exactly as its internal logic requires.
@@ -21,23 +19,17 @@ As capital accumulates within a given economy, a problem emerges from within the
 
 Lenin developed this analysis in *Imperialism, the Highest Stage of Capitalism*, written in 1916. By the late nineteenth century, capitalism in the industrialised centres had reached a stage where free competition had given way to monopoly. Banks and industrial corporations merged into finance capital, concentrating economic power in the hands of a small number of institutions. This finance capital exported itself outward, seeking the rates of return that saturated home markets could no longer provide. Colonies and semi-colonies offered cheap raw materials, cheap labour not yet organised into strong unions, and investment opportunities in infrastructure, plantations, and extraction that generated profits unavailable at home. The division of the world among the major capitalist powers was the political expression of this economic competition. Imperialism was not a policy choice. It was a stage of capitalist development.
 
----
-
 ## What Independence Changed, and What It Did Not
 
 This mechanism did not end with formal independence. The economic structures built during the colonial period, the railways running to ports rather than connecting African cities to each other, the mono-crop agricultural systems producing for export rather than domestic consumption, the mining operations owned by foreign corporations, the financial systems integrated into London and Paris rather than into each other, remained in place after the flags changed. Capital continued to flow outward. The terms on which African states could borrow were set by institutions controlled by the major capitalist powers. Structural adjustment programmes imposed through debt conditionalities dismantled what public industry existed, liberalised trade in ways that destroyed domestic manufacturing competing with cheaper imports, and privatised assets at prices reflecting the desperation of states with no alternative. These are not the results of bad decisions by individual governments. They are the results of the class position of African states within global capitalism, as territories integrated into the system on terms set by those who hold capital, not those who hold labour.
 
 The class that inherited state power at independence was not in a position to alter this, and in most cases had no interest in doing so. The nationalist movements that won independence drew their leadership from lawyers, military officers, civil servants trained under colonial administration, merchants whose commercial position depended on the existing trade relationships. This petty bourgeoisie and nascent bourgeoisie inherited states whose economic function was the extraction and export of surplus. Managing that function on behalf of global capital, taking a portion of the proceeds, and disciplining the labour force that made it possible became the organising logic of the post-colonial state. Marxists describe the class that performs this function as a comprador bourgeoisie. It is not a foreign imposition. It is a domestic class whose material interests align with global capital against domestic labour. Dangote and a Lagos factory worker are not on the same side of the class question because both are Nigerian. Their positions in the relations of production are opposed, and that opposition determines their political interests regardless of shared nationality.
 
----
-
 ## What Nkrumah and Cabral Understood
 
 Amilcar Cabral in Guinea-Bissau understood this with particular clarity. His analysis of the class content of the liberation movement engaged directly with the role of the petty bourgeoisie, which provided the educated leadership of anticolonial nationalism across the continent. Cabral argued that this class faced a choice: commit class suicide, genuinely subordinating its interests to those of workers and peasants, or use the liberation movement to consolidate its own position at independence. The trajectory of most post-colonial African states answered the question he posed.
 
 Kwame Nkrumah, writing *Class Struggle in Africa* in 1970 after the coup that removed him from power, reached the same conclusion from his own experience. His earlier insistence that African society was classless by tradition had been wrong. The bourgeoisie that inherited independence was a real class with real interests opposed to those of African workers. He understood this after his defeat. The cost of understanding it late was the defeat itself.
-
----
 
 ## Race and Class
 
@@ -46,8 +38,6 @@ Capitalism does not care about race. The experience of racial oppression across 
 The post-apartheid South African economy integrated a Black bourgeoisie into ownership and management while the material conditions of Black working-class life remained largely unchanged, because what capital required was political stability. What capitalism requires in every instance is a class of owners and a class of workers. The racial composition of the owning class is a secondary question. The rate of exploitation is the same regardless.
 
 The radical youth across the continent who are looking for answers to genuine and worsening material conditions are right that something fundamental has failed. Decades of independence have produced billionaires in Lagos, Nairobi, and Johannesburg alongside mass unemployment, collapsed public services, and wars that cannot be ended because too many class interests profit from their continuation. The anger at this is correct. The question is whether it is organised around a framework capable of carrying it toward the actual source of the problem. A politics organised around continental identity or racial solidarity has no mechanism for identifying the African billionaire as a class enemy. It has no criterion for distinguishing between the Lagos factory worker and the owner of the factory, because both are African. Capital benefits from this confusion. An African bourgeoisie that presents itself as the leadership of African people, while extracting surplus from African workers and repatriating it to global capital, requires exactly this kind of politics to sustain its legitimacy.
-
----
 
 ## What Liberation Actually Requires
 

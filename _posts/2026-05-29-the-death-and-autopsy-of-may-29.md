@@ -11,8 +11,6 @@ On 29 May the Nigerian state will mount its annual parade. The President will re
 
 Three weeks before the parade, on Workers' Day, the President himself declared poverty a national emergency, as if the hunger had blown in from outside his own three years in office.
 
----
-
 ## Guns Blazing into a Recession
 
 The hunger Nigerians live with has a maker, and his name was on the platform on 29 May 2023.
@@ -25,8 +23,6 @@ Take it to the worker's pay packet. The minimum wage was raised from ₦30,000 t
 
 The same conjuring was run on the public accounts. Tinubu boasts of a ₦55 trillion budget for 2025. Convert it: thirty-five billion dollars. A country of 220 million people, sitting on an ocean of crude oil and gas, plans its year on less than what Kenya, a country one-quarter its size, manages. Africa's giant has been starved for three years and dressed in a larger suit, and the costume called recovery.
 
----
-
 ## The Reforms Doing the Opposite
 
 Three years of what Tinubu and his ministers called "Renewed Hope" have produced the opposite of every promise this government made. Tinubu told us the reforms would attract foreign capital to build factories and hire Nigerians. Capital came, alright, and went straight to the bond market to feed at the 27% the state pays its lenders. Foreign direct investment, the real money that builds a factory or hires a worker, came to a starving $923 million for the whole of 2025, under 4% of total inflows. The other 85%, around $20 billion, was hot money come to collect at 27% and bolt the moment the rate dips. Tinubu calls this "investor confidence." In plain Nigerian, it is the confidence of looters that the state will keep handing them twenty-seven kobo on every naira lent to it, while the welder, the seamstress, and the small farmer lock their gates. Nigerian factories shut at the rate of two every day across 2025, and investment in real manufacturing fell by half.
@@ -36,8 +32,6 @@ Tinubu's revenue numbers are no better. He crashed the naira, revalued the same 
 Inflation rose from 23% the day Tinubu took office to 35% by the end of 2024, the highest this country has known in three decades. At Mile 12 market in Lagos, the bowl of food that cost a woman ₦703 to put together for her family in 2023 cost ₦1,371 by October 2024, the same plate at twice the price, while her husband's pay-slip did not move until July of that year. The CPI was then rebased so the rate would read smaller on television, but even the cooked figure has begun climbing again, reaching 15.7% in April 2026. The last argument Tinubu had, that inflation was easing, is dying on the page in front of him.
 
 At the market, the new ₦70,000 minimum wage will not buy a single 50kg bag of rice, which sits between ₦60,000 and ₦82,000 across most of the country, while the ₦30,000 wage of 2019 bought a worker two such bags. The raise shrank the wage, and Tinubu told us to be grateful for it.
-
----
 
 ## Cooking the Books
 
@@ -49,13 +43,9 @@ The second was inflation. The CPI was rebased in January 2025, the basket of goo
 
 The third, and most shameless, was unemployment. In 2023 the NBS adopted a methodology that counts anyone who worked for one hour in the past seven days, even for ₦500, as "employed." Overnight, official unemployment fell from 33.3% under the old framework to 4.1% under the new, while KPMG, on the older method, estimated 2023 unemployment at 40.6%. A country of mass joblessness, of graduates riding okada because there is no other work, was rebranded by decree as a country at near-full employment. The graduate driving the okada was relabelled employed. The young man hawking puff-puff between cars in Lagos traffic was relabelled employed.
 
----
-
 ## Bound Hand and Foot
 
 Tinubu's ministers say they have no choice. The rate must stay near 27%, the borrowing must continue, the IMF's conditions must be met. On their narrow terms they are right. The rate cannot be brought down toward the 2% the wealthy economies treat as their floor, because the hot foreign capital came for the yield and nothing else. Cut the rate and it bolts; the naira drops; inflation breaks loose. So Tinubu strangles his own farmers and welders to keep his creditors calm. The men who run this country are paid to hold those chains. They will not break them. The arrangement is the prison.
-
----
 
 ## The Class That Can End It
 
