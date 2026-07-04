@@ -237,7 +237,7 @@ Located at `/signup/`, built from `_includes/signup-form.html` and `js/signup.js
 **Supabase table:** `members`
 **Columns:** `id, first_name, last_name, gender, email, telegram_username, resident_in_nigeria, location, profession, primary_skill, social_handles, q1–q10, score, level, created_at`
 
-**Applicant classification:** Each application is automatically scored (0–20+) and classified as `beginner`, `intermediate`, or `advanced` based on keyword analysis of the written answers. The recruitment team reviews and can override the classification.
+<!-- **Applicant classification:** Each application is automatically scored (0–20+) and classified as `beginner`, `intermediate`, or `advanced` based on keyword analysis of the written answers. The recruitment team reviews and can override the classification. -->
 
 ### Contact Form
 
