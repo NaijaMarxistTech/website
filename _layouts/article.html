@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="/css/layout.css">
   <link rel="stylesheet" href="/css/sections.css">
   <link rel="stylesheet" href="/css/pages.css">
-    <!-- Favicon -->
+  <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="/assets/favicons/favicon.ico">
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
@@ -26,7 +26,35 @@
       {{ page.category }} &nbsp;|&nbsp; {{ page.date | date: "%-d %B %Y" }}
     </div>
     {{ content }}
+
+    <!-- Back to analysis link -->
     <p class="back-link"><a href="/#analysis">← Back to analysis</a></p>
+
+    <!-- Social & Contact Footer -->
+    <div class="article-footer">
+      <hr class="article-divider">
+      <p class="contact-invite">
+        <a href="/#contact" class="contact-link">Have questions or want to get involved? Reach out to us.</a>
+      </p>
+      <div class="social-footer-links">
+        <a href="https://ngnmarxists.substack.com/" target="_blank" rel="noopener" class="social-footer-icon" aria-label="Substack">
+          {% include social-icons-footer.html type="substack" %}
+        </a>
+        <a href="https://twitter.com/ngnmarxists" target="_blank" rel="noopener" class="social-footer-icon" aria-label="Twitter/X">
+          {% include social-icons-footer.html type="twitter" %}
+        </a>
+        <a href="https://facebook.com/ngnmarxists" target="_blank" rel="noopener" class="social-footer-icon" aria-label="Facebook">
+          {% include social-icons-footer.html type="facebook" %}
+        </a>
+        <a href="https://instagram.com/ngnmarxists" target="_blank" rel="noopener" class="social-footer-icon" aria-label="Instagram">
+          {% include social-icons-footer.html type="instagram" %}
+        </a>
+        <!-- YouTube (commented out) -->
+        <!-- <a href="https://youtube.com/@NaijaMarxists" target="_blank" rel="noopener" class="social-footer-icon" aria-label="YouTube">
+          {% include social-icons-footer.html type="youtube" %}
+        </a> -->
+      </div>
+    </div>
   </div>
   <script src="/js/masthead.js"></script>
   <script src="/js/scroll.js"></script>

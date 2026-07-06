@@ -74,6 +74,64 @@ body {
   text-decoration: underline;
 }
 
+.article-footer {
+  margin-top: 2.5rem;
+}
+
+.article-divider {
+  border: none;
+  border-top: 1px solid var(--off);
+  margin: 0 0 1rem 0;
+  opacity: 0.5;
+}
+
+.contact-invite {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: #666;
+  margin: 0 0 0.75rem 0;
+}
+
+.contact-link {
+  color: var(--red);
+  text-decoration: none;
+  transition: color 0.2s, border-bottom 0.2s;
+  border-bottom: 1px solid transparent;
+}
+
+.contact-link:hover {
+  color: var(--red-dk);
+  border-bottom-color: var(--red-dk);
+}
+
+/* Social icons in footer - side by side, red theme */
+.social-footer-links {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.social-footer-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #999;
+  transition: color 0.2s, transform 0.2s;
+  text-decoration: none;
+  padding: 0.25rem;
+}
+
+.social-footer-icon:hover {
+  color: var(--red);
+  transform: translateY(-2px);
+}
+
+.social-footer-icon svg {
+  width: 20px;
+  height: 20px;
+  display: block;
+}
+
 /* ── EVENT PAGE STYLES ── */
 body {
   background: var(--paper);
@@ -120,6 +178,25 @@ body {
 }
 
 @media (max-width: 768px) {
+  .contact-invite {
+    font-size: 0.7rem;
+  }
+
+  .article-footer {
+    margin-top: 1.5rem;
+  }
+
+  .social-footer-links {
+    gap: 0.5rem;
+  }
+
+  .social-footer-icon svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  /* EVENTS */
+
   .event-container {
     margin: 2rem auto;
     padding: 0 1rem;
