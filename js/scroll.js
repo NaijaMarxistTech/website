@@ -109,6 +109,15 @@
       setMenuState(!isOpen);
     });
 
+    // ── 5. CLOSE BUTTON ──
+    const closeBtn = document.querySelector('.nav-close-btn');
+    if (closeBtn) {
+      closeBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        setMenuState(false);
+      });
+    }
+
     // Close when a nav link is clicked
     navMenu.querySelectorAll('a').forEach(function(link) {
       link.addEventListener('click', function() {
