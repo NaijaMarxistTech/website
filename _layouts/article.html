@@ -20,18 +20,22 @@
   <link rel="manifest" href="/assets/favicons/site.webmanifest">
 </head>
 <body>
-
   {% include nav.html %}
+
+  <!-- Hero Image (full width, reduced height, no crop) -->
+  {% if page.hero_image %}
+    <div class="article-hero-image">
+      <img src="{{ page.hero_image }}" alt="{{ page.title }}">
+    </div>
+  {% endif %}
 
   <div class="article-container">
     <h1>{{ page.title }}</h1>
     <div class="article-meta">
       {{ page.category }} &nbsp;|&nbsp; {{ page.date | date: "%-d %B %Y" }}
     </div>
-    {{ content }}
 
-    <!-- Back to analysis link -->
-    <p class="back-link"><a href="/#analysis">← Back to analysis</a></p>
+    {{ content }}
 
     <!-- Social & Contact Footer -->
     <div class="article-footer">
@@ -52,13 +56,14 @@
         <a href="https://instagram.com/ngnmarxists" target="_blank" rel="noopener" class="social-footer-icon" aria-label="Instagram">
           {% include social-icons-footer.html type="instagram" %}
         </a>
-        <!-- YouTube (commented out) -->
-        <!-- <a href="https://youtube.com/@NaijaMarxists" target="_blank" rel="noopener" class="social-footer-icon" aria-label="YouTube">
-          {% include social-icons-footer.html type="youtube" %}
-        </a> -->
       </div>
     </div>
+
+    <!-- Back to analysis link -->
+    <p class="back-link"><a href="/#analysis">← Back to analysis</a></p>
+
   </div>
+
   <script src="/js/masthead.js"></script>
   <script src="/js/scroll.js"></script>
 </body>

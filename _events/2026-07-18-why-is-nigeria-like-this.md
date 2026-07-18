@@ -7,6 +7,8 @@ location: "X Space: @NGNMarxists"
 excerpt: "Every time you ask why Nigeria is like this, someone tells you it is our culture, our leaders, our tribe, our curse. We disagree. Join us Saturday as we explain Nigeria — in class terms, not excuses."
 ---
 
+<!-- <img src="/assets/images/events/2026-07-16.jpg" alt="image" width="400" style="max-width:100%; height:auto;"> -->
+
 **Nigeria is not poor by accident.**
 
 Every time you ask why Nigeria is like this, someone tells you it is our culture, our leaders, our tribe, our curse.
