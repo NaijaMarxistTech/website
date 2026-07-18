@@ -1,5 +1,5 @@
 ---
-title: "Tinubu State Police Bill: A Cheap Distraction, Not Security"
+title: "Tinubu's State Police Bill: A Cheap Distraction, Not Security"
 date: 2026-07-16
 category: Analysis
 excerpt: "Nigeria is bleeding. Farmers pay levies to armed groups. Highways are kidnapping markets. And the Tinubu administration's answer is a State Police Bill. When the Nigerian ruling class has no answer for poverty, they offer police."

@@ -7,7 +7,7 @@ location: "X Space: @NGNMarxists"
 excerpt: "The IMF says Nigeria must raise more taxes. 63% of Nigerians already live in poverty. Is this the solution to our crisis? Join the conversation."
 ---
 
-<!-- <img src="/assets/images/events/2025-06-19-imf-taxes-x-space.jpg" alt="image" width="200" style="max-width:100%; height:auto;"> -->
+<!-- <img src="/assets/images/events/2026-06-19-imf-taxes-x-space.jpg" alt="image" width="200" style="max-width:100%; height:auto;"> -->
 
 **63% of Nigerians already live in poverty. 31 million face acute food insecurity.**
 
