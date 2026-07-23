@@ -102,7 +102,7 @@ nav.scrolled {
 .nav-menu-desktop li a {
   display: flex;
   align-items: center;
-  padding: 0.6rem 0.9rem;
+  padding: 1.2rem 0.9rem;
   color: #ccc;
   text-decoration: none;
   font-family: var(--mono);
@@ -348,12 +348,13 @@ footer {
 
   /* ── NAV ── */
   .nav-inner {
-    padding: 0.4rem 1rem;
+    padding: 0.5rem 1rem;
     position: relative;
     gap: 0.5rem;
   }
   .nav-toggle {
     display: flex;
+    padding: 0.8rem 0.5rem;   /* Increase top/bottom padding */
   }
 
   /* Hide desktop menu on mobile */
