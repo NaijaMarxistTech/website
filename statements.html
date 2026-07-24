@@ -1,0 +1,30 @@
+---
+layout: default
+title: All Statements
+permalink: /statements/
+hide_hero: true
+---
+
+<section class="content-section fade-in">
+  <div class="section-label">Political Statements</div>
+  <h2>All Official Statements</h2>
+  <p class="archive-intro">All official statements published by The Naija Marxists, in reverse chronological order.</p>
+
+  <div class="archive-list">
+    {% assign statements = site.statements | sort: "date" | reverse %}
+    {% for statement in statements %}
+      <a href="{{ statement.url | relative_url }}" class="archive-item">
+        <div class="archive-meta">
+          <span class="archive-date">{{ statement.date | date: "%b %d, %Y" }}</span>
+          <span class="archive-category">{{ statement.doc-type | default: "Statement" }}</span>
+        </div>
+        <h3>{{ statement.title }}</h3>
+        <p class="archive-excerpt">{{ statement.excerpt | strip_html }}</p>
+      </a>
+    {% endfor %}
+  </div>
+
+  <div class="back-to-home">
+    <a href="/#statements" class="read-more">← Back to homepage</a>
+  </div>
+</section>
