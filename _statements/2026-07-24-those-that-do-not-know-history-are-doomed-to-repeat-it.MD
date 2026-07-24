@@ -1,6 +1,6 @@
 ---
 title: "Those That Do Not Know History Are Doomed to Repeat It"
-date: 2026-07-23
+date: 2026-07-24
 doc-type: "Official Statement"
 excerpt: "A reply to the polemic titled 'Against Supermarxist Tendencies' by African Yeast. A shared enemy is not a shared road, and not all roads lead to Rome."
 layout: "statement"
