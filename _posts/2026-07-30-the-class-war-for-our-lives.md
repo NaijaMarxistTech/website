@@ -5,6 +5,8 @@ category: Analysis
 excerpt: "For decades the Nigerian ruling class has promised universal health coverage to the working masses. They keep selling a future where every Nigerian reaches essential healthcare without financial ruin, and they deliver nothing."
 ---
 
+<img src="/assets/images/posts/class-war-for-our-lives.jpg" alt="image" width="800" style="max-width:100%; height:auto;">
+
 <i><center><b>Why Nigeria's Rulers Cannot Heal Us, and How the Working Class Can</b></center></i>
 
 **For decades the Nigerian ruling class has promised universal health coverage to the working masses.** Through endless summits, reform mandates and empty rhetoric they keep selling a future where every Nigerian reaches essential healthcare without financial ruin, and they deliver nothing. Nigeria put its name to the 1978 Alma-Ata Declaration and swore to bring healthcare to all. Almost half a century later that promise lies in ruins, and the ordinary Nigerian still pays for a fever with money meant for food.
