@@ -1,0 +1,178 @@
+/* css/print.css - Print Stylesheet */
+
+/* ── HIDE NON-PRINT ELEMENTS ── */
+nav,
+.nav-menu-mobile,
+.nav-toggle,
+.article-hero-image,
+.hero-band,
+.ticker-wrap,
+footer,
+.social-footer-links,
+.contact-invite,
+.article-footer,
+.back-link,
+#social,
+#events,
+#statements,
+#contact,
+#about,
+#study-groups,
+.view-all-container {
+  display: none !important;
+}
+
+/* ── PAGE SETUP ── */
+@page {
+  margin: 2cm;
+  size: A4;
+}
+
+/* ── BODY ── */
+body {
+  background: white !important;
+  color: black !important;
+  font-size: 12pt !important;
+  line-height: 1.5 !important;
+  font-family: 'Times New Roman', serif !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* ── ARTICLE CONTAINER ── */
+.article-container,
+.event-container {
+  max-width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  background: white !important;
+}
+
+/* ── TITLES ── */
+.article-container h1,
+.event-container h1 {
+  font-size: 24pt !important;
+  font-weight: bold !important;
+  color: black !important;
+  margin-bottom: 0.5cm !important;
+  font-family: 'Times New Roman', serif !important;
+}
+
+.article-container h2,
+.event-container h2 {
+  font-size: 18pt !important;
+  font-weight: bold !important;
+  color: black !important;
+  margin-top: 1cm !important;
+  margin-bottom: 0.3cm !important;
+  font-family: 'Times New Roman', serif !important;
+}
+
+/* ── META DATA ── */
+.article-meta,
+.event-meta {
+  font-size: 10pt !important;
+  color: #555 !important;
+  border-bottom: 1px solid #ccc !important;
+  padding-bottom: 0.3cm !important;
+  margin-bottom: 0.5cm !important;
+  font-family: 'Times New Roman', serif !important;
+}
+
+/* ── PARAGRAPHS ── */
+.article-container p,
+.event-container p {
+  font-size: 11pt !important;
+  line-height: 1.6 !important;
+  text-align: justify !important;
+  margin-bottom: 0.3cm !important;
+  font-family: 'Times New Roman', serif !important;
+}
+
+/* ── BOLD TEXT ── */
+.article-container strong,
+.article-container b {
+  color: black !important;
+}
+
+/* ── LINKS ── */
+.article-container a,
+.event-container a {
+  color: black !important;
+  text-decoration: underline !important;
+}
+
+/* ── IMAGES ── */
+.article-container img,
+.event-container img {
+  max-width: 100% !important;
+  height: auto !important;
+  page-break-inside: avoid !important;
+  display: block !important;
+  margin: 0.5cm auto !important;
+}
+
+/* ── PAGE BREAKS ── */
+.article-container h2,
+.article-container h3,
+.event-container h2 {
+  page-break-after: avoid !important;
+}
+
+.article-container p {
+  page-break-inside: avoid !important;
+}
+
+.article-container ul,
+.article-container ol,
+.event-container ul,
+.event-container ol {
+  page-break-inside: avoid !important;
+}
+
+/* ── QUOTES ── */
+.article-container blockquote,
+.event-container blockquote {
+  margin: 0.5cm 1cm !important;
+  padding: 0.3cm 0.5cm !important;
+  border-left: 3px solid #ccc !important;
+  font-style: italic !important;
+}
+
+/* ── TABLES ── */
+.article-container table,
+.event-container table {
+  width: 100% !important;
+  border-collapse: collapse !important;
+  page-break-inside: avoid !important;
+}
+
+.article-container th,
+.article-container td,
+.event-container th,
+.event-container td {
+  border: 1px solid #ccc !important;
+  padding: 0.2cm !important;
+  text-align: left !important;
+}
+
+/* ── FOOTNOTES ── */
+.article-container .footnote,
+.event-container .footnote {
+  font-size: 9pt !important;
+  color: #555 !important;
+}
+
+/* ── HEADERS AND FOOTERS ── */
+@page {
+  @top-center {
+    content: "The Naija Marxists";
+    font-size: 9pt;
+    color: #999;
+  }
+  @bottom-center {
+    content: "Page " counter(page) " of " counter(pages);
+    font-size: 9pt;
+    color: #999;
+  }
+}
