@@ -1,0 +1,46 @@
+---
+layout: default
+title: Unsubscribe from Our Mailing List
+permalink: /unsubscribe/
+hide_hero: true
+---
+
+<link rel="stylesheet" href="{{ site.baseurl }}/css/subscribe.css">
+
+<section class="content-section fade-in">
+  <div class="section-label">Unsubscribe</div>
+  <h2>Unsubscribe from Our Mailing List</h2>
+  <p style="font-weight:300; max-width:600px; margin-bottom:1.5rem;">
+    We're sorry to see you go. Enter your email address below to unsubscribe from our mailing list.
+  </p>
+
+  <div class="subscribe-form-container" style="max-width: 600px; margin: 0 auto;">
+    <form id="unsubscribeForm">
+      <div class="form-field">
+        <label>Email Address <span class="required">*</span></label>
+        <input type="email" id="unsubscribeEmail" placeholder="your@email.com" required aria-required="true">
+      </div>
+
+      <button type="submit" class="submit-btn unsubscribe-btn" id="unsubscribeBtn">
+        Unsubscribe
+      </button>
+
+      <p class="privacy-note">
+        You can resubscribe at any time by visiting our <a href="/subscribe/">Subscribe page</a>.
+      </p>
+    </form>
+
+    <div id="unsubscribeStatus" class="form-status"></div>
+    <div id="unsubscribeSuccess" style="display: none;">
+      <div class="success-box">
+        <div class="success-icon" style="color:var(--red);">✓</div>
+        <h3>You've Been Unsubscribed</h3>
+        <p id="unsubscribeEmail" class="success-email"></p>
+        <p>You will no longer receive emails from The Naija Marxists.</p>
+        <p style="margin-top:1rem;">If you change your mind, you can <a href="/subscribe/">resubscribe anytime</a>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="/js/unsubscribe.js"></script>
