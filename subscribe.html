@@ -43,13 +43,13 @@ hide_hero: true
         <input type="tel" id="phone" placeholder="080 1234 5678">
       </div>
 
-      <!-- Consent Checkbox (mobile-optimized) -->
-      <div class="form-field consent-field">
-        <label class="consent-label">
-          <input type="checkbox" id="consent" required>
-          <span class="consent-text">I agree to receive emails from The Naija Marxists. I have read and understand the <a href="/privacy/" target="_blank">Privacy Policy</a> and I can unsubscribe at any time.</span>
-        </label>
-      </div>
+<!-- Consent Checkbox (rebuilt on CSS Grid — see subscribe.css) -->
+<div class="form-field cf-row">
+  <input type="checkbox" id="consent" required>
+  <label for="consent" class="cf-label">
+    I agree to receive emails from The Naija Marxists. I have read and understand the <a href="/privacy/" target="_blank">Privacy Policy</a> and I can unsubscribe at any time.
+  </label>
+</div>
 
       <button type="submit" class="submit-btn" id="subscribeBtn">
         Subscribe
