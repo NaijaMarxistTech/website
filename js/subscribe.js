@@ -91,7 +91,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
       // ── 8. Insert into mailing_list ──
       const { data, error } = await supabase
-        .from('test_mailing_list')
+        .from('mailing_list')
         .insert([{
           first_name: firstName,
           last_name: lastName,
@@ -111,7 +111,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (error.code === '23505') {
           // Check if the email exists but is unsubscribed
           const { data: existing, error: checkError } = await supabase
-            .from('test_mailing_list')
+            .from('mailing_list')
             .select('subscribed')
             .eq('email', email)
             .single();
@@ -121,7 +121,7 @@ document.addEventListener('DOMContentLoaded', function() {
           } else if (existing && existing.subscribed === false) {
             // Re-subscribe
             const { error: updateError } = await supabase
-              .from('test_mailing_list')
+              .from('mailing_list')
               .update({
                 subscribed: true,
                 subscribed_at: new Date().toISOString(),

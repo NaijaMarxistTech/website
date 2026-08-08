@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
       // ── 5. Check if email exists ──
       const { data: existing, error: checkError } = await supabase
-        .from('test_mailing_list')
+        .from('mailing_list')
         .select('subscribed')
         .eq('email', email)
         .single();
@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
       // ── 6. Update subscription status ──
       const { error: updateError } = await supabase
-        .from('test_mailing_list')
+        .from('mailing_list')
         .update({
           subscribed: false,
           unsubscribed_at: new Date().toISOString()

@@ -16,7 +16,7 @@ hide_hero: true
 
   <div class="subscribe-form-container" style="max-width: 600px; margin: 0 auto;">
     <form id="subscribeForm" method="POST" autocomplete="off">
-      <!-- Honeypot field (hidden from humans, traps bots) -->
+      <!-- Honeypot field -->
       <div style="display:none; position:absolute; left:-9999px;">
         <label for="website">Website</label>
         <input type="text" id="website" name="website" value="" tabindex="-1" autocomplete="off">
@@ -43,31 +43,29 @@ hide_hero: true
         <input type="tel" id="phone" placeholder="080 1234 5678">
       </div>
 
-      <!-- Consent Checkbox -->
-      <div class="form-field" style="margin-top:0.5rem;">
-        <label style="display:flex; align-items:flex-start; gap:0.75rem; font-size:0.85rem; text-transform:none; font-weight:400; color:#444; cursor:pointer; line-height:1.4;">
-          <input type="checkbox" id="consent" required style="width:20px; height:20px; margin-top:2px; flex-shrink:0; accent-color:var(--red);">
-          <span>I agree to receive emails from The Naija Marxists. I have read and understand the <a href="/privacy/" style="color:var(--red); text-decoration:underline;">Privacy Policy</a> and I can unsubscribe at any time.</span>
+      <!-- Consent Checkbox (mobile-optimized) -->
+      <div class="form-field consent-field">
+        <label class="consent-label">
+          <input type="checkbox" id="consent" required>
+          <span class="consent-text">I agree to receive emails from The Naija Marxists. I have read and understand the <a href="/privacy/" target="_blank">Privacy Policy</a> and I can unsubscribe at any time.</span>
         </label>
       </div>
 
-      <button type="submit" class="submit-btn" id="subscribeBtn" style="width:100%;">
+      <button type="submit" class="submit-btn" id="subscribeBtn">
         Subscribe
       </button>
 
-      <p style="font-size:0.7rem; color:#888; margin-top:0.8rem; text-align:center;">
-        We respect your privacy. You can unsubscribe at any time.
-      </p>
+      <p class="privacy-note">We respect your privacy. You can unsubscribe at any time.</p>
     </form>
 
     <div id="formStatus" class="form-status"></div>
     <div id="successMessage" style="display: none;">
-      <div style="text-align:center; padding:2rem; background:#fff; border-top:4px solid var(--red);">
-        <div style="font-size:3rem; color:var(--green);">✓</div>
-        <h3 style="font-family:var(--display); color:var(--navy);">You're Subscribed!</h3>
-        <p id="successEmail" style="font-weight:500; margin:0.5rem 0;"></p>
+      <div class="success-box">
+        <div class="success-icon">✓</div>
+        <h3>You're Subscribed!</h3>
+        <p id="successEmail" class="success-email"></p>
         <p>Thank you for joining our mailing list. You'll receive updates on our latest content and events.</p>
-        <p style="font-size:0.85rem; color:#888; margin-top:1rem;">You can unsubscribe at any time using the link in our emails.</p>
+        <p class="unsubscribe-reminder">You can unsubscribe at any time using the link in our emails.</p>
       </div>
     </div>
   </div>

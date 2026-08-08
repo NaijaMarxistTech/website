@@ -21,23 +21,23 @@ hide_hero: true
         <input type="email" id="unsubscribeEmail" placeholder="your@email.com" required aria-required="true">
       </div>
 
-      <button type="submit" class="submit-btn" id="unsubscribeBtn" style="width:100%; background:var(--red);">
+      <button type="submit" class="submit-btn unsubscribe-btn" id="unsubscribeBtn">
         Unsubscribe
       </button>
 
-      <p style="font-size:0.7rem; color:#888; margin-top:0.8rem; text-align:center;">
-        You can resubscribe at any time by visiting our <a href="/subscribe/" style="color:var(--red);">Subscribe page</a>.
+      <p class="privacy-note">
+        You can resubscribe at any time by visiting our <a href="/subscribe/">Subscribe page</a>.
       </p>
     </form>
 
     <div id="unsubscribeStatus" class="form-status"></div>
     <div id="unsubscribeSuccess" style="display: none;">
-      <div style="text-align:center; padding:2rem; background:#fff; border-top:4px solid var(--red);">
-        <div style="font-size:3rem; color:var(--red);">✓</div>
-        <h3 style="font-family:var(--display); color:var(--navy);">You've Been Unsubscribed</h3>
-        <p id="unsubscribeEmail" style="font-weight:500; margin:0.5rem 0;"></p>
+      <div class="success-box">
+        <div class="success-icon" style="color:var(--red);">✓</div>
+        <h3>You've Been Unsubscribed</h3>
+        <p id="unsubscribeEmail" class="success-email"></p>
         <p>You will no longer receive emails from The Naija Marxists.</p>
-        <p style="margin-top:1rem;">If you change your mind, you can <a href="/subscribe/" style="color:var(--red);">resubscribe anytime</a>.</p>
+        <p style="margin-top:1rem;">If you change your mind, you can <a href="/subscribe/">resubscribe anytime</a>.</p>
       </div>
     </div>
   </div>
