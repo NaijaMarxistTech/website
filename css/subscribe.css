@@ -1,0 +1,84 @@
+/* css/subscribe.css */
+.subscribe-form-container {
+  background: var(--off);
+  padding: 2rem;
+  border-radius: 4px;
+}
+
+.subscribe-form-container .form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.subscribe-form-container .form-field {
+  margin-bottom: 1rem;
+}
+
+.subscribe-form-container .form-field label {
+  display: block;
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #555;
+  margin-bottom: 0.3rem;
+}
+
+.subscribe-form-container .form-field .optional {
+  text-transform: none;
+  color: #999;
+  font-size: 0.6rem;
+}
+
+.subscribe-form-container .form-field input {
+  width: 100%;
+  padding: 0.65rem 0.8rem;
+  border: 1px solid #ccc;
+  background: #fff;
+  font-size: 0.9rem;
+  color: var(--ink);
+  outline: none;
+  transition: border-color 0.2s;
+  min-height: 44px;
+}
+
+.subscribe-form-container .form-field input:focus {
+  border-color: var(--red);
+}
+
+.subscribe-form-container .form-status {
+  margin-top: 1rem;
+  padding: 0.8rem;
+  text-align: center;
+  font-size: 0.9rem;
+  border-radius: 4px;
+}
+
+.subscribe-form-container .form-status.error {
+  background: var(--red);
+  color: #fff;
+}
+
+/* ── Unsubscribe page ── */
+#unsubscribeForm .submit-btn {
+  background: var(--red);
+}
+
+#unsubscribeForm .submit-btn:hover {
+  background: var(--red-dk);
+}
+
+#unsubscribeForm .submit-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+  .subscribe-form-container .form-row {
+    grid-template-columns: 1fr;
+  }
+  .subscribe-form-container {
+    padding: 1.5rem;
+  }
+}
