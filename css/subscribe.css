@@ -5,6 +5,11 @@
   background: var(--off);
   padding: 2rem;
   border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.subscribe-form-container * {
+  box-sizing: border-box;
 }
 
 .subscribe-form-container .form-row {
@@ -42,62 +47,65 @@
   color: var(--ink);
   outline: none;
   transition: border-color 0.2s;
-  min-height: 44px; /* touch target */
+  min-height: 44px;
 }
 
 .subscribe-form-container .form-field input:focus {
   border-color: var(--red);
 }
 
-/* ── Consent Checkbox (mobile-optimised) ── */
-.consent-field {
+/* ── Consent Checkbox — rebuilt on CSS Grid ──
+   Grid + minmax(0, 1fr) is used instead of flexbox on purpose:
+   a flex item's default min-width is "auto", which means it will
+   refuse to shrink below the width of its longest unbreakable run
+   of text (e.g. "Privacy Policy") — that's what was overflowing
+   on narrow screens. minmax(0, 1fr) has no such escape hatch: the
+   column is hard-capped at the available track width no matter
+   what the content wants, so wrapping is forced correctly. */
+
+.cf-row {
+  display: grid;
+  grid-template-columns: 24px minmax(0, 1fr);
+  column-gap: 0.75rem;
+  align-items: start;
+  width: 100%;
   margin-top: 0.5rem;
 }
 
-.consent-label {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.75rem;
+.cf-row input[type="checkbox"] {
+  grid-column: 1;
+  grid-row: 1;
+  width: 22px;
+  height: 22px;
+  margin: 0.2em 0 0 0;
+  accent-color: var(--red);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.cf-label {
+  grid-column: 2;
+  grid-row: 1;
+  min-width: 0;
+  max-width: 100%;
   font-size: 0.9rem;
-  line-height: 1.5;
+  line-height: 1.55;
   color: #333;
   cursor: pointer;
   text-transform: none;
   font-weight: 400;
   font-family: var(--body);
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  hyphens: auto;
 }
 
-.consent-label input[type="checkbox"] {
-  flex-shrink: 0;
-  width: 22px;
-  height: 22px;
-  margin-top: 2px;
-  accent-color: var(--red);
-  cursor: pointer;
-  border: 2px solid #ccc;
-  border-radius: 4px;
-  transition: border-color 0.2s;
-}
-
-.consent-label input[type="checkbox"]:checked {
-  border-color: var(--red);
-}
-
-.consent-label input[type="checkbox"]:focus-visible {
-  outline: 2px solid var(--red);
-  outline-offset: 2px;
-}
-
-.consent-text {
-  flex: 1;
-}
-
-.consent-text a {
+.cf-label a {
   color: var(--red);
   text-decoration: underline;
 }
 
-.consent-text a:hover {
+.cf-label a:hover {
   color: var(--red-dk);
 }
 
@@ -229,20 +237,25 @@
   }
 
   .subscribe-form-container .form-field input {
-    font-size: 16px; /* prevents iOS zoom */
+    font-size: 16px;
     padding: 0.7rem 0.8rem;
     min-height: 48px;
   }
 
-  .consent-label {
-    font-size: 0.9rem;
-    gap: 0.6rem;
+  .cf-row {
+    grid-template-columns: 26px minmax(0, 1fr);
+    column-gap: 0.6rem;
   }
 
-  .consent-label input[type="checkbox"] {
+  .cf-row input[type="checkbox"] {
     width: 24px;
     height: 24px;
-    margin-top: 2px;
+    margin: 0.15em 0 0 0;
+  }
+
+  .cf-label {
+    font-size: 0.85rem;
+    line-height: 1.5;
   }
 
   .submit-btn {
@@ -267,7 +280,6 @@
     font-size: 0.65rem;
   }
 
-  /* Unsubscribe page */
   .unsubscribe-btn {
     font-size: 0.8rem;
     padding: 0.8rem 1rem;
@@ -278,6 +290,7 @@
 /* ── Touch-friendly tap targets ── */
 button,
 a,
-.consent-label input[type="checkbox"] {
+.cf-label,
+.cf-row input[type="checkbox"] {
   touch-action: manipulation;
 }
