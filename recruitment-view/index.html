@@ -1,0 +1,68 @@
+---
+layout: default
+title: Recruitment View – Mailing List
+permalink: /recruitment-view/
+hide_hero: true
+hide_header: false
+---
+
+<link rel="stylesheet" href="{{ site.baseurl }}/css/admin.css">
+
+<section class="admin-section">
+  <div id="adminContent" style="display:none;">
+    <div class="admin-header">
+      <h1>📬 Mailing List Management</h1>
+      <p>View, search, and export mailing list subscribers.</p>
+      <button id="logoutBtn" class="logout-btn">Logout</button>
+    </div>
+
+    <div class="admin-controls">
+      <div class="search-wrapper">
+        <input type="text" id="searchInput" placeholder="Search subscribers..." />
+      </div>
+      <div class="export-wrapper">
+        <button id="exportCsvBtn" class="export-btn">📥 Export CSV</button>
+      </div>
+    </div>
+
+    <div class="table-wrapper">
+      <table id="mailingTable">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Source</th>
+            <th>Status</th>
+            <th>Subscribed At</th>
+          </tr>
+        </thead>
+        <tbody id="mailingTableBody">
+          <tr><td colspan="8" style="text-align:center; padding:2rem;">Loading...</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="admin-footer">
+      <p class="subscriber-count">Total subscribers: <span id="subscriberCount">0</span></p>
+    </div>
+  </div>
+
+  <!-- Password Prompt (visible initially) -->
+  <div id="passwordPrompt" class="password-prompt">
+    <div class="password-box">
+      <h2>🔐 Admin Access</h2>
+      <p>Enter the password to view the mailing list.</p>
+      <form id="passwordForm">
+        <input type="password" id="adminPassword" placeholder="Enter password..." autofocus />
+        <button type="submit">Unlock</button>
+      </form>
+      <p id="passwordError" style="display:none; color:var(--red); margin-top:0.5rem;">Incorrect password. Try again.</p>
+      <p style="margin-top:1rem; font-size:0.7rem; color:#888;">Attempts remaining: <span id="attemptsRemaining">5</span></p>
+    </div>
+  </div>
+</section>
+
+<script src="/js/admin.js"></script>
