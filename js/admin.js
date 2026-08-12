@@ -5,7 +5,7 @@ console.log("=== admin.js loaded ===");
 document.addEventListener('DOMContentLoaded', function() {
   console.log("DOMContentLoaded fired");
 
-  // ── Supabase configuration (same pattern as signup.js) ──
+  // ── Supabase configuration ──
   const supabase = window.supabaseClient || null;
 
   if (!supabase) {
@@ -13,6 +13,10 @@ document.addEventListener('DOMContentLoaded', function() {
   } else {
     console.log("Supabase client ready for admin page");
   }
+
+  // ── Edge Function URL (uses the Supabase project URL) ──
+  const SUPABASE_URL = window.SUPABASE_URL || 'https://pcpntpuujhrvbffgpixs.supabase.co';
+  const edgeFunctionUrl = `${SUPABASE_URL}/functions/v1/verify-admin-password`;
 
   const passwordForm = document.getElementById('passwordForm');
   const passwordInput = document.getElementById('adminPassword');
@@ -24,12 +28,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
   let attempts = 5;
 
-  // ── Use relative URL for Edge Function ──
-  const edgeFunctionUrl = `${window.location.origin}/functions/v1/verify-admin-password`;
-
   // ── Password verification via Edge Function ──
   const checkPassword = async (inputPassword) => {
     try {
+      console.log('🔐 Verifying password...');
       const response = await fetch(edgeFunctionUrl, {
         method: 'POST',
         headers: {
@@ -38,14 +40,17 @@ document.addEventListener('DOMContentLoaded', function() {
         body: JSON.stringify({ password: inputPassword })
       });
 
+      console.log('📡 Response status:', response.status);
+      const data = await response.json();
+      console.log('📡 Response data:', data);
+
       if (!response.ok) {
         return false;
       }
 
-      const data = await response.json();
       return data.valid === true;
     } catch (error) {
-      console.error('Password verification failed:', error);
+      console.error('❌ Password verification failed:', error);
       return false;
     }
   };
