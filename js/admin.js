@@ -1,6 +1,19 @@
 // js/admin.js – Mailing List Admin Page
 
+console.log("=== admin.js loaded ===");
+
 document.addEventListener('DOMContentLoaded', function() {
+  console.log("DOMContentLoaded fired");
+
+  // ── Supabase configuration (same pattern as signup.js) ──
+  const supabase = window.supabaseClient || null;
+
+  if (!supabase) {
+    console.warn("Supabase client not initialized — admin page will not work.");
+  } else {
+    console.log("Supabase client ready for admin page");
+  }
+
   const passwordForm = document.getElementById('passwordForm');
   const passwordInput = document.getElementById('adminPassword');
   const passwordError = document.getElementById('passwordError');
@@ -11,20 +24,19 @@ document.addEventListener('DOMContentLoaded', function() {
 
   let attempts = 5;
 
-  // ── Use Supabase Edge Function to check password ──
-  // The password is stored in Supabase secrets (not in code)
+  // ── Use relative URL for Edge Function ──
+  const edgeFunctionUrl = `${window.location.origin}/functions/v1/verify-admin-password`;
+
+  // ── Password verification via Edge Function ──
   const checkPassword = async (inputPassword) => {
     try {
-      const response = await fetch(
-        'https://pcpntpuujhrvbffgpixs.supabase.co/functions/v1/verify-admin-password',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ password: inputPassword })
-        }
-      );
+      const response = await fetch(edgeFunctionUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ password: inputPassword })
+      });
 
       if (!response.ok) {
         return false;
@@ -51,7 +63,6 @@ document.addEventListener('DOMContentLoaded', function() {
       return;
     }
 
-    // Check attempts
     if (attempts <= 0) {
       passwordError.textContent = 'Too many failed attempts. Refresh the page to try again.';
       passwordError.style.display = 'block';
@@ -59,11 +70,9 @@ document.addEventListener('DOMContentLoaded', function() {
       return;
     }
 
-    // Verify password via Supabase Edge Function
     const isValid = await checkPassword(inputPassword);
 
     if (isValid) {
-      // Correct password – show admin content
       passwordPrompt.style.display = 'none';
       adminContent.style.display = 'block';
       loadMailingList();
@@ -100,13 +109,12 @@ document.addEventListener('DOMContentLoaded', function() {
     const searchInput = document.getElementById('searchInput');
     const subscriberCount = document.getElementById('subscriberCount');
 
-    try {
-      const supabase = window.supabaseClient;
-      if (!supabase) {
-        throw new Error('Supabase client not available');
-      }
+    if (!supabase) {
+      tbody.innerHTML = '<tr><td colspan="8" style="text-align:center; padding:2rem; color:var(--red);">Supabase client not available.</td></tr>';
+      return;
+    }
 
-      // Fetch all subscribers
+    try {
       const { data, error } = await supabase
         .from('mailing_list')
         .select('*')
@@ -116,16 +124,10 @@ document.addEventListener('DOMContentLoaded', function() {
         throw error;
       }
 
-      // Store data globally for search and export
       window.subscribers = data || [];
-
-      // Update count
       subscriberCount.textContent = window.subscribers.length;
-
-      // Render table
       renderTable(window.subscribers);
 
-      // ── Search functionality ──
       searchInput.addEventListener('input', function() {
         const query = this.value.toLowerCase();
         const filtered = window.subscribers.filter(row =>
@@ -162,7 +164,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
       html += `
         <tr>
-          <td>${row.id}</td>
+          <td>${row.id || ''}</td>
           <td>${row.first_name || ''}</td>
           <td>${row.last_name || ''}</td>
           <td>${row.email || ''}</td>
@@ -186,10 +188,8 @@ document.addEventListener('DOMContentLoaded', function() {
       return;
     }
 
-    // Headers
     const headers = ['ID', 'First Name', 'Last Name', 'Email', 'Phone', 'Source', 'Status', 'Subscribed At'];
 
-    // Rows
     const rows = data.map(row => [
       row.id || '',
       row.first_name || '',
@@ -206,7 +206,6 @@ document.addEventListener('DOMContentLoaded', function() {
       ...rows.map(row => row.join(','))
     ].join('\n');
 
-    // Download
     const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
     const link = document.createElement('a');
     link.href = URL.createObjectURL(blob);
@@ -216,4 +215,6 @@ document.addEventListener('DOMContentLoaded', function() {
     document.body.removeChild(link);
     URL.revokeObjectURL(link.href);
   });
+
+  console.log("=== admin.js initialization complete ===");
 });
