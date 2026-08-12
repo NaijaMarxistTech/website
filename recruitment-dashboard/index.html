@@ -1,0 +1,165 @@
+---
+layout: default
+title: Recruitment Dashboard
+permalink: /recruitment-dashboard/
+hide_hero: true
+hide_header: false
+---
+
+<link rel="stylesheet" href="{{ site.baseurl }}/css/dashboard.css">
+
+<section class="dashboard-section">
+  <div id="dashboardContent" style="display:none;">
+    <!-- ── Header ── -->
+    <div class="dashboard-header">
+      <h1>📊 Recruitment Dashboard</h1>
+      <p>Overview of members, classifications, and applications.</p>
+      <button id="logoutBtn" class="logout-btn">Logout</button>
+    </div>
+
+    <!-- ── Tabs ── -->
+    <div class="dashboard-tabs">
+      <button class="tab-btn active" data-tab="overview">Overview</button>
+      <button class="tab-btn" data-tab="members">Members</button>
+      <button class="tab-btn" data-tab="analytics">Analytics</button>
+    </div>
+
+    <!-- ── Tab: Overview ── -->
+    <div id="tab-overview" class="tab-content active">
+      <!-- Metrics Cards -->
+      <div class="metrics-grid">
+        <div class="metric-card">
+          <span class="metric-label">Total Members</span>
+          <span class="metric-value" id="totalMembers">--</span>
+        </div>
+        <div class="metric-card">
+          <span class="metric-label">New (7 days)</span>
+          <span class="metric-value" id="newMembers7">--</span>
+        </div>
+        <div class="metric-card">
+          <span class="metric-label">New (30 days)</span>
+          <span class="metric-value" id="newMembers30">--</span>
+        </div>
+        <div class="metric-card">
+          <span class="metric-label">Unclassified</span>
+          <span class="metric-value" id="unclassifiedCount">--</span>
+        </div>
+      </div>
+
+      <!-- Classification Breakdown -->
+      <div class="breakdown-section">
+        <h2>Classification Breakdown</h2>
+        <div class="breakdown-grid" id="breakdownGrid">
+          <div class="breakdown-item beginner">
+            <span class="level">Beginner</span>
+            <span class="count" id="beginnerCount">--</span>
+          </div>
+          <div class="breakdown-item intermediate">
+            <span class="level">Intermediate</span>
+            <span class="count" id="intermediateCount">--</span>
+          </div>
+          <div class="breakdown-item advanced">
+            <span class="level">Advanced</span>
+            <span class="count" id="advancedCount">--</span>
+          </div>
+          <div class="breakdown-item unclassified">
+            <span class="level">Unclassified</span>
+            <span class="count" id="unclassifiedCount2">--</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Tab: Members ── -->
+    <div id="tab-members" class="tab-content">
+      <div class="members-controls">
+        <div class="search-wrapper">
+          <input type="text" id="memberSearch" placeholder="Search members..." />
+        </div>
+        <div class="filter-wrapper">
+          <select id="memberFilter">
+            <option value="all">All Levels</option>
+            <option value="beginner">Beginner</option>
+            <option value="intermediate">Intermediate</option>
+            <option value="advanced">Advanced</option>
+            <option value="unclassified">Unclassified</option>
+          </select>
+        </div>
+        <div class="export-wrapper">
+          <button id="exportMembersBtn" class="export-btn">📥 Export CSV</button>
+        </div>
+      </div>
+
+      <div class="table-wrapper">
+        <table id="memberTable">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Location</th>
+              <th>Level</th>
+              <th>Score</th>
+              <th>Joined</th>
+            </tr>
+          </thead>
+          <tbody id="memberTableBody">
+            <tr><td colspan="7" style="text-align:center; padding:2rem;">Loading...</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="table-footer">
+        <p class="member-count">Total members: <span id="memberCount">0</span></p>
+      </div>
+    </div>
+
+    <!-- ── Tab: Analytics ── -->
+    <div id="tab-analytics" class="tab-content">
+      <div class="analytics-section">
+        <h2>GitHub Traffic</h2>
+        <p>Traffic data from the repository. Requires GitHub Personal Access Token.</p>
+
+        <div class="analytics-grid">
+          <div class="analytics-card">
+            <span class="analytics-label">Views (14 days)</span>
+            <span class="analytics-value" id="githubViews">--</span>
+          </div>
+          <div class="analytics-card">
+            <span class="analytics-label">Unique Visitors</span>
+            <span class="analytics-value" id="githubUniques">--</span>
+          </div>
+          <div class="analytics-card">
+            <span class="analytics-label">Clones (14 days)</span>
+            <span class="analytics-value" id="githubClones">--</span>
+          </div>
+          <div class="analytics-card">
+            <span class="analytics-label">Unique Cloners</span>
+            <span class="analytics-value" id="githubCloneUniques">--</span>
+          </div>
+        </div>
+
+        <div class="analytics-note">
+          <p>To enable GitHub Analytics, set the <code>GITHUB_TOKEN</code> environment variable in Supabase.</p>
+          <p><a href="#" id="refreshAnalytics" class="refresh-link">↻ Refresh</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Password Prompt ── -->
+  <div id="passwordPrompt" class="password-prompt">
+    <div class="password-box">
+      <h2>🔐 Admin Access</h2>
+      <p>Enter the password to view the recruitment dashboard.</p>
+      <form id="passwordForm">
+        <input type="password" id="dashboardPassword" placeholder="Enter password..." autofocus />
+        <button type="submit">Unlock</button>
+      </form>
+      <p id="passwordError" style="display:none; color:var(--red); margin-top:0.5rem;">Incorrect password. Try again.</p>
+      <p style="margin-top:1rem; font-size:0.7rem; color:#888;">Attempts remaining: <span id="attemptsRemaining">5</span></p>
+    </div>
+  </div>
+</section>
+
+<script src="/js/dashboard.js"></script>
