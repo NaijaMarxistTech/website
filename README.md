@@ -4,7 +4,7 @@
 [![Hosted on GitHub Pages](https://img.shields.io/badge/hosted%20on-GitHub%20Pages-blue)](https://pages.github.com/)
 [![Deployed with Netlify](https://img.shields.io/badge/deployed%20with-Netlify-00C7B7)](https://netlify.com/)
 
-The official website of **The Naija Marxists**, a revolutionary socialist organisation rooted in the Nigerian working class. Built with **Jekyll**, hosted on **GitHub Pages**, with a **Supabase** backend for forms and **Netlify** preview deployments.
+The official website of **The Naija Marxists**, a revolutionary socialist organisation rooted in the Nigerian working class. Built with **Jekyll**, hosted on **GitHub Pages**, with a **Supabase** backend for forms, AI classification, mailing list management, and admin dashboards.
 
 ---
 
@@ -13,67 +13,101 @@ The official website of **The Naija Marxists**, a revolutionary socialist organi
 ```
 naija-marxists/
 │
-├── _config.yml                   # Jekyll configuration
-├── index.html                    # Homepage sections (about, statements, analysis, events, etc.)
-├── signup.html                   # Membership application page
+├── _config.yml # Jekyll configuration
+├── index.html # Homepage
+├── archive.html # All articles archive
+├── statements.html # All statements archive
+├── signup.html # Membership application page
+├── subscribe.html # Mailing list subscription page
+├── unsubscribe.html # Unsubscribe from mailing list
+├── privacy.html # Privacy policy
 │
-├── _layouts/
-│   ├── default.html              # Main layout (head, masthead, nav, hero, ticker, footer)
-│   ├── article.html              # Clean layout for article pages
-│   ├── statement.html            # Clean layout for statement pages
-│   └── event.html                # Clean layout for event pages
+├── _layouts/ # Jekyll layouts
+│ ├── default.html # Main layout (head, nav, hero, footer)
+│ ├── article.html # Article layout
+│ ├── statement.html # Statement layout
+│ └── event.html # Event layout
 │
-├── _includes/                    # Reusable HTML components
-│   ├── header.html               # Masthead, logo, navigation
-│   ├── hero.html                 # Hero band with CTA buttons
-│   ├── footer.html                # Footer content
-│   ├── signup-form.html          # Membership application form
-│   └── success-message.html      # Reusable success message component
+├── _includes/ # Reusable HTML components
+│ ├── header.html # Header (logo + tagline)
+│ ├── nav.html # Navigation bar (desktop + mobile)
+│ ├── hero.html # Hero band with CTA buttons
+│ ├── footer.html # Footer content
+│ ├── signup-form.html # Membership application form
+│ ├── success-message.html # Reusable success message
+│ ├── social-icons.html # SVG social icons
+│ └── social-icons-footer.html # SVG social icons for footer
 │
-├── _posts/                       # Analysis articles (Jekyll collection)
-│   └── YYYY-MM-DD-title.md
+├── _posts/ # Analysis articles
+│ └── YYYY-MM-DD-title.md
 │
-├── _statements/                  # Official statements (Jekyll collection)
-│   └── YYYY-MM-DD-title.md
+├── _statements/ # Official statements
+│ └── YYYY-MM-DD-title.md
 │
-├── _events/                       # Events (Jekyll collection)
-│   └── YYYY-MM-DD-event-title.md
+├── events/ # Events
+│ └── YYYY-MM-DD-event-title.md
 │
 ├── assets/
-│   ├── favicons/                 # Favicon images (ICO, PNG, SVG, manifest)
-│   ├── images/                   # Article/statement/event images
-│   ├── logo.jpg                  # Site logo (full lockup)
-│   └── logo_.jpg                 # Second site logo (symbol only)
+│ ├── favicons/ # Favicon images
+│ ├── images/ # Article/statement/event images
+│ │ ├── events/ # Event images
+│ │ ├── posts/ # Article images
+│ │ └── statements/ # Statement images
+│ ├── logo.jpg # Site logo (full lockup)
+│ └── logo.jpg # Site logo (symbol only)
 │
 ├── css/
-│   ├── base.css                  # Variables, reset, typography, buttons, fade-in
-│   ├── layout.css                # Masthead, header, nav, ticker, hero, footer
-│   ├── sections.css              # Section styles (about, statements, analysis, etc.)
-│   ├── pages.css                 # Article, statement, and event page styles
-│   └── signup.css                # Signup form styles
+│ ├── base.css # Variables, reset, typography, buttons
+│ ├── layout.css # Masthead, header, nav, footer
+│ ├── sections.css # Section styles (about, statements, analysis, etc.)
+│ ├── pages.css # Article, statement, event page styles
+│ ├── signup.css # Signup form styles
+│ ├── subscribe.css # Subscribe/unsubscribe form styles
+│ ├── admin.css # Admin page styles (mailing list)
+│ ├── dashboard.css # Recruitment dashboard styles
+│ └── print.css # Print stylesheet
 │
 ├── js/
-│   ├── masthead.js               # Writes today's date into the masthead bar (currently commented out)
-│   ├── scroll.js                 # Fade-in animations, active nav, scroll transparency, hamburger toggle
-│   ├── nav.js                    # Hamburger menu toggle (mobile)
-│   ├── signup.js                 # Membership form submission, validation, applicant classification
-│   └── contact.js                # Contact form submission
+│ ├── scroll.js # Fade-in animations, active nav, hamburger toggle
+│ ├── signup.js # Membership form submission & validation
+│ ├── contact.js # Contact form submission
+│ ├── subscribe.js # Mailing list subscription form
+│ ├── unsubscribe.js # Unsubscribe functionality
+│ ├── admin.js # Mailing list admin page
+│ ├── dashboard.js # Recruitment dashboard
+│ └── masthead.js # Masthead date (commented out)
 │
-├── sections/                     # Reference HTML snippets (not served — editing reference only)
-│   ├── header.html
-│   ├── hero.html
-│   ├── statements.html
-│   ├── analysis.html
-│   ├── events.html
-│   └── social.html
+├── recruitment-view/ # Mailing list admin page
+│ └── index.html
+│
+├── recruitment-dashboard/ # Recruitment dashboard
+│ └── index.html
+│
+├── sections/ # Reference HTML snippets (not served)
+│ ├── analysis.html
+│ ├── events.html
+│ ├── header.html
+│ ├── hero.html
+│ ├── social.html
+│ └── statements.html
+│
+├── supabase/ # Supabase Edge Functions
+│ └── functions/
+│ ├── classify-applicant/ # AI classification of applicants
+│ │ ├── deno.json
+│ │ └── index.ts
+│ ├── verify-admin-password/ # Admin password verification
+│ │ └── index.ts
+│ └── github-analytics/ # GitHub traffic data
+│ └── index.ts
 │
 ├── .github/workflows/
-│   └── build.yml                 # GitHub Actions workflow for deployment
+│ └── build.yml # GitHub Actions workflow
 │
-├── Gemfile                       # Ruby gem dependencies
-├── Gemfile.lock                  # Locked gem versions
-├── .gitignore                    # Excludes _site/, .jekyll-cache/, node_modules/, .env
-└── README.md                     # This file
+├── Gemfile # Ruby gem dependencies
+├── Gemfile.lock # Locked gem versions
+├── .gitignore # Excludes _site/, .jekyll-cache/, node_modules/
+└── README.md # This file
 ```
 
 ---
@@ -96,8 +130,6 @@ bundle exec jekyll serve --host 0.0.0.0
 ```
 
 Open `http://localhost:4000` in your browser. The site rebuilds automatically when files are saved.
-
-The `--host 0.0.0.0` flag makes the site accessible from other devices on the same Wi-Fi — useful for mobile testing. Access it at `http://YOUR_LOCAL_IP:4000`.
 
 ---
 
@@ -130,7 +162,7 @@ The `--host 0.0.0.0` flag makes the site accessible from other devices on the sa
    [Link text](https://example.com)
    ```
 
-4. Commit and push. The live site updates within 30 seconds.
+4. Commit and push. then create a PR.
 
 ---
 
@@ -155,7 +187,7 @@ The `--host 0.0.0.0` flag makes the site accessible from other devices on the sa
 
 3. Write the statement body in Markdown.
 
-4. Commit and push.
+4. Commit and push, then create a PR.
 
 ---
 
@@ -182,7 +214,7 @@ Events are now their own Jekyll collection rather than hand-edited HTML.
 
 3. Write the event description in Markdown.
 
-4. Commit and push.
+4. Commit and push, then create a PR.
 
 ---
 
@@ -223,9 +255,14 @@ For favicons, replace the files inside `assets/favicons/` — `favicon.ico`, `fa
 
 ---
 
-## Forms & Backend
+## Backend & Supabase
 
-### Signup Form (Membership Application)
+### Membership Application
+
+- **Page:** `/signup/`
+- **Table:** `members`
+- **Script:** `js/signup.js`
+- **AI Classification:** Automatically classifies applicants as `beginner`, `intermediate`, or `advanced` using the `classify-applicant` Edge Function.
 
 Located at `/signup/`, built from `_includes/signup-form.html` and `js/signup.js`. Collects:
 
@@ -237,9 +274,14 @@ Located at `/signup/`, built from `_includes/signup-form.html` and `js/signup.js
 **Supabase table:** `members`
 **Columns:** `id, first_name, last_name, gender, email, telegram_username, resident_in_nigeria, location, profession, primary_skill, social_handles, q1–q10, score, level, created_at`
 
-<!-- **Applicant classification:** Each application is automatically scored (0–20+) and classified as `beginner`, `intermediate`, or `advanced` based on keyword analysis of the written answers. The recruitment team reviews and can override the classification. -->
+**Applicant classification:** Each application is automatically scored (0–20+) and classified as `beginner`, `intermediate`, or `advanced` based on keyword analysis of the written answers. The recruitment team reviews and can override the classification.
+
 
 ### Contact Form
+
+- **Page:** Homepage `#contact` section
+- **Table:** `contact_messages`
+- **Script:** `js/contact.js`
 
 Located in the `#contact` section on the homepage, handled by `js/contact.js`.
 
@@ -262,20 +304,69 @@ const { error } = await supabase
         .insert([formData]);
 ```
 
+
+### Mailing List
+
+- **Subscription Page:** `/subscribe/`
+- **UnSubscribe Page:** `/unsubscribe/`
+- **Table:** `mailing_list`
+- **Script:** `js/subscribe.js`, `js/unsubscribe.js`
+- **Admin Page:** `/recruitment-view/` (password protected)
+
+
+### Admin Dashboards
+
+| Admin Page | URL | Purpose | Script |
+|---|---|---|---|
+| Mailing List Admin | `/recruitment-view/` | View, search, and export mailing list subscribers | `js/admin.js` |
+| Recruitment Dashboard | `/recruitment-dashboard/` | View members, classifications, and GitHub analytics | `js/dashboard.js` |
+
+**Both admin pages are password protected** using the `verify-admin-password` Edge Function. The password is stored as a Supabase secret (`ADMIN_PASSWORD`).
+
+
+### Environment Variables
+
+| Variable	| Purpose |
+|---|---|
+| SUPABASE_URL	| Supabase project URL |
+| SUPABASE_ANON_KEY |	Supabase anonymous API key |
+| ADMIN_PASSWORD |	Password for admin pages |
+| GITHUB_TOKEN |	GitHub Personal Access Token for analytics |
+
+**Where they're set:**
+
+- **Netlify** — Environment variables in site settings (previews and production)
+- **GitHub Actions** — Injected via repository secrets
+- **Supabase** — Edge Function secrets
+
+
+### Supabase Edge Functions
+
+| Function |	Purpose |	URL |
+|---|---|---|
+| `classify-applicant` |	AI classification of membership applicants |	`/functions/v1/classify-applicant` |
+| `verify-admin-password` |	Password verification for admin pages |	`/functions/v1/verify-admin-password` |
+| `github-analytics`	| Fetch GitHub traffic data |	`/functions/v1/github-analytics` |
+
+
+### Deploying Edge Functions
+Via Supabase Dashboard:
+
+1. Go to **Edge Functions**
+
+2. Click **Create Function**
+
+3. Paste the code from `supabase/functions/[name]/index.ts`
+
+4. Set **"No verification required"** (public)
+
+5. Click **Deploy**
+
+
 ### Email Notifications
 
 When a new signup or contact form is submitted, an email notification is sent to the recruitment team.
 
-### Environment Variables
-
-| Variable | Purpose |
-|----------|---------|
-| `SUPABASE_URL` | Supabase project URL |
-| `SUPABASE_ANON_KEY` | Supabase anonymous API key |
-
-**Where they're set:**
-- **Netlify** — Environment variables (secrets) in site settings (used for previews and production)
-- **GitHub Actions** — Injected during build via repository secrets
 
 ---
 
@@ -313,9 +404,12 @@ The site is fully responsive. Key features on mobile (max 768px):
 |------|---------|
 | `js/masthead.js` | Writes the current day and date (e.g. `SUNDAY, 7 JUNE 2026`) into the masthead bar. Currently commented out. |
 | `js/scroll.js` | Triggers `.visible` on `.fade-in` elements as they scroll into the viewport. Marks the active nav link on scroll. Toggles the hamburger menu open/closed on mobile and closes it when a nav link is tapped. |
-| `js/nav.js` | Hamburger menu toggle (mobile) — secondary/legacy handler, see `scroll.js` for the current implementation. |
 | `js/signup.js` | Membership form submission, validation, applicant classification, Supabase integration. |
 | `js/contact.js` | Contact form submission, validation, Supabase integration. |
+| `js/subscribe.js`	| Mailing list subscription form. |
+| `js/unsubscribe.js` |	Unsubscribe functionality. |
+| `js/admin.js` |	Mailing list admin page (view, search, CSV export). |
+| `js/dashboard.js` |	Recruitment dashboard (members, classifications, GitHub analytics). |
 
 ---
 
@@ -335,6 +429,35 @@ Check:
 - All links work and images load.
 - Signup and contact forms submit correctly (check the netlify link on github when merging to master, confirm the supabase dashboard for the new row).
 - Mobile layout (Chrome DevTools — `F12` → device toolbar, or a real device).
+
+---
+
+## Git Workflow
+
+**IMPORTANT: NEVER COMMIT DIRECTLY TO `master`**
+
+### Pull the latest version from GitHub
+
+```bash
+git pull origin master
+```
+
+### Discard all local changes and reset to the live version
+
+```bash
+git fetch origin
+git reset --hard origin/master
+```
+
+Use this if local edits have broken the site and you want to start fresh from the last known-good version on GitHub.
+
+### Standard edit -> commit -> push
+
+```bash
+git add .
+git commit -m "Brief description of what changed"
+git push origin master
+```
 
 ---
 
@@ -367,38 +490,11 @@ Netlify automatically builds a preview for every pull request, each with its own
 
 ---
 
-## Git Workflow
-
-### Pull the latest version from GitHub
-
-```bash
-git pull origin master
-```
-
-### Discard all local changes and reset to the live version
-
-```bash
-git fetch origin
-git reset --hard origin/master
-```
-
-Use this if local edits have broken the site and you want to start fresh from the last known-good version on GitHub.
-
-### Standard edit -> commit -> push
-
-```bash
-git add .
-git commit -m "Brief description of what changed"
-git push origin master
-```
-
----
-
 ## Security & Privacy
 
 ### Account Separation
 
-Contributors are encouraged to use a separate activist GitHub account to keep personal and political identities separate. The repository is public, but member data visibility is restricted.
+Contributors are encouraged to use a separate GitHub account to keep personal and political identities separate, if needed.
 
 ### Supabase Row Level Security (RLS)
 
@@ -407,6 +503,12 @@ RLS is enabled on all tables. Anonymous users can only `INSERT` — they cannot 
 ### Environment Variables
 
 Sensitive keys are stored as GitHub Secrets and Netlify environment variables — never committed to the codebase.
+
+### Admin Pages
+Both admin pages are protected by:
+
+- Semi-random URL (/recruitment-view/, /recruitment-dashboard/)
+- Password protection (verified via Supabase Edge Function)
 
 ---
 
@@ -434,13 +536,13 @@ Sensitive keys are stored as GitHub Secrets and Netlify environment variables �
 - **Jekyll** — Static site generator (MIT License)
 - **GitHub Pages gem** — Ensures local and remote build parity
 - **Supabase JS** — Backend database client for signup and contact forms
-- **Google Fonts** — Playfair Display, Source Serif 4, DM Mono (loaded via CDN in `_layouts/default.html`)
+- **Google Fonts** — Playfair Display, Inter, DM Mono (loaded via CDN in `_layouts/default.html`)
 
 ---
 
 ## Content License
 
-The written content of this site — articles, statements, events, and all political material — is the property of **The Naija Marxists**. The site structure and code may be reused freely by other socialist organisations.
+The written content — articles, statements, events, and all political material — is the property of **The Naija Marxists**. The site structure and code may be reused freely by other socialist organisations.
 
 ---
 
