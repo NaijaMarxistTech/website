@@ -107,7 +107,7 @@ document.addEventListener('DOMContentLoaded', function() {
       document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
       this.classList.add('active');
       document.getElementById(`tab-${this.dataset.tab}`).classList.add('active');
-      
+
       // Load analytics when switching to analytics tab
       if (this.dataset.tab === 'analytics') {
         setTimeout(loadGitHubAnalytics, 500);
@@ -299,7 +299,7 @@ document.addEventListener('DOMContentLoaded', function() {
         : m.reasoning || 'Awaiting classification...';
 
       html += `
-        <tr>
+        <tr data-id="${m.id}">
           <td>${m.id || ''}</td>
           <td>${[m.first_name, m.last_name].filter(Boolean).join(' ') || ''}</td>
           <td>${m.email || ''}</td>
@@ -315,6 +315,14 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     tbody.innerHTML = html;
+
+    // ── Attach click event to rows (modal) ──
+    tbody.querySelectorAll('tr[data-id]').forEach(row => {
+      row.addEventListener('click', function() {
+        const id = this.dataset.id;
+        if (id) openModal(id);
+      });
+    });
   }
 
   // ── CSV Export ──
@@ -478,6 +486,181 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
   }
+
+  // ──────────────────────────────────────────────────────────────
+  // ── Applicant Detail Modal ──
+  // ──────────────────────────────────────────────────────────────
+
+  // ── Fetch full applicant data for modal ──
+  async function loadApplicantDetails(id) {
+    try {
+      // Fetch member details
+      const { data: member, error: mError } = await supabase
+        .from('members')
+        .select('*')
+        .eq('id', id)
+        .single();
+
+      if (mError) throw mError;
+
+      // Fetch classification
+      const { data: classification, error: cError } = await supabase
+        .from('members_classified')
+        .select('*')
+        .eq('id', id)
+        .single();
+
+      if (cError && cError.code !== 'PGRST116') throw cError; // PGRST116 = not found
+
+      return { member, classification };
+    } catch (error) {
+      console.error('Error fetching applicant details:', error);
+      return null;
+    }
+  }
+
+  // ── Render applicant modal ──
+  function renderModal(data) {
+    const { member, classification } = data;
+
+    // Set header
+    const name = [member.first_name, member.last_name].filter(Boolean).join(' ') || 'Unknown';
+    document.getElementById('modalName').textContent = name;
+
+    // Set meta
+    document.getElementById('modalEmail').textContent = `📧 ${member.email || 'No email'}`;
+    document.getElementById('modalLocation').textContent = `📍 ${member.location || 'No location'}`;
+
+    const level = classification?.level || 'unclassified';
+    const levelLabel = level.charAt(0).toUpperCase() + level.slice(1);
+    document.getElementById('modalLevel').textContent = `🎯 ${levelLabel}`;
+
+    const score = classification?.score || 0;
+    document.getElementById('modalScore').textContent = `📊 Score: ${score}`;
+
+    // Reasoning
+    const reasoningEl = document.getElementById('modalReasoning');
+    if (classification?.classification_reasoning) {
+      reasoningEl.textContent = classification.classification_reasoning;
+    } else {
+      reasoningEl.textContent = 'No reasoning available.';
+    }
+
+    // Answers
+    const answersContainer = document.getElementById('modalAnswers');
+    const questionKeys = [
+      'q1_marxist_familiarity',
+      'q2_class_definition',
+      'q3_class_conflict_revolution',
+      'q4_primary_class_struggle',
+      'q5_capitalism_vs_socialism',
+      'q6_pan_africanism_vs_marxism',
+      'q7_nigerian_democracy',
+      'q8_revolution_definition',
+      'q9_socialist_revolutions_today',
+      'q10_why_join_contribution'
+    ];
+
+    const questionLabels = [
+      '1. Marxist familiarity',
+      '2. Class definition',
+      '3. Class conflict + Nigeria',
+      '4. Class vs tribalism/religion',
+      '5. Capitalism vs Socialism',
+      '6. Pan-Africanism vs Marxism',
+      '7. Nigerian democracy',
+      '8. Revolution definition',
+      '9. Socialist revolution today',
+      '10. Why join?'
+    ];
+
+    let html = '';
+    questionKeys.forEach((key, i) => {
+      const answer = member[key] || 'No answer provided.';
+      html += `
+        <div class="modal-answer-item">
+          <div class="q">${questionLabels[i]}</div>
+          <div class="a">${answer}</div>
+        </div>
+      `;
+    });
+
+    answersContainer.innerHTML = html;
+  }
+
+  // ── Open modal ──
+  async function openModal(applicantId) {
+    const modal = document.getElementById('applicantModal');
+    const loadingText = document.getElementById('modalName');
+    loadingText.textContent = 'Loading...';
+
+    modal.style.display = 'flex';
+
+    const data = await loadApplicantDetails(applicantId);
+    if (data) {
+      renderModal(data);
+    } else {
+      document.getElementById('modalName').textContent = 'Error loading applicant';
+      document.getElementById('modalReasoning').textContent = 'Could not load details.';
+    }
+  }
+
+  // ── Close modal ──
+  function closeModal() {
+    document.getElementById('applicantModal').style.display = 'none';
+  }
+
+  // ── Modal close events ──
+  document.getElementById('modalClose').addEventListener('click', closeModal);
+  document.getElementById('modalCloseBtn').addEventListener('click', closeModal);
+  document.getElementById('applicantModal').addEventListener('click', function(e) {
+    if (e.target === this) closeModal();
+  });
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeModal();
+  });
+
+  // ── Modal export button (single applicant) ──
+  document.getElementById('modalExportBtn').addEventListener('click', function() {
+    // Get the current member data from the modal
+    const nameEl = document.getElementById('modalName');
+    const emailEl = document.getElementById('modalEmail');
+    const locationEl = document.getElementById('modalLocation');
+    const levelEl = document.getElementById('modalLevel');
+    const scoreEl = document.getElementById('modalScore');
+    const reasoningEl = document.getElementById('modalReasoning');
+
+    // Collect answers
+    const answerItems = document.querySelectorAll('#modalAnswers .modal-answer-item');
+    let answersText = '';
+    answerItems.forEach(item => {
+      const q = item.querySelector('.q')?.textContent || '';
+      const a = item.querySelector('.a')?.textContent || '';
+      answersText += `${q}\n${a}\n\n`;
+    });
+
+    const csvContent = [
+      'Field,Value',
+      `Name,${nameEl.textContent}`,
+      `Email,${emailEl.textContent.replace('📧 ', '')}`,
+      `Location,${locationEl.textContent.replace('📍 ', '')}`,
+      `Level,${levelEl.textContent.replace('🎯 ', '')}`,
+      `Score,${scoreEl.textContent.replace('📊 Score: ', '')}`,
+      `Reasoning,${reasoningEl.textContent}`,
+      '',
+      'Answers:',
+      answersText.trim()
+    ].join('\n');
+
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = `applicant-${nameEl.textContent}-${new Date().toISOString().split('T')[0]}.csv`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(link.href);
+  });
 
   console.log("=== dashboard.js initialization complete ===");
 });
