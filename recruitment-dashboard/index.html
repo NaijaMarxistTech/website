@@ -170,6 +170,40 @@ hide_header: false
       <p style="margin-top:1rem; font-size:0.7rem; color:#888;">Attempts remaining: <span id="attemptsRemaining">5</span></p>
     </div>
   </div>
+
+  <!-- ── Modal ── -->
+  <div id="applicantModal" class="modal-overlay" style="display:none;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="modalName">Applicant Name</h2>
+        <button id="modalClose" class="modal-close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-meta">
+          <span id="modalEmail"></span>
+          <span id="modalLocation"></span>
+          <span id="modalLevel"></span>
+          <span id="modalScore"></span>
+        </div>
+
+        <div class="modal-section">
+          <h4>Classification Reasoning</h4>
+          <p id="modalReasoning" class="modal-reasoning"></p>
+        </div>
+
+        <div class="modal-section">
+          <h4>Full Answers</h4>
+          <div id="modalAnswers">
+            <!-- Answers will be populated by JavaScript -->
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button id="modalExportBtn" class="btn btn-red">Export This Applicant</button>
+        <button id="modalCloseBtn" class="btn btn-outline">Close</button>
+      </div>
+    </div>
+  </div>
 </section>
 
 <script src="/js/dashboard.js"></script>
