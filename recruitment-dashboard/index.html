@@ -6,6 +6,7 @@ hide_hero: true
 hide_header: false
 ---
 
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <link rel="stylesheet" href="{{ site.baseurl }}/css/dashboard.css">
 
 <section class="dashboard-section">
@@ -136,6 +137,14 @@ hide_header: false
           <div class="analytics-card">
             <span class="analytics-label">Unique Cloners</span>
             <span class="analytics-value" id="githubCloneUniques">--</span>
+          </div>
+        </div>
+
+        <!-- ── CHART ── -->
+        <div class="analytics-chart-wrapper">
+          <h3>Views Over Time (Last 14 Days)</h3>
+          <div id="viewsChartContainer">
+            <canvas id="viewsChart" width="400" height="200"></canvas>
           </div>
         </div>
 

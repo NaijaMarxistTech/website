@@ -107,6 +107,11 @@ document.addEventListener('DOMContentLoaded', function() {
       document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
       this.classList.add('active');
       document.getElementById(`tab-${this.dataset.tab}`).classList.add('active');
+      
+      // Load analytics when switching to analytics tab
+      if (this.dataset.tab === 'analytics') {
+        setTimeout(loadGitHubAnalytics, 500);
+      }
     });
   });
 
@@ -188,25 +193,39 @@ document.addEventListener('DOMContentLoaded', function() {
     const filterSelect = document.getElementById('memberFilter');
     const memberCount = document.getElementById('memberCount');
 
+    if (!supabase) {
+      tbody.innerHTML = '<tr><td colspan="7" style="text-align:center; padding:2rem; color:var(--red);">Supabase client not available.</td></tr>';
+      return;
+    }
+
     try {
       const { data, error } = await supabase
         .from('members')
         .select('id, first_name, last_name, email, location, created_at')
         .order('created_at', { ascending: false });
 
-      if (error) throw error;
+      if (error) {
+        console.error('Error fetching members:', error);
+        tbody.innerHTML = '<tr><td colspan="7" style="text-align:center; padding:2rem; color:var(--red);">Error loading members.</td></tr>';
+        return;
+      }
 
       // Get classifications separately
       const { data: classifications, error: cError } = await supabase
         .from('members_classified')
         .select('id, level, score');
 
-      if (cError) throw cError;
+      if (cError) {
+        console.error('Error fetching classifications:', cError);
+        // Continue without classifications
+      }
 
       const classMap = {};
-      classifications.forEach(c => {
-        classMap[c.id] = { level: c.level || 'unclassified', score: c.score || 0 };
-      });
+      if (classifications) {
+        classifications.forEach(c => {
+          classMap[c.id] = { level: c.level || 'unclassified', score: c.score || 0 };
+        });
+      }
 
       window.members = data.map(m => ({
         ...m,
@@ -217,12 +236,12 @@ document.addEventListener('DOMContentLoaded', function() {
       memberCount.textContent = window.members.length;
       renderMemberTable(window.members);
 
-      // Search
+      // ── Search ──
       searchInput.addEventListener('input', function() {
         filterMembers();
       });
 
-      // Filter
+      // ── Filter ──
       filterSelect.addEventListener('change', function() {
         filterMembers();
       });
@@ -238,7 +257,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const query = document.getElementById('memberSearch').value.toLowerCase();
     const filter = document.getElementById('memberFilter').value;
 
-    let filtered = window.members;
+    let filtered = window.members || [];
 
     if (filter !== 'all') {
       filtered = filtered.filter(m => m.level === filter);
@@ -323,52 +342,129 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   // ── GitHub Analytics ──
+  let viewsChartInstance = null;
+
   document.getElementById('refreshAnalytics').addEventListener('click', function(e) {
     e.preventDefault();
     loadGitHubAnalytics();
   });
 
   async function loadGitHubAnalytics() {
-    // This requires a GitHub Personal Access Token
-    // The token should be stored in Supabase Edge Function secrets
-    // For now, we'll show a message
+    const viewsEl = document.getElementById('githubViews');
+    const uniquesEl = document.getElementById('githubUniques');
+    const clonesEl = document.getElementById('githubClones');
+    const cloneUniquesEl = document.getElementById('githubCloneUniques');
+    const chartContainer = document.getElementById('viewsChartContainer');
 
-    document.getElementById('githubViews').textContent = '🔐';
-    document.getElementById('githubUniques').textContent = '🔐';
-    document.getElementById('githubClones').textContent = '🔐';
-    document.getElementById('githubCloneUniques').textContent = '🔐';
+    viewsEl.textContent = 'Loading...';
+    uniquesEl.textContent = 'Loading...';
+    clonesEl.textContent = 'Loading...';
+    cloneUniquesEl.textContent = 'Loading...';
 
     try {
-      // Call Supabase Edge Function to fetch GitHub traffic
       const response = await fetch(`${SUPABASE_URL}/functions/v1/github-analytics`, {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' }
       });
 
       if (!response.ok) {
-        throw new Error('Failed to fetch GitHub analytics');
+        throw new Error(`Failed to fetch GitHub analytics: ${response.status}`);
       }
 
       const data = await response.json();
 
-      document.getElementById('githubViews').textContent = data.views?.count || '0';
-      document.getElementById('githubUniques').textContent = data.views?.uniques || '0';
-      document.getElementById('githubClones').textContent = data.clones?.count || '0';
-      document.getElementById('githubCloneUniques').textContent = data.clones?.uniques || '0';
+      if (data.error) {
+        viewsEl.textContent = '❌';
+        uniquesEl.textContent = '❌';
+        clonesEl.textContent = '❌';
+        cloneUniquesEl.textContent = '❌';
+        console.error('GitHub analytics error:', data.error);
+        return;
+      }
+
+      viewsEl.textContent = data.views?.count || '0';
+      uniquesEl.textContent = data.views?.uniques || '0';
+      clonesEl.textContent = data.clones?.count || '0';
+      cloneUniquesEl.textContent = data.clones?.uniques || '0';
+
+      // ── Render chart ──
+      renderViewsChart(data.views);
 
     } catch (error) {
       console.error('GitHub analytics error:', error);
-      document.getElementById('githubViews').textContent = '❌';
-      document.getElementById('githubUniques').textContent = '❌';
-      document.getElementById('githubClones').textContent = '❌';
-      document.getElementById('githubCloneUniques').textContent = '❌';
+      viewsEl.textContent = '❌';
+      uniquesEl.textContent = '❌';
+      clonesEl.textContent = '❌';
+      cloneUniquesEl.textContent = '❌';
     }
   }
 
-  // ── Load GitHub analytics on tab switch ──
-  document.querySelector('[data-tab="analytics"]').addEventListener('click', function() {
-    setTimeout(loadGitHubAnalytics, 500);
-  });
+  // ── Render GitHub views chart ──
+  function renderViewsChart(viewsData) {
+    const container = document.getElementById('viewsChartContainer');
+    const canvas = document.getElementById('viewsChart');
+
+    if (!canvas) return;
+
+    // Destroy existing chart if it exists
+    if (viewsChartInstance) {
+      viewsChartInstance.destroy();
+      viewsChartInstance = null;
+    }
+
+    if (!viewsData || !viewsData.views || viewsData.views.length === 0) {
+      canvas.style.display = 'none';
+      container.innerHTML = '<p style="color:#888; font-size:0.9rem;">No views data available for the last 14 days.</p>';
+      return;
+    }
+
+    canvas.style.display = 'block';
+    container.innerHTML = '';
+    container.appendChild(canvas);
+
+    const labels = viewsData.views.map(v => new Date(v.timestamp).toLocaleDateString('en-GB'));
+    const counts = viewsData.views.map(v => v.count);
+
+    viewsChartInstance = new Chart(canvas, {
+      type: 'bar',
+      data: {
+        labels: labels,
+        datasets: [{
+          label: 'Views',
+          data: counts,
+          backgroundColor: 'rgba(198, 40, 40, 0.6)',
+          borderColor: 'rgba(198, 40, 40, 1)',
+          borderWidth: 2,
+          borderRadius: 4
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: true,
+        plugins: {
+          legend: {
+            display: false
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            ticks: {
+              stepSize: 1
+            }
+          },
+          x: {
+            ticks: {
+              maxTicksLimit: 14,
+              font: {
+                size: 9
+              }
+            }
+          }
+        }
+      }
+    });
+  }
 
   console.log("=== dashboard.js initialization complete ===");
 });

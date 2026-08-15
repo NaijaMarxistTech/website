@@ -350,6 +350,33 @@
   text-decoration: underline;
 }
 
+/* ── Analytics Chart ── */
+.analytics-chart-wrapper {
+  background: #fff;
+  padding: 1.5rem;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  margin-bottom: 1.5rem;
+}
+
+.analytics-chart-wrapper h3 {
+  font-family: var(--display);
+  font-size: 1rem;
+  color: var(--navy);
+  margin-bottom: 1rem;
+}
+
+#viewsChartContainer {
+  width: 100%;
+  min-height: 200px;
+}
+
+#viewsChart {
+  width: 100% !important;
+  height: auto !important;
+  max-height: 250px;
+}
+
 /* ── Password Prompt ── */
 .password-prompt {
   display: flex;
