@@ -194,11 +194,12 @@ document.addEventListener('DOMContentLoaded', function() {
     const memberCount = document.getElementById('memberCount');
 
     if (!supabase) {
-      tbody.innerHTML = '<tr><td colspan="7" style="text-align:center; padding:2rem; color:var(--red);">Supabase client not available.</td></tr>';
+      tbody.innerHTML = '<tr><td colspan="8" style="text-align:center; padding:2rem; color:var(--red);">Supabase client not available.</td></tr>';
       return;
     }
 
     try {
+      // ── Fetch members ──
       const { data, error } = await supabase
         .from('members')
         .select('id, first_name, last_name, email, location, created_at')
@@ -206,31 +207,35 @@ document.addEventListener('DOMContentLoaded', function() {
 
       if (error) {
         console.error('Error fetching members:', error);
-        tbody.innerHTML = '<tr><td colspan="7" style="text-align:center; padding:2rem; color:var(--red);">Error loading members.</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="8" style="text-align:center; padding:2rem; color:var(--red);">Error loading members.</td></tr>';
         return;
       }
 
-      // Get classifications separately
+      // ── Fetch classifications with reasoning ──
       const { data: classifications, error: cError } = await supabase
         .from('members_classified')
-        .select('id, level, score');
+        .select('id, level, score, classification_reasoning');
 
       if (cError) {
         console.error('Error fetching classifications:', cError);
-        // Continue without classifications
       }
 
       const classMap = {};
       if (classifications) {
         classifications.forEach(c => {
-          classMap[c.id] = { level: c.level || 'unclassified', score: c.score || 0 };
+          classMap[c.id] = {
+            level: c.level || 'unclassified',
+            score: c.score || 0,
+            reasoning: c.classification_reasoning || 'No reasoning available'
+          };
         });
       }
 
       window.members = data.map(m => ({
         ...m,
         level: classMap[m.id]?.level || 'unclassified',
-        score: classMap[m.id]?.score || 0
+        score: classMap[m.id]?.score || 0,
+        reasoning: classMap[m.id]?.reasoning || 'Awaiting classification...'
       }));
 
       memberCount.textContent = window.members.length;
@@ -248,7 +253,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     } catch (error) {
       console.error('Error loading members:', error);
-      tbody.innerHTML = '<tr><td colspan="7" style="text-align:center; padding:2rem; color:var(--red);">Failed to load members.</td></tr>';
+      tbody.innerHTML = '<tr><td colspan="8" style="text-align:center; padding:2rem; color:var(--red);">Failed to load members.</td></tr>';
     }
   }
 
@@ -268,7 +273,8 @@ document.addEventListener('DOMContentLoaded', function() {
         (m.first_name || '').toLowerCase().includes(query) ||
         (m.last_name || '').toLowerCase().includes(query) ||
         (m.email || '').toLowerCase().includes(query) ||
-        (m.location || '').toLowerCase().includes(query)
+        (m.location || '').toLowerCase().includes(query) ||
+        (m.reasoning || '').toLowerCase().includes(query)
       );
     }
 
@@ -280,7 +286,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const tbody = document.getElementById('memberTableBody');
 
     if (!members || members.length === 0) {
-      tbody.innerHTML = '<tr><td colspan="7" style="text-align:center; padding:2rem; color:#888;">No members found.</td></tr>';
+      tbody.innerHTML = '<tr><td colspan="8" style="text-align:center; padding:2rem; color:#888;">No members found.</td></tr>';
       return;
     }
 
@@ -288,6 +294,10 @@ document.addEventListener('DOMContentLoaded', function() {
     members.forEach(m => {
       const levelClass = m.level || 'unclassified';
       const levelLabel = levelClass.charAt(0).toUpperCase() + levelClass.slice(1);
+      const reasoningShort = m.reasoning && m.reasoning.length > 80
+        ? m.reasoning.substring(0, 80) + '...'
+        : m.reasoning || 'Awaiting classification...';
+
       html += `
         <tr>
           <td>${m.id || ''}</td>
@@ -296,6 +306,9 @@ document.addEventListener('DOMContentLoaded', function() {
           <td>${m.location || ''}</td>
           <td><span class="level-badge ${levelClass}">${levelLabel}</span></td>
           <td>${m.score || 0}</td>
+          <td title="${m.reasoning || ''}" style="max-width:200px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+            ${reasoningShort}
+          </td>
           <td>${m.created_at ? new Date(m.created_at).toLocaleDateString('en-GB') : ''}</td>
         </tr>
       `;
@@ -313,7 +326,7 @@ document.addEventListener('DOMContentLoaded', function() {
       return;
     }
 
-    const headers = ['ID', 'First Name', 'Last Name', 'Email', 'Location', 'Level', 'Score', 'Joined'];
+    const headers = ['ID', 'First Name', 'Last Name', 'Email', 'Location', 'Level', 'Score', 'Reasoning', 'Joined'];
 
     const rows = data.map(m => [
       m.id || '',
@@ -323,6 +336,7 @@ document.addEventListener('DOMContentLoaded', function() {
       m.location || '',
       m.level || 'unclassified',
       m.score || 0,
+      m.reasoning || '',
       m.created_at ? new Date(m.created_at).toLocaleString('en-GB') : ''
     ]);
 
@@ -354,7 +368,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const uniquesEl = document.getElementById('githubUniques');
     const clonesEl = document.getElementById('githubClones');
     const cloneUniquesEl = document.getElementById('githubCloneUniques');
-    const chartContainer = document.getElementById('viewsChartContainer');
 
     viewsEl.textContent = 'Loading...';
     uniquesEl.textContent = 'Loading...';
