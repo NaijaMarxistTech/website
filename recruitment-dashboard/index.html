@@ -6,6 +6,7 @@ hide_hero: true
 hide_header: false
 ---
 
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <link rel="stylesheet" href="{{ site.baseurl }}/css/dashboard.css">
 
 <section class="dashboard-section">
@@ -100,11 +101,12 @@ hide_header: false
               <th>Location</th>
               <th>Level</th>
               <th>Score</th>
+              <th>Reasoning</th>
               <th>Joined</th>
             </tr>
           </thead>
           <tbody id="memberTableBody">
-            <tr><td colspan="7" style="text-align:center; padding:2rem;">Loading...</td></tr>
+            <tr><td colspan="8" style="text-align:center; padding:2rem;">Loading...</td></tr>
           </tbody>
         </table>
       </div>
@@ -139,6 +141,14 @@ hide_header: false
           </div>
         </div>
 
+        <!-- ── CHART ── -->
+        <div class="analytics-chart-wrapper">
+          <h3>Views Over Time (Last 14 Days)</h3>
+          <div id="viewsChartContainer">
+            <canvas id="viewsChart" width="400" height="200"></canvas>
+          </div>
+        </div>
+
         <div class="analytics-note">
           <p>To enable GitHub Analytics, set the <code>GITHUB_TOKEN</code> environment variable in Supabase.</p>
           <p><a href="#" id="refreshAnalytics" class="refresh-link">↻ Refresh</a></p>
@@ -158,6 +168,40 @@ hide_header: false
       </form>
       <p id="passwordError" style="display:none; color:var(--red); margin-top:0.5rem;">Incorrect password. Try again.</p>
       <p style="margin-top:1rem; font-size:0.7rem; color:#888;">Attempts remaining: <span id="attemptsRemaining">5</span></p>
+    </div>
+  </div>
+
+  <!-- ── Modal ── -->
+  <div id="applicantModal" class="modal-overlay" style="display:none;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="modalName">Applicant Name</h2>
+        <button id="modalClose" class="modal-close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-meta">
+          <span id="modalEmail"></span>
+          <span id="modalLocation"></span>
+          <span id="modalLevel"></span>
+          <span id="modalScore"></span>
+        </div>
+
+        <div class="modal-section">
+          <h4>Classification Reasoning</h4>
+          <p id="modalReasoning" class="modal-reasoning"></p>
+        </div>
+
+        <div class="modal-section">
+          <h4>Full Answers</h4>
+          <div id="modalAnswers">
+            <!-- Answers will be populated by JavaScript -->
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button id="modalExportBtn" class="btn btn-red">Export This Applicant</button>
+        <button id="modalCloseBtn" class="btn btn-outline">Close</button>
+      </div>
     </div>
   </div>
 </section>

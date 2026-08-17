@@ -107,6 +107,11 @@ document.addEventListener('DOMContentLoaded', function() {
       document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
       this.classList.add('active');
       document.getElementById(`tab-${this.dataset.tab}`).classList.add('active');
+
+      // Load analytics when switching to analytics tab
+      if (this.dataset.tab === 'analytics') {
+        setTimeout(loadGitHubAnalytics, 500);
+      }
     });
   });
 
@@ -188,48 +193,67 @@ document.addEventListener('DOMContentLoaded', function() {
     const filterSelect = document.getElementById('memberFilter');
     const memberCount = document.getElementById('memberCount');
 
+    if (!supabase) {
+      tbody.innerHTML = '<tr><td colspan="8" style="text-align:center; padding:2rem; color:var(--red);">Supabase client not available.</td></tr>';
+      return;
+    }
+
     try {
+      // ── Fetch members ──
       const { data, error } = await supabase
         .from('members')
         .select('id, first_name, last_name, email, location, created_at')
         .order('created_at', { ascending: false });
 
-      if (error) throw error;
+      if (error) {
+        console.error('Error fetching members:', error);
+        tbody.innerHTML = '<tr><td colspan="8" style="text-align:center; padding:2rem; color:var(--red);">Error loading members.</td></tr>';
+        return;
+      }
 
-      // Get classifications separately
+      // ── Fetch classifications with reasoning ──
       const { data: classifications, error: cError } = await supabase
         .from('members_classified')
-        .select('id, level, score');
+        .select('id, level, score, classification_reasoning');
 
-      if (cError) throw cError;
+      if (cError) {
+        console.error('Error fetching classifications:', cError);
+      }
 
       const classMap = {};
-      classifications.forEach(c => {
-        classMap[c.id] = { level: c.level || 'unclassified', score: c.score || 0 };
-      });
+      if (classifications) {
+        classifications.forEach(c => {
+          classMap[c.id] = {
+            level: c.level || 'unclassified',
+            score: c.score || 0,
+            reasoning: c.classification_reasoning || 'No reasoning available'
+          };
+        });
+      }
 
       window.members = data.map(m => ({
         ...m,
         level: classMap[m.id]?.level || 'unclassified',
-        score: classMap[m.id]?.score || 0
+        score: classMap[m.id]?.score || 0,
+        reasoning: classMap[m.id]?.reasoning || 'Awaiting classification...'
       }));
 
       memberCount.textContent = window.members.length;
       renderMemberTable(window.members);
 
-      // Search
+      // ── Search ──
       searchInput.addEventListener('input', function() {
         filterMembers();
       });
 
-      // Filter
+      // ── Filter ──
       filterSelect.addEventListener('change', function() {
         filterMembers();
       });
 
     } catch (error) {
       console.error('Error loading members:', error);
-      tbody.innerHTML = '<tr><td colspan="7" style="text-align:center; padding:2rem; color:var(--red);">Failed to load members.</td></tr>';
+      tbody.innerHTML = '<tr><td colspan="8" style="text-align:center; padding:2rem; color:var(--red);">Failed to load members.</td></tr>';
     }
   }
 
@@ -238,7 +262,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const query = document.getElementById('memberSearch').value.toLowerCase();
     const filter = document.getElementById('memberFilter').value;
 
-    let filtered = window.members;
+    let filtered = window.members || [];
 
     if (filter !== 'all') {
       filtered = filtered.filter(m => m.level === filter);
@@ -249,7 +273,8 @@ document.addEventListener('DOMContentLoaded', function() {
         (m.first_name || '').toLowerCase().includes(query) ||
         (m.last_name || '').toLowerCase().includes(query) ||
         (m.email || '').toLowerCase().includes(query) ||
-        (m.location || '').toLowerCase().includes(query)
+        (m.location || '').toLowerCase().includes(query) ||
+        (m.reasoning || '').toLowerCase().includes(query)
       );
     }
 
@@ -261,7 +286,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const tbody = document.getElementById('memberTableBody');
 
     if (!members || members.length === 0) {
-      tbody.innerHTML = '<tr><td colspan="7" style="text-align:center; padding:2rem; color:#888;">No members found.</td></tr>';
+      tbody.innerHTML = '<tr><td colspan="8" style="text-align:center; padding:2rem; color:#888;">No members found.</td></tr>';
       return;
     }
 
@@ -269,20 +294,35 @@ document.addEventListener('DOMContentLoaded', function() {
     members.forEach(m => {
       const levelClass = m.level || 'unclassified';
       const levelLabel = levelClass.charAt(0).toUpperCase() + levelClass.slice(1);
+      const reasoningShort = m.reasoning && m.reasoning.length > 80
+        ? m.reasoning.substring(0, 80) + '...'
+        : m.reasoning || 'Awaiting classification...';
+
       html += `
-        <tr>
+        <tr data-id="${m.id}">
           <td>${m.id || ''}</td>
           <td>${[m.first_name, m.last_name].filter(Boolean).join(' ') || ''}</td>
           <td>${m.email || ''}</td>
           <td>${m.location || ''}</td>
           <td><span class="level-badge ${levelClass}">${levelLabel}</span></td>
           <td>${m.score || 0}</td>
+          <td title="${m.reasoning || ''}" style="max-width:200px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+            ${reasoningShort}
+          </td>
           <td>${m.created_at ? new Date(m.created_at).toLocaleDateString('en-GB') : ''}</td>
         </tr>
       `;
     });
 
     tbody.innerHTML = html;
+
+    // ── Attach click event to rows (modal) ──
+    tbody.querySelectorAll('tr[data-id]').forEach(row => {
+      row.addEventListener('click', function() {
+        const id = this.dataset.id;
+        if (id) openModal(id);
+      });
+    });
   }
 
   // ── CSV Export ──
@@ -294,7 +334,7 @@ document.addEventListener('DOMContentLoaded', function() {
       return;
     }
 
-    const headers = ['ID', 'First Name', 'Last Name', 'Email', 'Location', 'Level', 'Score', 'Joined'];
+    const headers = ['ID', 'First Name', 'Last Name', 'Email', 'Location', 'Level', 'Score', 'Reasoning', 'Joined'];
 
     const rows = data.map(m => [
       m.id || '',
@@ -304,6 +344,7 @@ document.addEventListener('DOMContentLoaded', function() {
       m.location || '',
       m.level || 'unclassified',
       m.score || 0,
+      m.reasoning || '',
       m.created_at ? new Date(m.created_at).toLocaleString('en-GB') : ''
     ]);
 
@@ -323,51 +364,302 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   // ── GitHub Analytics ──
+  let viewsChartInstance = null;
+
   document.getElementById('refreshAnalytics').addEventListener('click', function(e) {
     e.preventDefault();
     loadGitHubAnalytics();
   });
 
   async function loadGitHubAnalytics() {
-    // This requires a GitHub Personal Access Token
-    // The token should be stored in Supabase Edge Function secrets
-    // For now, we'll show a message
+    const viewsEl = document.getElementById('githubViews');
+    const uniquesEl = document.getElementById('githubUniques');
+    const clonesEl = document.getElementById('githubClones');
+    const cloneUniquesEl = document.getElementById('githubCloneUniques');
 
-    document.getElementById('githubViews').textContent = '🔐';
-    document.getElementById('githubUniques').textContent = '🔐';
-    document.getElementById('githubClones').textContent = '🔐';
-    document.getElementById('githubCloneUniques').textContent = '🔐';
+    viewsEl.textContent = 'Loading...';
+    uniquesEl.textContent = 'Loading...';
+    clonesEl.textContent = 'Loading...';
+    cloneUniquesEl.textContent = 'Loading...';
 
     try {
-      // Call Supabase Edge Function to fetch GitHub traffic
       const response = await fetch(`${SUPABASE_URL}/functions/v1/github-analytics`, {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' }
       });
 
       if (!response.ok) {
-        throw new Error('Failed to fetch GitHub analytics');
+        throw new Error(`Failed to fetch GitHub analytics: ${response.status}`);
       }
 
       const data = await response.json();
 
-      document.getElementById('githubViews').textContent = data.views?.count || '0';
-      document.getElementById('githubUniques').textContent = data.views?.uniques || '0';
-      document.getElementById('githubClones').textContent = data.clones?.count || '0';
-      document.getElementById('githubCloneUniques').textContent = data.clones?.uniques || '0';
+      if (data.error) {
+        viewsEl.textContent = '❌';
+        uniquesEl.textContent = '❌';
+        clonesEl.textContent = '❌';
+        cloneUniquesEl.textContent = '❌';
+        console.error('GitHub analytics error:', data.error);
+        return;
+      }
+
+      viewsEl.textContent = data.views?.count || '0';
+      uniquesEl.textContent = data.views?.uniques || '0';
+      clonesEl.textContent = data.clones?.count || '0';
+      cloneUniquesEl.textContent = data.clones?.uniques || '0';
+
+      // ── Render chart ──
+      renderViewsChart(data.views);
 
     } catch (error) {
       console.error('GitHub analytics error:', error);
-      document.getElementById('githubViews').textContent = '❌';
-      document.getElementById('githubUniques').textContent = '❌';
-      document.getElementById('githubClones').textContent = '❌';
-      document.getElementById('githubCloneUniques').textContent = '❌';
+      viewsEl.textContent = '❌';
+      uniquesEl.textContent = '❌';
+      clonesEl.textContent = '❌';
+      cloneUniquesEl.textContent = '❌';
     }
   }
 
-  // ── Load GitHub analytics on tab switch ──
-  document.querySelector('[data-tab="analytics"]').addEventListener('click', function() {
-    setTimeout(loadGitHubAnalytics, 500);
+  // ── Render GitHub views chart ──
+  function renderViewsChart(viewsData) {
+    const container = document.getElementById('viewsChartContainer');
+    const canvas = document.getElementById('viewsChart');
+
+    if (!canvas) return;
+
+    // Destroy existing chart if it exists
+    if (viewsChartInstance) {
+      viewsChartInstance.destroy();
+      viewsChartInstance = null;
+    }
+
+    if (!viewsData || !viewsData.views || viewsData.views.length === 0) {
+      canvas.style.display = 'none';
+      container.innerHTML = '<p style="color:#888; font-size:0.9rem;">No views data available for the last 14 days.</p>';
+      return;
+    }
+
+    canvas.style.display = 'block';
+    container.innerHTML = '';
+    container.appendChild(canvas);
+
+    const labels = viewsData.views.map(v => new Date(v.timestamp).toLocaleDateString('en-GB'));
+    const counts = viewsData.views.map(v => v.count);
+
+    viewsChartInstance = new Chart(canvas, {
+      type: 'bar',
+      data: {
+        labels: labels,
+        datasets: [{
+          label: 'Views',
+          data: counts,
+          backgroundColor: 'rgba(198, 40, 40, 0.6)',
+          borderColor: 'rgba(198, 40, 40, 1)',
+          borderWidth: 2,
+          borderRadius: 4
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: true,
+        plugins: {
+          legend: {
+            display: false
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            ticks: {
+              stepSize: 1
+            }
+          },
+          x: {
+            ticks: {
+              maxTicksLimit: 14,
+              font: {
+                size: 9
+              }
+            }
+          }
+        }
+      }
+    });
+  }
+
+  // ──────────────────────────────────────────────────────────────
+  // ── Applicant Detail Modal ──
+  // ──────────────────────────────────────────────────────────────
+
+  // ── Fetch full applicant data for modal ──
+  async function loadApplicantDetails(id) {
+    try {
+      // Fetch member details
+      const { data: member, error: mError } = await supabase
+        .from('members')
+        .select('*')
+        .eq('id', id)
+        .single();
+
+      if (mError) throw mError;
+
+      // Fetch classification
+      const { data: classification, error: cError } = await supabase
+        .from('members_classified')
+        .select('*')
+        .eq('id', id)
+        .single();
+
+      if (cError && cError.code !== 'PGRST116') throw cError; // PGRST116 = not found
+
+      return { member, classification };
+    } catch (error) {
+      console.error('Error fetching applicant details:', error);
+      return null;
+    }
+  }
+
+  // ── Render applicant modal ──
+  function renderModal(data) {
+    const { member, classification } = data;
+
+    // Set header
+    const name = [member.first_name, member.last_name].filter(Boolean).join(' ') || 'Unknown';
+    document.getElementById('modalName').textContent = name;
+
+    // Set meta
+    document.getElementById('modalEmail').textContent = `📧 ${member.email || 'No email'}`;
+    document.getElementById('modalLocation').textContent = `📍 ${member.location || 'No location'}`;
+
+    const level = classification?.level || 'unclassified';
+    const levelLabel = level.charAt(0).toUpperCase() + level.slice(1);
+    document.getElementById('modalLevel').textContent = `🎯 ${levelLabel}`;
+
+    const score = classification?.score || 0;
+    document.getElementById('modalScore').textContent = `📊 Score: ${score}`;
+
+    // Reasoning
+    const reasoningEl = document.getElementById('modalReasoning');
+    if (classification?.classification_reasoning) {
+      reasoningEl.textContent = classification.classification_reasoning;
+    } else {
+      reasoningEl.textContent = 'No reasoning available.';
+    }
+
+    // Answers
+    const answersContainer = document.getElementById('modalAnswers');
+    const questionKeys = [
+      'q1_marxist_familiarity',
+      'q2_class_definition',
+      'q3_class_conflict_revolution',
+      'q4_primary_class_struggle',
+      'q5_capitalism_vs_socialism',
+      'q6_pan_africanism_vs_marxism',
+      'q7_nigerian_democracy',
+      'q8_revolution_definition',
+      'q9_socialist_revolutions_today',
+      'q10_why_join_contribution'
+    ];
+
+    const questionLabels = [
+      '1. Marxist familiarity',
+      '2. Class definition',
+      '3. Class conflict + Nigeria',
+      '4. Class vs tribalism/religion',
+      '5. Capitalism vs Socialism',
+      '6. Pan-Africanism vs Marxism',
+      '7. Nigerian democracy',
+      '8. Revolution definition',
+      '9. Socialist revolution today',
+      '10. Why join?'
+    ];
+
+    let html = '';
+    questionKeys.forEach((key, i) => {
+      const answer = member[key] || 'No answer provided.';
+      html += `
+        <div class="modal-answer-item">
+          <div class="q">${questionLabels[i]}</div>
+          <div class="a">${answer}</div>
+        </div>
+      `;
+    });
+
+    answersContainer.innerHTML = html;
+  }
+
+  // ── Open modal ──
+  async function openModal(applicantId) {
+    const modal = document.getElementById('applicantModal');
+    const loadingText = document.getElementById('modalName');
+    loadingText.textContent = 'Loading...';
+
+    modal.style.display = 'flex';
+
+    const data = await loadApplicantDetails(applicantId);
+    if (data) {
+      renderModal(data);
+    } else {
+      document.getElementById('modalName').textContent = 'Error loading applicant';
+      document.getElementById('modalReasoning').textContent = 'Could not load details.';
+    }
+  }
+
+  // ── Close modal ──
+  function closeModal() {
+    document.getElementById('applicantModal').style.display = 'none';
+  }
+
+  // ── Modal close events ──
+  document.getElementById('modalClose').addEventListener('click', closeModal);
+  document.getElementById('modalCloseBtn').addEventListener('click', closeModal);
+  document.getElementById('applicantModal').addEventListener('click', function(e) {
+    if (e.target === this) closeModal();
+  });
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeModal();
+  });
+
+  // ── Modal export button (single applicant) ──
+  document.getElementById('modalExportBtn').addEventListener('click', function() {
+    // Get the current member data from the modal
+    const nameEl = document.getElementById('modalName');
+    const emailEl = document.getElementById('modalEmail');
+    const locationEl = document.getElementById('modalLocation');
+    const levelEl = document.getElementById('modalLevel');
+    const scoreEl = document.getElementById('modalScore');
+    const reasoningEl = document.getElementById('modalReasoning');
+
+    // Collect answers
+    const answerItems = document.querySelectorAll('#modalAnswers .modal-answer-item');
+    let answersText = '';
+    answerItems.forEach(item => {
+      const q = item.querySelector('.q')?.textContent || '';
+      const a = item.querySelector('.a')?.textContent || '';
+      answersText += `${q}\n${a}\n\n`;
+    });
+
+    const csvContent = [
+      'Field,Value',
+      `Name,${nameEl.textContent}`,
+      `Email,${emailEl.textContent.replace('📧 ', '')}`,
+      `Location,${locationEl.textContent.replace('📍 ', '')}`,
+      `Level,${levelEl.textContent.replace('🎯 ', '')}`,
+      `Score,${scoreEl.textContent.replace('📊 Score: ', '')}`,
+      `Reasoning,${reasoningEl.textContent}`,
+      '',
+      'Answers:',
+      answersText.trim()
+    ].join('\n');
+
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = `applicant-${nameEl.textContent}-${new Date().toISOString().split('T')[0]}.csv`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(link.href);
   });
 
   console.log("=== dashboard.js initialization complete ===");
