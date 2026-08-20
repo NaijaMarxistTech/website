@@ -1,0 +1,30 @@
+---
+layout: default
+title: All Events
+permalink: /events/
+hide_hero: true
+---
+
+<section class="content-section fade-in">
+  <div class="section-label">Events</div>
+  <h2>All Events</h2>
+  <p class="archive-intro">All events hosted by The Naija Marxists, in reverse chronological order.</p>
+
+  <div class="archive-list">
+    {% assign events = site.events | sort: "date" | reverse %}
+    {% for event in events %}
+      <a href="{{ event.url | relative_url }}" class="archive-item">
+        <div class="archive-meta">
+          <span class="archive-date">{{ event.date | date: "%b %d, %Y" }}</span>
+          <span class="archive-category">{{ event.time }}</span>
+        </div>
+        <h3>{{ event.title }}</h3>
+        <p class="archive-excerpt">{{ event.excerpt | strip_html }}</p>
+      </a>
+    {% endfor %}
+  </div>
+
+  <div class="back-to-home">
+    <a href="/#events" class="read-more">← Back to homepage</a>
+  </div>
+</section>
