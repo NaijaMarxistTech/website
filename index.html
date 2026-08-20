@@ -133,7 +133,7 @@ layout: default
   <div class="events-list">
     {% if site.events %}
       {% assign events = site.events | sort: "date" | reverse %}
-      {% for event in events limit:5 %}
+      {% for event in events limit:3 %}
         <a href="{{ event.url | relative_url }}" class="event-row">
           <div class="event-date-block">
             <div class="day">{{ event.date | date: "%d" }}</div>
@@ -141,7 +141,6 @@ layout: default
           </div>
           <div>
             <h3>{{ event.title }}</h3>
-            <!-- DATE ADDED HERE IN META -->
             <p class="event-meta">
               <span>{{ event.date | date: "%b %d, %Y" }}</span> &mdash;
               <span>{{ event.time }}</span> &mdash;
@@ -160,6 +159,11 @@ layout: default
         </div>
       </div>
     {% endif %}
+  </div>
+
+  <!-- View past events link -->
+  <div class="view-all-container">
+    <a href="/events/" class="view-all-link">View past events →</a>
   </div>
 </section>
 
