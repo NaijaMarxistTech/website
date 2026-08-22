@@ -1,7 +1,8 @@
 // supabase/functions/classify-applicant/index.ts
-// AI Classification for The Naija Marxists – with majority voting
+// AI Classification for The Naija Marxists – with majority voting + email notifications
 
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+import { sendAutoReply, sendTeamNotification } from '../_shared/email-sender.ts';
 
 // ── ENVIRONMENT VARIABLES ──
 const GROQ_API_KEY = Deno.env.get('GROQ_API_KEY');
@@ -242,8 +243,32 @@ Deno.serve(async (req) => {
 
     console.log(`✅ Classified ${record.id} as ${finalLevel}`);
 
+    // ── ── ── ── ── ── ── ── ── ── ── ── ── ── ── ── ── ──
+    // ── SEND EMAILS (NEW!)
+    // ── ── ── ── ── ── ── ── ── ── ── ── ── ── ── ── ── ──
+    try {
+      const classification = { level: finalLevel, reasoning };
+      
+      // 1. Auto-reply to applicant
+      await sendAutoReply(record);
+      
+      // 2. Team notification with classification
+      await sendTeamNotification(record, classification);
+      
+      console.log(`📧 Emails sent for ${record.id}`);
+    } catch (emailError) {
+      console.error(`⚠️ Email sending failed for ${record.id}:`, emailError.message);
+      // Don't fail the whole request - classification succeeded
+    }
+
     return new Response(
-      JSON.stringify({ success: true, level: finalLevel, score, reasoning, evaluations: levels }),
+      JSON.stringify({ 
+        success: true, 
+        level: finalLevel, 
+        score, 
+        reasoning, 
+        evaluations: levels 
+      }),
       { status: 200, headers: { 'Content-Type': 'application/json' } }
     );
 
