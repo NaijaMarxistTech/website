@@ -46,7 +46,10 @@ function buildEmailTemplate(article: any, subscriberEmail: string): string {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>${article.title} – The Naija Marxists</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,600;14..32,700;14..32,800&family=Oswald:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
+    /* ── Reset & Base ── */
     body, table, td, p, a, div, span {
       margin: 0;
       padding: 0;
@@ -58,31 +61,138 @@ function buildEmailTemplate(article: any, subscriberEmail: string): string {
     }
     body { background-color: #f4f0ec; padding: 20px 0; }
     .email-container { max-width: 600px; margin: 0 auto; background: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.08); }
-    .email-header { background: #1E1E2A; padding: 24px 30px; text-align: center; border-bottom: 4px solid #C62828; }
-    .email-header h1 { color: #ffffff; font-size: 22px; font-weight: 700; margin: 0; font-family: 'Oswald', 'Inter', sans-serif; }
-    .email-header .tagline { color: #F5B041; font-size: 12px; letter-spacing: 0.15em; text-transform: uppercase; margin-top: 4px; font-family: 'DM Mono', 'Courier New', monospace; }
+
+    /* ── Header ── */
+    .email-header {
+      background: #1E1E2A;
+      padding: 24px 30px;
+      text-align: center;
+      border-bottom: 4px solid #C62828;
+    }
+    .email-header h1 {
+      color: #ffffff;
+      font-size: 22px;
+      font-weight: 700;
+      margin: 0;
+      font-family: 'Oswald', 'Inter', sans-serif;
+      letter-spacing: 0.02em;
+    }
+    .email-header .tagline {
+      color: #F5B041;
+      font-size: 12px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-top: 4px;
+      font-family: 'DM Mono', 'Courier New', monospace;
+    }
+
+    /* ── Body ── */
     .email-body { padding: 30px 30px 20px; }
-    .email-body h2 { font-size: 24px; font-weight: 700; color: #1E1E2A; margin-bottom: 10px; line-height: 1.3; font-family: 'Oswald', 'Inter', sans-serif; }
-    .email-body .meta { font-size: 13px; color: #C62828; font-family: 'DM Mono', 'Courier New', monospace; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 18px; border-bottom: 1px solid #f0e8e0; padding-bottom: 12px; }
-    .email-body .summary { font-size: 16px; line-height: 1.7; color: #1a1a1a; margin-bottom: 20px; font-family: 'Inter', sans-serif; }
+    .email-body h2 {
+      font-size: 24px;
+      font-weight: 700;
+      color: #1E1E2A;
+      margin-bottom: 10px;
+      line-height: 1.3;
+      font-family: 'Oswald', 'Inter', sans-serif;
+    }
+    .email-body .meta {
+      font-size: 13px;
+      color: #C62828;
+      font-family: 'DM Mono', 'Courier New', monospace;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+      border-bottom: 1px solid #f0e8e0;
+      padding-bottom: 12px;
+    }
+    .email-body .summary {
+      font-size: 16px;
+      line-height: 1.7;
+      color: #1a1a1a;
+      margin-bottom: 20px;
+      font-family: 'Inter', sans-serif;
+    }
     .btn-container { text-align: center; margin: 24px 0 16px; }
-    .btn { display: inline-block; background: #C62828; color: #ffffff !important; text-decoration: none; padding: 12px 28px; border-radius: 6px; font-weight: 600; font-size: 15px; letter-spacing: 0.05em; transition: background 0.2s; font-family: 'Inter', sans-serif; }
+    .btn {
+      display: inline-block;
+      background: #C62828;
+      color: #ffffff !important;
+      text-decoration: none;
+      padding: 12px 28px;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 15px;
+      letter-spacing: 0.05em;
+      transition: background 0.2s;
+      font-family: 'Inter', sans-serif;
+    }
     .btn:hover { background: #8B1A1A; }
-    .link-row { text-align: center; margin: 16px 0 20px; padding: 12px 0; border-top: 1px solid #f0e8e0; border-bottom: 1px solid #f0e8e0; }
-    .link-row a { display: inline-block; color: #C62828; text-decoration: none; font-size: 14px; padding: 4px 12px; border-radius: 4px; transition: background 0.2s; font-family: 'Inter', sans-serif; }
+
+    .link-row {
+      text-align: center;
+      margin: 16px 0 20px;
+      padding: 12px 0;
+      border-top: 1px solid #f0e8e0;
+      border-bottom: 1px solid #f0e8e0;
+    }
+    .link-row a {
+      display: inline-block;
+      color: #C62828;
+      text-decoration: none;
+      font-size: 14px;
+      padding: 4px 12px;
+      border-radius: 4px;
+      transition: background 0.2s;
+      font-family: 'Inter', sans-serif;
+    }
     .link-row a:hover { background: #f5e8e8; text-decoration: underline; }
     .link-row .separator { color: #ddd; font-size: 14px; font-weight: 300; }
-    .social-links { text-align: center; padding: 16px 0 8px; border-top: 1px solid #f0e8e0; margin-top: 8px; }
-    .social-links span { color: #888; font-size: 13px; font-family: 'Inter', sans-serif; }
-    .social-links a { display: inline-block; margin: 0 8px; color: #1E1E2A; text-decoration: none; font-size: 14px; font-family: 'Inter', sans-serif; transition: color 0.2s; }
+
+    .social-links {
+      text-align: center;
+      padding: 16px 0 8px;
+      border-top: 1px solid #f0e8e0;
+      margin-top: 8px;
+    }
+    .social-links span {
+      color: #888;
+      font-size: 13px;
+      font-family: 'Inter', sans-serif;
+    }
+    .social-links a {
+      display: inline-block;
+      margin: 0 8px;
+      color: #1E1E2A;
+      text-decoration: none;
+      font-size: 14px;
+      font-family: 'Inter', sans-serif;
+      transition: color 0.2s;
+    }
     .social-links a:hover { color: #C62828; }
-    .email-footer { background: #f8f4f0; padding: 20px 30px; text-align: center; border-top: 1px solid #e8e0d8; }
-    .email-footer p { font-size: 12px; color: #888; margin-bottom: 6px; font-family: 'Inter', sans-serif; }
-    .email-footer a { color: #C62828; text-decoration: underline; font-size: 12px; }
+
+    .email-footer {
+      background: #f8f4f0;
+      padding: 20px 30px;
+      text-align: center;
+      border-top: 1px solid #e8e0d8;
+    }
+    .email-footer p {
+      font-size: 12px;
+      color: #888;
+      margin-bottom: 6px;
+      font-family: 'Inter', sans-serif;
+    }
+    .email-footer a {
+      color: #C62828;
+      text-decoration: underline;
+      font-size: 12px;
+    }
     .email-footer a:hover { color: #8B1A1A; }
     .unsubscribe-link { font-size: 11px; color: #aaa; }
     .unsubscribe-link a { color: #aaa; text-decoration: underline; }
     .unsubscribe-link a:hover { color: #C62828; }
+
     @media only screen and (max-width: 480px) {
       .email-body { padding: 20px 18px; }
       .email-header { padding: 18px 20px; }
@@ -100,7 +210,7 @@ function buildEmailTemplate(article: any, subscriberEmail: string): string {
   <tr><td>
     <div class="email-header">
       <h1>The Naija Marxists</h1>
-      <div class="tagline">Scientific Socialism • Class Struggle • Nigerian Liberation</div>
+      <div class="tagline">Marxist Theory • Class Struggle • Nigerian Liberation</div>
     </div>
     <div class="email-body">
       <h2>${article.title}</h2>
@@ -144,14 +254,12 @@ function buildEmailTemplate(article: any, subscriberEmail: string): string {
 // ── Main Handler ──
 Deno.serve(async (req) => {
   try {
-    // 1. Get the article data and optional test email
     const { article, testEmail } = await req.json();
 
     if (!article || !article.title) {
       throw new Error('Article data is required');
     }
 
-    // 2. Fetch subscribers (filter by testEmail if provided)
     let query = supabase
       .from('mailing_list')
       .select('email, first_name')
@@ -175,10 +283,8 @@ Deno.serve(async (req) => {
       );
     }
 
-    // 3. Build the email content
     const subject = `[New Article] ${article.title} – The Naija Marxists`;
 
-    // 4. Send emails in parallel
     const promises = subscribers.map(sub => {
       const html = buildEmailTemplate(article, sub.email);
       return sendEmail(sub.email, subject, html);
