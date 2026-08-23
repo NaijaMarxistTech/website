@@ -46,9 +46,10 @@ function buildEmailTemplate(article: any, subscriberEmail: string): string {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>${article.title} – The Naija Marxists</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,600;14..32,700;14..32,800&family=Oswald:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
+    /* ── Import fonts inline (works in more email clients) ── */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,600;14..32,700;14..32,800&family=Oswald:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap');
+
     /* ── Reset & Base ── */
     body, table, td, p, a, div, span {
       margin: 0;
@@ -69,6 +70,18 @@ function buildEmailTemplate(article: any, subscriberEmail: string): string {
       text-align: center;
       border-bottom: 4px solid #C62828;
     }
+    .email-header .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+    .email-header .logo {
+      width: 40px;
+      height: 40px;
+      border-radius: 4px;
+      flex-shrink: 0;
+    }
     .email-header h1 {
       color: #ffffff;
       font-size: 22px;
@@ -79,7 +92,7 @@ function buildEmailTemplate(article: any, subscriberEmail: string): string {
     }
     .email-header .tagline {
       color: #F5B041;
-      font-size: 12px;
+      font-size: 11px;
       letter-spacing: 0.15em;
       text-transform: uppercase;
       margin-top: 4px;
@@ -209,8 +222,13 @@ function buildEmailTemplate(article: any, subscriberEmail: string): string {
 <table class="email-container" align="center" cellpadding="0" cellspacing="0" width="100%" style="max-width:600px;">
   <tr><td>
     <div class="email-header">
-      <h1>The Naija Marxists</h1>
-      <div class="tagline">Marxist Theory • Class Struggle • Nigerian Liberation</div>
+      <div class="header-inner">
+        <img src="https://thenaijamarxists.org/assets/logo_.jpg" alt="The Naija Marxists" class="logo">
+        <div>
+          <h1>The Naija Marxists</h1>
+          <div class="tagline">Marxist Theory • Class Struggle • Nigerian Liberation</div>
+        </div>
+      </div>
     </div>
     <div class="email-body">
       <h2>${article.title}</h2>
