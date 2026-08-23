@@ -1,0 +1,101 @@
+name: Send Newsletter on New Article
+
+on:
+  push:
+    paths:
+      - '_posts/*.md'
+
+jobs:
+  send-newsletter:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2  # So we can see what changed
+
+      - name: Get the new article
+        id: article
+        run: |
+          # Get the list of changed files
+          CHANGED_FILES=$(git diff --name-only HEAD~1 HEAD -- _posts/*.md)
+          
+          # Get the first changed file (assumes one new article per push)
+          NEW_ARTICLE=$(echo "$CHANGED_FILES" | head -1)
+          
+          if [ -z "$NEW_ARTICLE" ]; then
+            echo "No new article found"
+            exit 0
+          fi
+          
+          echo "file=$NEW_ARTICLE" >> $GITHUB_OUTPUT
+          echo "🔍 New article detected: $NEW_ARTICLE"
+
+      - name: Extract article data
+        if: steps.article.outputs.file != ''
+        id: data
+        run: |
+          FILE="${{ steps.article.outputs.file }}"
+          
+          # Extract title from frontmatter
+          TITLE=$(sed -n '/^---$/,/^---$/p' "$FILE" | grep -E '^title:' | sed 's/title: //' | sed 's/^"//;s/"$//' | head -1)
+          
+          # Extract category from frontmatter
+          CATEGORY=$(sed -n '/^---$/,/^---$/p' "$FILE" | grep -E '^category:' | sed 's/category: //' | head -1)
+          
+          # Extract date from frontmatter
+          DATE=$(sed -n '/^---$/,/^---$/p' "$FILE" | grep -E '^date:' | sed 's/date: //' | head -1)
+          
+          # Extract excerpt from frontmatter
+          EXCERPT=$(sed -n '/^---$/,/^---$/p' "$FILE" | grep -E '^excerpt:' | sed 's/excerpt: //' | sed 's/^"//;s/"$//' | head -1)
+          
+          # Build URL slug from filename
+          FILENAME=$(basename "$FILE" .md)
+          SLUG=$(echo "$FILENAME" | sed 's/^[0-9]*-[0-9]*-[0-9]*-//')
+          URL="https://thenaijamarxists.org/analysis/$SLUG/"
+          
+          # Substack URL (you'll need to set this manually or derive it)
+          SUBSTACK_URL="https://ngnmarxists.substack.com/p/$SLUG"
+          
+          echo "title=$TITLE" >> $GITHUB_OUTPUT
+          echo "category=$CATEGORY" >> $GITHUB_OUTPUT
+          echo "date=$DATE" >> $GITHUB_OUTPUT
+          echo "excerpt=$EXCERPT" >> $GITHUB_OUTPUT
+          echo "url=$URL" >> $GITHUB_OUTPUT
+          echo "substack_url=$SUBSTACK_URL" >> $GITHUB_OUTPUT
+          
+          echo "📝 Title: $TITLE"
+          echo "📂 Category: $CATEGORY"
+          echo "📅 Date: $DATE"
+
+      - name: Trigger Supabase Edge Function
+        if: steps.data.outputs.title != ''
+        env:
+          SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+        run: |
+          curl -X POST "https://pcpntpuujhrvbffgpixs.supabase.co/functions/v1/send-newsletter" \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer ${{ secrets.SUPABASE_ANON_KEY }}" \
+            -d '{
+              "article": {
+                "title": "${{ steps.data.outputs.title }}",
+                "category": "${{ steps.data.outputs.category }}",
+                "date": "${{ steps.data.outputs.date }}",
+                "excerpt": "${{ steps.data.outputs.excerpt }}",
+                "url": "${{ steps.data.outputs.url }}",
+                "substack_url": "${{ steps.data.outputs.substack_url }}"
+              }
+            }'
+
+      - name: Log result
+        if: always()
+        run: |
+          if [ "${{ steps.data.outputs.title }}" != "" ]; then
+            echo "✅ Newsletter sent for: ${{ steps.data.outputs.title }}"
+          else
+            echo "⏭️ No new article detected, skipping newsletter"
+          fi
