@@ -1,7 +1,8 @@
 ---
+layout: article
 title: "ReMarx: The Ruling Ideas in Nigeria"
 date: 2026-08-22
-category: Analysis
+category: Education
 excerpt: "When Marxists say 'the ruling ideas are the ideas of the ruling class,' we do not mean every rich person has the same opinion. We mean that the class which dominates wealth and the state has disproportionate power to make its worldview seem like 'common sense.'"
 ---
 
