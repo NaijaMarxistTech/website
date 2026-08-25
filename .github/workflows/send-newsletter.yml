@@ -11,29 +11,25 @@ jobs:
   send-newsletter:
     runs-on: ubuntu-latest
     permissions:
-      contents: write
-      pull-requests: write
+      contents: read
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
-          fetch-depth: 2  # So we can see what changed
+          fetch-depth: 2
 
       - name: Get the new article
         id: article
         run: |
-          # Get the list of changed files
           CHANGED_FILES=$(git diff --name-only HEAD~1 HEAD -- _posts/*.md)
-          
-          # Get the first changed file (assumes one new article per push)
           NEW_ARTICLE=$(echo "$CHANGED_FILES" | head -1)
-          
+
           if [ -z "$NEW_ARTICLE" ]; then
             echo "No new article found"
             exit 0
           fi
-          
+
           echo "file=$NEW_ARTICLE" >> $GITHUB_OUTPUT
           echo "🔍 New article detected: $NEW_ARTICLE"
 
@@ -42,27 +38,17 @@ jobs:
         id: data
         run: |
           FILE="${{ steps.article.outputs.file }}"
-          
-          # Extract title from frontmatter
+
           TITLE=$(sed -n '/^---$/,/^---$/p' "$FILE" | grep -E '^title:' | sed 's/title: //' | sed 's/^"//;s/"$//' | head -1)
-          
-          # Extract category from frontmatter
           CATEGORY=$(sed -n '/^---$/,/^---$/p' "$FILE" | grep -E '^category:' | sed 's/category: //' | head -1)
-          
-          # Extract date from frontmatter
           DATE=$(sed -n '/^---$/,/^---$/p' "$FILE" | grep -E '^date:' | sed 's/date: //' | head -1)
-          
-          # Extract excerpt from frontmatter
           EXCERPT=$(sed -n '/^---$/,/^---$/p' "$FILE" | grep -E '^excerpt:' | sed 's/excerpt: //' | sed 's/^"//;s/"$//' | head -1)
-          
-          # Build URL slug from filename
+
           FILENAME=$(basename "$FILE" .md)
           SLUG=$(echo "$FILENAME" | sed 's/^[0-9]*-[0-9]*-[0-9]*-//')
           URL="https://thenaijamarxists.org/analysis/$SLUG/"
-          
-          # Substack URL
           SUBSTACK_URL="https://ngnmarxists.substack.com/p/$SLUG"
-          
+
           echo "title=$TITLE" >> $GITHUB_OUTPUT
           echo "category=$CATEGORY" >> $GITHUB_OUTPUT
           echo "date=$DATE" >> $GITHUB_OUTPUT
@@ -70,34 +56,11 @@ jobs:
           echo "url=$URL" >> $GITHUB_OUTPUT
           echo "substack_url=$SUBSTACK_URL" >> $GITHUB_OUTPUT
           echo "slug=$SLUG" >> $GITHUB_OUTPUT
-          
+
           echo "📝 Title: $TITLE"
           echo "📂 Category: $CATEGORY"
           echo "📅 Date: $DATE"
           echo "📄 Slug: $SLUG"
-
-      - name: Install wkhtmltopdf
-        if: steps.data.outputs.title != ''
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y wkhtmltopdf
-
-      - name: Generate PDF
-        if: steps.data.outputs.title != ''
-        run: |
-          mkdir -p assets/pdfs
-          URL="${{ steps.data.outputs.url }}"
-          SLUG="${{ steps.data.outputs.slug }}"
-          wkhtmltopdf "$URL" "assets/pdfs/$SLUG.pdf"
-
-      - name: Commit and Push PDF
-        if: steps.data.outputs.title != ''
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add assets/pdfs/
-          git commit -m "Add PDF for article: ${{ steps.data.outputs.title }}" || echo "No changes to commit"
-          git push
 
       - name: Trigger Supabase Edge Function
         if: steps.data.outputs.title != ''
