@@ -2,7 +2,6 @@
 title: "Ibrahim Traoré and the Unfinished Burkinabè Revolution"
 date: 2026-08-25
 category: Analysis
-hero_image: /assets/images/posts/ibrahim-traore-unfinished-revolution.jpg
 excerpt: "Few African personalities in recent years have generated as much enthusiasm as Captain Ibrahim Traoré. Yet this fervour reflects a real continental hunger for a force capable of breaking with imperialism — but the revolution cannot be completed through national sovereignty alone."
 ---
 
