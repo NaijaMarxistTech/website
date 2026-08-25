@@ -15,6 +15,9 @@ collections:
   events:
     output: true
     permalink: /events/:title/
+  education:
+    output: true
+    permalink: /education/:title/
   
 defaults:
   - scope:

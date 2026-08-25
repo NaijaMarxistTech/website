@@ -551,6 +551,89 @@
   transform: translateY(1px);
 }
 
+/* ── EDUCATION DIVIDER ── */
+.education-divider {
+  border: none;
+  border-top: 2px solid var(--off);
+  margin: 2.5rem 0 2rem 0;
+  opacity: 0.6;
+}
+
+/* ── REMARX SECTION ── */
+.remarx-section {
+  padding: 1.5rem;
+  background: var(--off);
+  border-left: 4px solid var(--red);
+  border-radius: 4px;
+}
+
+.remarx-header {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-bottom: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.remarx-badge {
+  background: var(--red);
+  color: #fff;
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+}
+
+.remarx-section h3 {
+  font-family: var(--display);
+  font-size: 1.1rem;
+  color: var(--navy);
+  margin: 0;
+}
+
+.remarx-description {
+  font-size: 0.9rem;
+  color: #555;
+  margin-bottom: 1rem;
+}
+
+.remarx-latest {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.remarx-latest-label {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #888;
+  margin: 0;
+}
+
+.remarx-latest-link {
+  color: var(--navy);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s;
+}
+
+.remarx-latest-link:hover {
+  color: var(--red);
+}
+
+.remarx-date {
+  font-size: 0.8rem;
+  color: #888;
+}
+
+
+
 /* ── MOBILE ADJUSTMENTS ── */
 @media (max-width: 768px) {
 
@@ -698,6 +781,17 @@
     padding: 0.9rem 0.5rem;
     font-size: 0.7rem;
     font-weight: 600;
+  }
+
+  .remarx-section {
+    padding: 1rem;
+  }
+  .remarx-header {
+    flex-wrap: wrap;
+  }
+  .remarx-latest {
+    flex-direction: column;
+    align-items: flex-start;
   }
 
 }

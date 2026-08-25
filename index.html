@@ -86,7 +86,6 @@ layout: default
           <div class="month">{{ post.date | date: "%b %Y" }}</div>
         </div>
         <div class="analysis-body">
-          <!-- DATE ADDED HERE (Option A: under label, before title) -->
           <p class="byline">{{ post.category | default: "Analysis" }} &middot; {{ post.date | date: "%b %d, %Y" }}</p>
           <h3>{{ post.title }}</h3>
           <p>{{ post.excerpt | strip_html }}</p>
@@ -101,10 +100,10 @@ layout: default
   </div>
 </section>
 
-<!-- STUDY GROUPS -->
-<section id="study-groups" class="content-section fade-in">
+<!-- EDUCATION (Study Groups + ReMarx) -->
+<section id="education" class="content-section fade-in">
   <div class="section-label">Education</div>
-  <h2>Study Groups</h2>
+  <h2>Learn Marxism</h2>
   <p class="sg-intro">Political education is the foundation of revolutionary practice. Our study sessions focus on the fundamentals of Marxism: philosophy, politics and economics.</p>
   <div class="sg-grid">
 
@@ -124,6 +123,35 @@ layout: default
     </div>
 
   </div>
+
+  <!-- ── Divider ── -->
+  <hr class="education-divider">
+
+  <!-- ── ReMarx Series ── -->
+  <div class="remarx-section">
+    <div class="remarx-header">
+      <span class="remarx-badge">📖 Series</span>
+      <h3>ReMarx — Marxist Theory for Everyone</h3>
+    </div>
+    <p class="remarx-description">
+      A series breaking down the ideas of Marxism for everyone to understand.
+      From class struggle to historical materialism, we explain it in plain language.
+    </p>
+    <div class="remarx-latest">
+      <p class="remarx-latest-label">Latest:</p>
+      {% assign remarx_posts = site.education | sort: "date" | reverse %}
+      {% if remarx_posts.size > 0 %}
+        <a href="{{ remarx_posts.first.url | relative_url }}" class="remarx-latest-link">
+          {{ remarx_posts.first.title }}
+        </a>
+        <span class="remarx-date">{{ remarx_posts.first.date | date: "%b %d, %Y" }}</span>
+      {% else %}
+        <p style="color:#888; font-style:italic;">Coming soon...</p>
+      {% endif %}
+    </div>
+    <a href="/remarx/" class="read-more">Start Reading →</a>
+  </div>
+
 </section>
 
 <!-- EVENTS (dynamic from _events) -->
@@ -167,57 +195,7 @@ layout: default
   </div>
 </section>
 
-<!-- SOCIAL -->
-<section id="social" class="content-section fade-in">
-  <div class="section-label">Follow Us</div>
-  <h2>Find Us Online</h2>
-  <p style="font-weight:300; max-width:600px; margin-bottom:1.5rem;">Follow the Naija Marxist Movement on social media for statements, analysis, and updates on the struggle.</p>
-  <div class="social-grid">
-    <a href="https://ngnmarxists.substack.com/" target="_blank" rel="noopener" class="social-card">
-      <span class="platform">
-        {% include social-icons.html type="substack" %}
-        Substack
-      </span>
-      <span class="handle">The Naija Marxists</span>
-      <p>Long-form analysis, articles, and political education published directly to your inbox.</p>
-    </a>
-    <a href="https://twitter.com/ngnmarxists" target="_blank" rel="noopener" class="social-card">
-      <span class="platform">
-        {% include social-icons.html type="twitter" %}
-        Twitter / X
-      </span>
-      <span class="handle">@NGNMarxists</span>
-      <p>Statements, commentary, and political updates.</p>
-    </a>
-    <a href="https://facebook.com/ngnmarxists" target="_blank" rel="noopener" class="social-card">
-      <span class="platform">
-        {% include social-icons.html type="facebook" %}
-        Facebook
-      </span>
-      <span class="handle">NGNMarxists</span>
-      <p>Longer posts, event announcements, and discussions.</p>
-    </a>
-    <a href="https://instagram.com/ngnmarxists" target="_blank" rel="noopener" class="social-card">
-      <span class="platform">
-        {% include social-icons.html type="instagram" %}
-        Instagram
-      </span>
-      <span class="handle">@ngnmarxists</span>
-      <p>Graphics, quotes, and visual political education.</p>
-    </a>
-    <!-- YouTube (commented out) -->
-    <!-- <a href="https://youtube.com/@NaijaMarxists" target="_blank" rel="noopener" class="social-card">
-      <span class="platform">
-        {% include social-icons.html type="youtube" %}
-        YouTube
-      </span>
-      <span class="handle">Naija Marxists</span>
-      <p>Study group recordings, lead-offs, and public forums.</p>
-    </a> -->
-  </div>
-</section>
-
-<!-- CONTACT -->
+<!-- CONTACT (stays) -->
 <section id="contact" class="content-section fade-in">
   <div class="section-label">Get Involved</div>
   <h2>Contact &amp; Join</h2>

@@ -1,0 +1,37 @@
+---
+layout: default
+title: ReMarx – Marxist Theory for Everyone
+permalink: /remarx/
+hide_hero: true
+---
+
+<section class="content-section fade-in">
+  <div class="section-label">Education</div>
+  <h2>ReMarx — Marxist Theory for Everyone</h2>
+  <p class="archive-intro">
+    A series breaking down the ideas of Marxism for everyone to understand.
+    From class struggle to historical materialism, we explain it in plain language.
+  </p>
+
+  <div class="archive-list">
+    {% assign remarx_posts = site.education | sort: "date" | reverse %}
+    {% if remarx_posts.size == 0 %}
+      <p style="color:#888; font-style:italic; padding:2rem 0;">No ReMarx articles yet. Check back soon!</p>
+    {% else %}
+      {% for post in remarx_posts %}
+        <a href="{{ post.url | relative_url }}" class="archive-item">
+          <div class="archive-meta">
+            <span class="archive-date">{{ post.date | date: "%b %d, %Y" }}</span>
+            <span class="archive-category">{{ post.category | default: "ReMarx" }}</span>
+          </div>
+          <h3>{{ post.title }}</h3>
+          <p class="archive-excerpt">{{ post.excerpt | strip_html }}</p>
+        </a>
+      {% endfor %}
+    {% endif %}
+  </div>
+
+  <div class="back-to-home">
+    <a href="/#education" class="read-more">← Back to homepage</a>
+  </div>
+</section>
