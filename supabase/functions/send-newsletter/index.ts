@@ -307,6 +307,10 @@ Deno.serve(async (req) => {
       throw new Error('Article data is required');
     }
 
+    // ── Clean the title for the subject line ──
+    const cleanedTitle = cleanText(article.title);
+    const subject = `[New Article] ${cleanedTitle} – The Naija Marxists`;
+
     let query = supabase
       .from('mailing_list')
       .select('email, first_name')
@@ -329,8 +333,6 @@ Deno.serve(async (req) => {
         { status: 200, headers: { 'Content-Type': 'application/json' } }
       );
     }
-
-    const subject = `[New Article] ${article.title} – The Naija Marxists`;
 
     const promises = subscribers.map(sub => {
       const html = buildEmailTemplate(article, sub.email);
