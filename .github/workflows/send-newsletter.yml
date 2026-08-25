@@ -3,7 +3,7 @@ name: Send Newsletter on New Article
 on:
   push:
     branches:
-      - master  # Only run when pushed to master
+      - master
     paths:
       - '_posts/*.md'
 
