@@ -37,19 +37,48 @@ async function sendEmail(to: string, subject: string, html: string) {
   return response.json();
 }
 
+// ── Clean text to handle special characters ──
+function cleanText(text: string): string {
+  if (!text) return '';
+  return text
+    .replace(/�/g, 'é')
+    .replace(/�/g, 'è')
+    .replace(/�/g, 'É')
+    .replace(/�/g, 'È')
+    .replace(/�/g, 'ç')
+    .replace(/�/g, 'Ç')
+    .replace(/�/g, 'à')
+    .replace(/�/g, 'À')
+    .replace(/�/g, 'ô')
+    .replace(/�/g, 'Ô')
+    .replace(/�/g, 'ê')
+    .replace(/�/g, 'Ê')
+    .replace(/�/g, 'ï')
+    .replace(/�/g, 'Ï')
+    .replace(/�/g, 'û')
+    .replace(/�/g, 'Û')
+    .replace(/�/g, 'î')
+    .replace(/�/g, 'Î');
+}
+
 // ── Build the email HTML (inline template) ──
 function buildEmailTemplate(article: any, subscriberEmail: string): string {
+  // Clean the article data
+  const title = cleanText(article.title || '');
+  const category = cleanText(article.category || 'Analysis');
+  const excerpt = cleanText(article.excerpt || (article.content ? article.content.substring(0, 250) + '...' : ''));
+  const date = article.date ? new Date(article.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }) : '';
+  const slug = article.slug || '';
+  const pdfUrl = `https://thenaijamarxists.org/assets/pdfs/${slug}.pdf`;
+
   return `
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>${article.title} – The Naija Marxists</title>
+  <title>${title} – The Naija Marxists</title>
   <style>
-    /* ── Import fonts inline (works in more email clients) ── */
-    @import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,600;14..32,700;14..32,800&family=Oswald:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap');
-
     /* ── Reset & Base ── */
     body, table, td, p, a, div, span {
       margin: 0;
@@ -231,18 +260,18 @@ function buildEmailTemplate(article: any, subscriberEmail: string): string {
       </div>
     </div>
     <div class="email-body">
-      <h2>${article.title}</h2>
-      <div class="meta">${article.category || 'Analysis'} &middot; ${new Date(article.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}</div>
-      <div class="summary">${article.excerpt || (article.content ? article.content.substring(0, 250) + '...' : '')}</div>
+      <h2>${title}</h2>
+      <div class="meta">${category} &middot; ${date}</div>
+      <div class="summary">${excerpt}</div>
       <div class="btn-container">
-        <a href="${article.url}" class="btn">Read the full article →</a>
+        <a href="${article.url || '#'}" class="btn">Read the full article →</a>
       </div>
       <div class="link-row">
-        <a href="${article.url}">📖 Read on our website</a>
+        <a href="${article.url || '#'}">📖 Read on our website</a>
         <span class="separator">|</span>
         <a href="${article.substack_url || '#'}">📬 Read on Substack</a>
         <span class="separator">|</span>
-        <a href="${article.url}?format=pdf">📄 Download as PDF</a>
+        <a href="${pdfUrl}">📄 Download as PDF</a>
       </div>
       <div class="social-links">
         <span>Follow us:</span>
