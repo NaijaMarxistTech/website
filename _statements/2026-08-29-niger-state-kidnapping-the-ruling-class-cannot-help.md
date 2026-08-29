@@ -2,7 +2,7 @@
 title: "Niger State Kidnapping: The Ruling Class Cannot Help"
 date: 2026-08-29
 doc-type: "Condemnation and Solidarity"
-excerpt: "On Friday 21 August, armed men entered the mosques of Dekara, Kpenya, Sabon-Gida and Gidan-Zana in Borgu, Niger State, during the Juma'at prayer, shot down worshippers and drove the rest into the forest at gunpoint. This is the real face of insecurity for Nigeria's working people."
+excerpt: "On Friday 21 August, armed men entered the mosques of Dekara, Kpenya, Sabon-Gida and Gidan-Zana in Borgu, Niger State, during the Juma'at prayer, shot down worshippers, and drove the rest into the forest at gunpoint. This is the real face of insecurity for Nigeria's working people."
 layout: statement
 ---
 
