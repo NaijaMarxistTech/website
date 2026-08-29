@@ -23,11 +23,8 @@ jobs:
       - name: Get the new content (article or statement)
         id: content
         run: |
-          # Check for changes in both _posts and _statements
-          CHANGED_POSTS=$(git diff --name-only HEAD~1 HEAD -- _posts/*.md)
-          CHANGED_STATEMENTS=$(git diff --name-only HEAD~1 HEAD -- _statements/*.md)
-
-          # Combine and get the first changed file
+          CHANGED_POSTS=$(git diff --name-only HEAD~1 HEAD -- _posts/*.md || echo "")
+          CHANGED_STATEMENTS=$(git diff --name-only HEAD~1 HEAD -- _statements/*.md || echo "")
           CHANGED_FILES="$CHANGED_POSTS"$'\n'"$CHANGED_STATEMENTS"
           NEW_FILE=$(echo "$CHANGED_FILES" | grep -v '^$' | head -1)
 
@@ -45,17 +42,15 @@ jobs:
         run: |
           FILE="${{ steps.content.outputs.file }}"
 
-          # Extract frontmatter
-          TITLE=$(sed -n '/^---$/,/^---$/p' "$FILE" | grep -E '^title:' | sed 's/title: //' | sed 's/^"//;s/"$//' | head -1)
-          CATEGORY=$(sed -n '/^---$/,/^---$/p' "$FILE" | grep -E '^category:' | sed 's/category: //' | head -1)
-          DATE=$(sed -n '/^---$/,/^---$/p' "$FILE" | grep -E '^date:' | sed 's/date: //' | head -1)
-          EXCERPT=$(sed -n '/^---$/,/^---$/p' "$FILE" | grep -E '^excerpt:' | sed 's/excerpt: //' | sed 's/^"//;s/"$//' | head -1)
-          DOC_TYPE=$(sed -n '/^---$/,/^---$/p' "$FILE" | grep -E '^doc-type:' | sed 's/doc-type: //' | sed 's/^"//;s/"$//' | head -1)
+          # Extract fields and clean them
+          TITLE=$(sed -n '/^---$/,/^---$/p' "$FILE" | grep -E '^title:' | sed 's/title: //' | sed 's/^"//;s/"$//' | head -1 | tr '\n' ' ')
+          CATEGORY=$(sed -n '/^---$/,/^---$/p' "$FILE" | grep -E '^category:' | sed 's/category: //' | head -1 | tr '\n' ' ')
+          DATE=$(sed -n '/^---$/,/^---$/p' "$FILE" | grep -E '^date:' | sed 's/date: //' | head -1 | tr '\n' ' ')
+          EXCERPT=$(sed -n '/^---$/,/^---$/p' "$FILE" | grep -E '^excerpt:' | sed 's/excerpt: //' | sed 's/^"//;s/"$//' | head -1 | tr '\n' ' ')
 
           FILENAME=$(basename "$FILE" .md)
           SLUG=$(echo "$FILENAME" | sed 's/^[0-9]*-[0-9]*-[0-9]*-//')
 
-          # Determine content type and URL
           if echo "$FILE" | grep -q "_posts"; then
             CATEGORY="${CATEGORY:-Analysis}"
             URL="https://thenaijamarxists.org/analysis/$SLUG/"
@@ -73,34 +68,35 @@ jobs:
           echo "url=$URL" >> $GITHUB_OUTPUT
           echo "substack_url=$SUBSTACK_URL" >> $GITHUB_OUTPUT
           echo "slug=$SLUG" >> $GITHUB_OUTPUT
-          echo "doc_type=$DOC_TYPE" >> $GITHUB_OUTPUT
 
           echo "📝 Title: $TITLE"
           echo "📂 Category: $CATEGORY"
           echo "📅 Date: $DATE"
           echo "📄 Slug: $SLUG"
-          echo "📁 File: $FILE"
-          echo "📋 Doc Type: $DOC_TYPE"
 
       - name: Trigger Supabase Edge Function
         if: steps.data.outputs.title != ''
         env:
           SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
         run: |
+          # Escape values for JSON
+          TITLE=$(printf '%s' "${{ steps.data.outputs.title }}" | sed 's/"/\\"/g' | tr -d '\n')
+          CATEGORY=$(printf '%s' "${{ steps.data.outputs.category }}" | sed 's/"/\\"/g' | tr -d '\n')
+          DATE=$(printf '%s' "${{ steps.data.outputs.date }}" | sed 's/"/\\"/g' | tr -d '\n')
+          EXCERPT=$(printf '%s' "${{ steps.data.outputs.excerpt }}" | sed 's/"/\\"/g' | tr -d '\n')
+          URL=$(printf '%s' "${{ steps.data.outputs.url }}" | sed 's/"/\\"/g' | tr -d '\n')
+          SUBSTACK_URL=$(printf '%s' "${{ steps.data.outputs.substack_url }}" | sed 's/"/\\"/g' | tr -d '\n')
+          SLUG=$(printf '%s' "${{ steps.data.outputs.slug }}" | sed 's/"/\\"/g' | tr -d '\n')
+
+          # Build JSON payload
+          JSON_PAYLOAD='{"article":{"title":"'"$TITLE"'","category":"'"$CATEGORY"'","date":"'"$DATE"'","excerpt":"'"$EXCERPT"'","url":"'"$URL"'","substack_url":"'"$SUBSTACK_URL"'","slug":"'"$SLUG"'"}}'
+
+          echo "📦 JSON Payload: $JSON_PAYLOAD"
+
           curl -X POST "https://pcpntpuujhrvbffgpixs.supabase.co/functions/v1/send-newsletter" \
             -H "Content-Type: application/json" \
             -H "Authorization: Bearer ${{ secrets.SUPABASE_ANON_KEY }}" \
-            -d '{
-              "article": {
-                "title": "${{ steps.data.outputs.title }}",
-                "category": "${{ steps.data.outputs.category }}",
-                "date": "${{ steps.data.outputs.date }}",
-                "excerpt": "${{ steps.data.outputs.excerpt }}",
-                "url": "${{ steps.data.outputs.url }}",
-                "substack_url": "${{ steps.data.outputs.substack_url }}",
-                "slug": "${{ steps.data.outputs.slug }}"
-              }
-            }'
+            -d "$JSON_PAYLOAD"
 
       - name: Log result
         if: always()
