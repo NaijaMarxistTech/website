@@ -42,16 +42,15 @@ jobs:
         run: |
           FILE="${{ steps.content.outputs.file }}"
 
-          # Extract and clean fields
-          TITLE=$(sed -n '/^---$/,/^---$/p' "$FILE" | grep -E '^title:' | sed 's/title: //' | sed 's/^"//;s/"$//' | head -1 | tr '\n' ' ' | sed 's/"/\\"/g')
-          CATEGORY=$(sed -n '/^---$/,/^---$/p' "$FILE" | grep -E '^category:' | sed 's/category: //' | head -1 | tr '\n' ' ' | sed 's/"/\\"/g')
-          DATE=$(sed -n '/^---$/,/^---$/p' "$FILE" | grep -E '^date:' | sed 's/date: //' | head -1 | tr '\n' ' ' | sed 's/"/\\"/g')
-          EXCERPT=$(sed -n '/^---$/,/^---$/p' "$FILE" | grep -E '^excerpt:' | sed 's/excerpt: //' | sed 's/^"//;s/"$//' | head -1 | tr '\n' ' ' | sed 's/"/\\"/g')
+          # Extract fields and clean them
+          TITLE=$(sed -n '/^---$/,/^---$/p' "$FILE" | grep -E '^title:' | sed 's/title: //' | sed 's/^"//;s/"$//' | head -1 | tr '\n' ' ')
+          CATEGORY=$(sed -n '/^---$/,/^---$/p' "$FILE" | grep -E '^category:' | sed 's/category: //' | head -1 | tr '\n' ' ')
+          DATE=$(sed -n '/^---$/,/^---$/p' "$FILE" | grep -E '^date:' | sed 's/date: //' | head -1 | tr '\n' ' ')
+          EXCERPT=$(sed -n '/^---$/,/^---$/p' "$FILE" | grep -E '^excerpt:' | sed 's/excerpt: //' | sed 's/^"//;s/"$//' | head -1 | tr '\n' ' ')
 
           FILENAME=$(basename "$FILE" .md)
           SLUG=$(echo "$FILENAME" | sed 's/^[0-9]*-[0-9]*-[0-9]*-//')
 
-          # Determine content type and URL
           if echo "$FILE" | grep -q "_posts"; then
             CATEGORY="${CATEGORY:-Analysis}"
             URL="https://thenaijamarxists.org/analysis/$SLUG/"
@@ -80,35 +79,17 @@ jobs:
         env:
           SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
         run: |
-          # Build JSON payload safely
-          TITLE="${{ steps.data.outputs.title }}"
-          CATEGORY="${{ steps.data.outputs.category }}"
-          DATE="${{ steps.data.outputs.date }}"
-          EXCERPT="${{ steps.data.outputs.excerpt }}"
-          URL="${{ steps.data.outputs.url }}"
-          SUBSTACK_URL="${{ steps.data.outputs.substack_url }}"
-          SLUG="${{ steps.data.outputs.slug }}"
+          # Escape values for JSON
+          TITLE=$(printf '%s' "${{ steps.data.outputs.title }}" | sed 's/"/\\"/g' | tr -d '\n')
+          CATEGORY=$(printf '%s' "${{ steps.data.outputs.category }}" | sed 's/"/\\"/g' | tr -d '\n')
+          DATE=$(printf '%s' "${{ steps.data.outputs.date }}" | sed 's/"/\\"/g' | tr -d '\n')
+          EXCERPT=$(printf '%s' "${{ steps.data.outputs.excerpt }}" | sed 's/"/\\"/g' | tr -d '\n')
+          URL=$(printf '%s' "${{ steps.data.outputs.url }}" | sed 's/"/\\"/g' | tr -d '\n')
+          SUBSTACK_URL=$(printf '%s' "${{ steps.data.outputs.substack_url }}" | sed 's/"/\\"/g' | tr -d '\n')
+          SLUG=$(printf '%s' "${{ steps.data.outputs.slug }}" | sed 's/"/\\"/g' | tr -d '\n')
 
-          # Use printf and jq to safely construct JSON
-          JSON_PAYLOAD=$(jq -n \
-            --arg title "$TITLE" \
-            --arg category "$CATEGORY" \
-            --arg date "$DATE" \
-            --arg excerpt "$EXCERPT" \
-            --arg url "$URL" \
-            --arg substack_url "$SUBSTACK_URL" \
-            --arg slug "$SLUG" \
-            '{
-              article: {
-                title: $title,
-                category: $category,
-                date: $date,
-                excerpt: $excerpt,
-                url: $url,
-                substack_url: $substack_url,
-                slug: $slug
-              }
-            }')
+          # Build JSON payload
+          JSON_PAYLOAD='{"article":{"title":"'"$TITLE"'","category":"'"$CATEGORY"'","date":"'"$DATE"'","excerpt":"'"$EXCERPT"'","url":"'"$URL"'","substack_url":"'"$SUBSTACK_URL"'","slug":"'"$SLUG"'"}}'
 
           echo "📦 JSON Payload: $JSON_PAYLOAD"
 
