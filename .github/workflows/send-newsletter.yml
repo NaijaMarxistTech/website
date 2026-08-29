@@ -6,6 +6,7 @@ on:
       - master
     paths:
       - '_posts/*.md'
+      - '_statements/*.md'
 
 jobs:
   send-newsletter:
@@ -19,34 +20,50 @@ jobs:
         with:
           fetch-depth: 2
 
-      - name: Get the new article
-        id: article
+      - name: Get the new content (article or statement)
+        id: content
         run: |
-          CHANGED_FILES=$(git diff --name-only HEAD~1 HEAD -- _posts/*.md)
-          NEW_ARTICLE=$(echo "$CHANGED_FILES" | head -1)
+          # Check for changes in both _posts and _statements
+          CHANGED_POSTS=$(git diff --name-only HEAD~1 HEAD -- _posts/*.md)
+          CHANGED_STATEMENTS=$(git diff --name-only HEAD~1 HEAD -- _statements/*.md)
 
-          if [ -z "$NEW_ARTICLE" ]; then
-            echo "No new article found"
+          # Combine and get the first changed file
+          CHANGED_FILES="$CHANGED_POSTS"$'\n'"$CHANGED_STATEMENTS"
+          NEW_FILE=$(echo "$CHANGED_FILES" | grep -v '^$' | head -1)
+
+          if [ -z "$NEW_FILE" ]; then
+            echo "No new content found"
             exit 0
           fi
 
-          echo "file=$NEW_ARTICLE" >> $GITHUB_OUTPUT
-          echo "🔍 New article detected: $NEW_ARTICLE"
+          echo "file=$NEW_FILE" >> $GITHUB_OUTPUT
+          echo "🔍 New content detected: $NEW_FILE"
 
-      - name: Extract article data
-        if: steps.article.outputs.file != ''
+      - name: Extract content data
+        if: steps.content.outputs.file != ''
         id: data
         run: |
-          FILE="${{ steps.article.outputs.file }}"
+          FILE="${{ steps.content.outputs.file }}"
 
+          # Extract frontmatter
           TITLE=$(sed -n '/^---$/,/^---$/p' "$FILE" | grep -E '^title:' | sed 's/title: //' | sed 's/^"//;s/"$//' | head -1)
           CATEGORY=$(sed -n '/^---$/,/^---$/p' "$FILE" | grep -E '^category:' | sed 's/category: //' | head -1)
           DATE=$(sed -n '/^---$/,/^---$/p' "$FILE" | grep -E '^date:' | sed 's/date: //' | head -1)
           EXCERPT=$(sed -n '/^---$/,/^---$/p' "$FILE" | grep -E '^excerpt:' | sed 's/excerpt: //' | sed 's/^"//;s/"$//' | head -1)
+          DOC_TYPE=$(sed -n '/^---$/,/^---$/p' "$FILE" | grep -E '^doc-type:' | sed 's/doc-type: //' | sed 's/^"//;s/"$//' | head -1)
 
           FILENAME=$(basename "$FILE" .md)
           SLUG=$(echo "$FILENAME" | sed 's/^[0-9]*-[0-9]*-[0-9]*-//')
-          URL="https://thenaijamarxists.org/analysis/$SLUG/"
+
+          # Determine content type and URL
+          if echo "$FILE" | grep -q "_posts"; then
+            CATEGORY="${CATEGORY:-Analysis}"
+            URL="https://thenaijamarxists.org/analysis/$SLUG/"
+          elif echo "$FILE" | grep -q "_statements"; then
+            CATEGORY="${CATEGORY:-Statement}"
+            URL="https://thenaijamarxists.org/statements/$SLUG/"
+          fi
+
           SUBSTACK_URL="https://ngnmarxists.substack.com/p/$SLUG"
 
           echo "title=$TITLE" >> $GITHUB_OUTPUT
@@ -56,11 +73,14 @@ jobs:
           echo "url=$URL" >> $GITHUB_OUTPUT
           echo "substack_url=$SUBSTACK_URL" >> $GITHUB_OUTPUT
           echo "slug=$SLUG" >> $GITHUB_OUTPUT
+          echo "doc_type=$DOC_TYPE" >> $GITHUB_OUTPUT
 
           echo "📝 Title: $TITLE"
           echo "📂 Category: $CATEGORY"
           echo "📅 Date: $DATE"
           echo "📄 Slug: $SLUG"
+          echo "📁 File: $FILE"
+          echo "📋 Doc Type: $DOC_TYPE"
 
       - name: Trigger Supabase Edge Function
         if: steps.data.outputs.title != ''
@@ -88,5 +108,5 @@ jobs:
           if [ "${{ steps.data.outputs.title }}" != "" ]; then
             echo "✅ Newsletter sent for: ${{ steps.data.outputs.title }}"
           else
-            echo "⏭️ No new article detected, skipping newsletter"
+            echo "⏭️ No new content detected, skipping newsletter"
           fi
