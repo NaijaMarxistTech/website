@@ -114,10 +114,10 @@ export const TEAM_NOTIFICATION_TEMPLATE = (record: any, classification: { level:
   
   <hr>
   
-  <p>
-    <a href="https://supabase.com/dashboard/project/pcpntpuujhrvbffgpixs/editor/members" class="btn">📊 View All Applications</a>
+  <p style="text-align: center;">
+    <a href="https://thenaijamarxists.org/recruitment-view/" class="btn">📊 View Full Application</a>
   </p>
-  <p>
+  <p style="text-align: center;">
     <a href="mailto:${record.email}" style="color: #C62828;">📧 Reply to ${record.first_name}</a>
   </p>
   
