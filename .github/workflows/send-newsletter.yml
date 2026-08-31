@@ -1,4 +1,4 @@
-name: Send Newsletter on New Article
+name: Send Newsletter on New Content
 
 on:
   push:
@@ -7,6 +7,7 @@ on:
     paths:
       - '_posts/*.md'
       - '_statements/*.md'
+      - '_education/*.md'
 
 jobs:
   send-newsletter:
@@ -20,12 +21,13 @@ jobs:
         with:
           fetch-depth: 2
 
-      - name: Get the new content (article or statement)
+      - name: Get the new content
         id: content
         run: |
           CHANGED_POSTS=$(git diff --name-only HEAD~1 HEAD -- _posts/*.md || echo "")
           CHANGED_STATEMENTS=$(git diff --name-only HEAD~1 HEAD -- _statements/*.md || echo "")
-          CHANGED_FILES="$CHANGED_POSTS"$'\n'"$CHANGED_STATEMENTS"
+          CHANGED_EDUCATION=$(git diff --name-only HEAD~1 HEAD -- _education/*.md || echo "")
+          CHANGED_FILES="$CHANGED_POSTS"$'\n'"$CHANGED_STATEMENTS"$'\n'"$CHANGED_EDUCATION"
           NEW_FILE=$(echo "$CHANGED_FILES" | grep -v '^$' | head -1)
 
           if [ -z "$NEW_FILE" ]; then
@@ -42,21 +44,28 @@ jobs:
         run: |
           FILE="${{ steps.content.outputs.file }}"
 
-          # Extract fields and clean them
           TITLE=$(sed -n '/^---$/,/^---$/p' "$FILE" | grep -E '^title:' | sed 's/title: //' | sed 's/^"//;s/"$//' | head -1 | tr '\n' ' ')
           CATEGORY=$(sed -n '/^---$/,/^---$/p' "$FILE" | grep -E '^category:' | sed 's/category: //' | head -1 | tr '\n' ' ')
           DATE=$(sed -n '/^---$/,/^---$/p' "$FILE" | grep -E '^date:' | sed 's/date: //' | head -1 | tr '\n' ' ')
           EXCERPT=$(sed -n '/^---$/,/^---$/p' "$FILE" | grep -E '^excerpt:' | sed 's/excerpt: //' | sed 's/^"//;s/"$//' | head -1 | tr '\n' ' ')
+          DOC_TYPE=$(sed -n '/^---$/,/^---$/p' "$FILE" | grep -E '^doc-type:' | sed 's/doc-type: //' | sed 's/^"//;s/"$//' | head -1 | tr '\n' ' ')
 
           FILENAME=$(basename "$FILE" .md)
           SLUG=$(echo "$FILENAME" | sed 's/^[0-9]*-[0-9]*-[0-9]*-//')
 
+          # Determine content type and URL
           if echo "$FILE" | grep -q "_posts"; then
+            CONTENT_TYPE="article"
             CATEGORY="${CATEGORY:-Analysis}"
             URL="https://thenaijamarxists.org/analysis/$SLUG/"
           elif echo "$FILE" | grep -q "_statements"; then
+            CONTENT_TYPE="statement"
             CATEGORY="${CATEGORY:-Statement}"
             URL="https://thenaijamarxists.org/statements/$SLUG/"
+          elif echo "$FILE" | grep -q "_education"; then
+            CONTENT_TYPE="remarx"
+            CATEGORY="${CATEGORY:-Education}"
+            URL="https://thenaijamarxists.org/education/$SLUG/"
           fi
 
           SUBSTACK_URL="https://ngnmarxists.substack.com/p/$SLUG"
@@ -68,11 +77,13 @@ jobs:
           echo "url=$URL" >> $GITHUB_OUTPUT
           echo "substack_url=$SUBSTACK_URL" >> $GITHUB_OUTPUT
           echo "slug=$SLUG" >> $GITHUB_OUTPUT
+          echo "content_type=$CONTENT_TYPE" >> $GITHUB_OUTPUT
 
           echo "📝 Title: $TITLE"
           echo "📂 Category: $CATEGORY"
           echo "📅 Date: $DATE"
           echo "📄 Slug: $SLUG"
+          echo "📁 Type: $CONTENT_TYPE"
 
       - name: Trigger Supabase Edge Function
         if: steps.data.outputs.title != ''
@@ -87,9 +98,10 @@ jobs:
           URL=$(printf '%s' "${{ steps.data.outputs.url }}" | sed 's/"/\\"/g' | tr -d '\n')
           SUBSTACK_URL=$(printf '%s' "${{ steps.data.outputs.substack_url }}" | sed 's/"/\\"/g' | tr -d '\n')
           SLUG=$(printf '%s' "${{ steps.data.outputs.slug }}" | sed 's/"/\\"/g' | tr -d '\n')
+          CONTENT_TYPE=$(printf '%s' "${{ steps.data.outputs.content_type }}" | sed 's/"/\\"/g' | tr -d '\n')
 
           # Build JSON payload
-          JSON_PAYLOAD='{"article":{"title":"'"$TITLE"'","category":"'"$CATEGORY"'","date":"'"$DATE"'","excerpt":"'"$EXCERPT"'","url":"'"$URL"'","substack_url":"'"$SUBSTACK_URL"'","slug":"'"$SLUG"'"}}'
+          JSON_PAYLOAD='{"article":{"title":"'"$TITLE"'","category":"'"$CATEGORY"'","date":"'"$DATE"'","excerpt":"'"$EXCERPT"'","url":"'"$URL"'","substack_url":"'"$SUBSTACK_URL"'","slug":"'"$SLUG"'","content_type":"'"$CONTENT_TYPE"'"}}'
 
           echo "📦 JSON Payload: $JSON_PAYLOAD"
 
